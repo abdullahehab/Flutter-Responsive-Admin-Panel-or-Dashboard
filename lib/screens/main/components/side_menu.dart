@@ -1,8 +1,10 @@
+import 'package:admin/models/side_menu_data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:admin/extensions/extension.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SideMenu extends StatelessWidget {
-  const SideMenu({
+  SideMenu({
     Key? key,
   }) : super(key: key);
 
@@ -14,46 +16,41 @@ class SideMenu extends StatelessWidget {
           DrawerHeader(
             child: Image.asset("assets/images/logo.png"),
           ),
-          DrawerListTile(
-            title: "Dashboard",
-            svgSrc: "assets/icons/menu_dashbord.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Transaction",
-            svgSrc: "assets/icons/menu_tran.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Task",
-            svgSrc: "assets/icons/menu_task.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Documents",
-            svgSrc: "assets/icons/menu_doc.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Store",
-            svgSrc: "assets/icons/menu_store.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Notification",
-            svgSrc: "assets/icons/menu_notification.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Profile",
-            svgSrc: "assets/icons/menu_profile.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Settings",
-            svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
-          ),
+          ...items.map((e) {
+            int index = items.indexOf(e);
+            bool selected = index == items.indexOf(e);
+            return DrawerListTile(
+              title: e.title!,
+              iconData: e.icon!,
+              press: e.onTap!,
+              selected: selected,
+            );
+          }),
+          ListTileTheme(
+              contentPadding: EdgeInsets.symmetric(horizontal: 13),
+              dense: true,
+              child: ExpansionTile(
+                  tilePadding: EdgeInsets.zero,
+                  childrenPadding: EdgeInsets.zero,
+                  initiallyExpanded: false,
+                  title: ListTile(
+                    title: Text('بيانات اخري'),
+                    contentPadding: EdgeInsets.zero,
+                    leading: Icon(
+                      FontAwesomeIcons.usersCog,
+                      size: 14,
+                    ).addPaddingOnly(right: 15),
+                  ),
+                  children: subItems
+                      .map(
+                        (e) => DrawerListTile(
+                          title: e.title,
+                          iconData: e.icon,
+                          press: () {},
+                          selected: false,
+                        ),
+                      )
+                      .toList())),
         ],
       ),
     );
@@ -63,27 +60,28 @@ class SideMenu extends StatelessWidget {
 class DrawerListTile extends StatelessWidget {
   const DrawerListTile({
     Key? key,
-    // For selecting those three line once press "Command+D"
     required this.title,
-    required this.svgSrc,
     required this.press,
+    required this.selected,
+    this.iconData,
   }) : super(key: key);
 
-  final String title, svgSrc;
+  final String? title;
   final VoidCallback press;
+  final IconData? iconData;
+  final bool selected;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: press,
       horizontalTitleGap: 0.0,
-      leading: SvgPicture.asset(
-        svgSrc,
-        color: Colors.white54,
-        height: 16,
+      leading: Icon(
+        iconData,
+        size: 14,
       ),
       title: Text(
-        title,
+        title!,
         style: TextStyle(color: Colors.white54),
       ),
     );
