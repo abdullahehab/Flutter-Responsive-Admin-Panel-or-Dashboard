@@ -48,7 +48,6 @@ class TableRow extends DataTableSource {
 
   @override
   DataRow? getRow(int index) {
-    print('index => $index');
     UserModel item = items[index];
     return DataRow.byIndex(index: index, cells: [
       DataCell(Text("${item.nationalId}")),
