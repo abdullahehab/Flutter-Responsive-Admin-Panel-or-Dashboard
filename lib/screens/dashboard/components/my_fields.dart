@@ -1,27 +1,26 @@
 import 'package:admin/models/MyFiles.dart';
 import 'package:admin/responsive.dart';
 import 'package:flutter/material.dart';
-
+import 'package:admin/extensions/extension.dart';
 import '../../../constants.dart';
 import 'file_info_card.dart';
 
-class MyFiles extends StatelessWidget {
-  const MyFiles({
+class Summary extends StatelessWidget {
+  const Summary({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "My Files",
-              style: Theme.of(context).textTheme.subtitle1,
-            ),
+            // Text(
+            //   "My Files",
+            //   style: Theme.of(context).textTheme.subtitle1,
+            // ),
             ElevatedButton.icon(
               style: TextButton.styleFrom(
                 padding: EdgeInsets.symmetric(
@@ -39,12 +38,12 @@ class MyFiles extends StatelessWidget {
         SizedBox(height: defaultPadding),
         Responsive(
           mobile: FileInfoCardGridView(
-            crossAxisCount: _size.width < 650 ? 2 : 4,
-            childAspectRatio: _size.width < 650 && _size.width > 350 ? 1.3 : 1,
+            crossAxisCount: context.width < 650 ? 2 : 4,
+            childAspectRatio: context.width < 650 && context.width > 350 ? 1.3 : 1,
           ),
           tablet: FileInfoCardGridView(),
           desktop: FileInfoCardGridView(
-            childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
+            childAspectRatio: context.width < 1400 ? 1.1 : 1.9,
           ),
         ),
       ],
