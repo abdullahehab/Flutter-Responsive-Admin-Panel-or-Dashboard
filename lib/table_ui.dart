@@ -21,7 +21,9 @@ class _TableUIState extends State<TableUI> {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: Theme.of(context).copyWith(cardColor: bgColor),
+      data: Theme.of(context).copyWith(
+          cardColor: bgColor,
+          textTheme: TextTheme(caption: TextStyle(color: Colors.white))),
       child: PaginatedDataTable(
         header: Text("البيانات الجديده",
             style: Theme.of(context).textTheme.subtitle1),
