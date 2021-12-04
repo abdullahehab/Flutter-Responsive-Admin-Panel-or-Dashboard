@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 class FileInfoCard extends StatelessWidget {
   const FileInfoCard({
     Key? key,
@@ -28,7 +27,7 @@ class FileInfoCard extends StatelessWidget {
             children: [
               Container(
                 padding: EdgeInsets.all(defaultPadding * 0.75),
-                height: 40.h,
+                height: 40,
                 width: 40,
                 decoration: BoxDecoration(
                   color: info.color!.withOpacity(0.1),
