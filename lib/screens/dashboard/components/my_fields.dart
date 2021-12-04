@@ -39,11 +39,12 @@ class Summary extends StatelessWidget {
         Responsive(
           mobile: FileInfoCardGridView(
             crossAxisCount: context.width < 650 ? 2 : 4,
-            childAspectRatio: context.width < 650 && context.width > 350 ? 1.3 : 1,
+            childAspectRatio:
+                context.width < 650 && context.width > 350 ? 1.3 : 1,
           ),
           tablet: FileInfoCardGridView(),
           desktop: FileInfoCardGridView(
-            childAspectRatio: context.width < 1400 ? 1.1 : 1.9,
+            childAspectRatio: 1.5,
           ),
         ),
       ],
