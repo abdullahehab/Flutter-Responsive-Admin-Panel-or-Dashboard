@@ -38,6 +38,7 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^9.2.0
   flutter_screenutil: ^4.0.3+2
+  fluttertoast:
 dev_dependencies:
   flutter_test:
     sdk: flutter
