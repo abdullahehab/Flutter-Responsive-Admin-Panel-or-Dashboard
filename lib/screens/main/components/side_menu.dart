@@ -66,7 +66,7 @@ class SideMenu extends StatelessWidget {
                             title: e.title,
                             iconData: e.icon,
                             selected: false,
-                          ),
+                          ).addPaddingOnly(right: 20),
                         )
                         .toList())),
           ],
