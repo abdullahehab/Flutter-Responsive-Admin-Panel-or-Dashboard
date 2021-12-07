@@ -16,7 +16,13 @@ class FileInfoCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
-        color: secondaryColor,
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+              color: Theme.of(context).hintColor.withOpacity(0.15),
+              offset: Offset(0, 3),
+              blurRadius: 10)
+        ],
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
@@ -38,7 +44,7 @@ class FileInfoCard extends StatelessWidget {
                   color: info.color,
                 ),
               ),
-              Icon(Icons.more_vert, color: Colors.white54)
+              Icon(Icons.more_vert, color: Colors.black)
             ],
           ),
           Row(
@@ -46,6 +52,10 @@ class FileInfoCard extends StatelessWidget {
             children: [
               Text(
                 info.title!,
+                style: Theme.of(context)
+                    .textTheme
+                    .caption!
+                    .copyWith(color: Colors.black54),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -54,7 +64,7 @@ class FileInfoCard extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .caption!
-                    .copyWith(color: Colors.white),
+                    .copyWith(color: Colors.black54),
               ),
             ],
           )

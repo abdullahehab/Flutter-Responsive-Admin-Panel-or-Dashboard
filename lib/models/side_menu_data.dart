@@ -1,4 +1,4 @@
-
+import 'package:admin/screens/main/users_data.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -25,7 +25,6 @@ List<SideMenuData> subItems = [
     icon: FontAwesomeIcons.briefcase,
     onTap: () {},
   ),
-  SideMenuData(
-      title: 'السكمن', icon: FontAwesomeIcons.houseUser, onTap: () {}),
+  SideMenuData(title: 'السكمن', icon: FontAwesomeIcons.houseUser, onTap: () {}),
   SideMenuData(title: 'حيازه', icon: FontAwesomeIcons.userTag, onTap: () {}),
 ];

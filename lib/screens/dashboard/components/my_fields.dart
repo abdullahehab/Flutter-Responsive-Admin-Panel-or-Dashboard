@@ -65,6 +65,7 @@ class FileInfoCardGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      padding: EdgeInsets.all(5),
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: demoMyFiles.length,

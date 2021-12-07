@@ -22,24 +22,31 @@ class _TableUIState extends State<TableUI> {
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-          cardColor: bgColor,
-          textTheme: TextTheme(caption: TextStyle(color: Colors.white))),
+          cardColor: Colors.white,
+          textTheme: TextTheme(caption: TextStyle(color: Colors.black54))),
       child: PaginatedDataTable(
         header: Text("البيانات الجديده",
-            style: Theme.of(context).textTheme.subtitle1),
+            style: Theme.of(context)
+                .textTheme
+                .subtitle1!
+                .copyWith(color: Colors.black54)),
         onRowsPerPageChanged: (perPage) {},
         rowsPerPage: 10,
         columns: tableHeader
             .map(
               (e) => DataColumn(
-                label: Text(e),
+                label: Text(e,
+                    style: Theme.of(context)
+                        .textTheme
+                        .subtitle2!
+                        .copyWith(color: Colors.black54)),
                 onSort: (columnIndex, ascending) {
                   print("$columnIndex $ascending");
                 },
               ),
             )
             .toList(),
-        source: TableRow(widget.items),
+        source: TableRow(widget.items, context),
       ),
     );
   }
@@ -47,23 +54,24 @@ class _TableUIState extends State<TableUI> {
 
 class TableRow extends DataTableSource {
   final List<UserModel> items;
+  final BuildContext context;
 
   @override
   DataRow? getRow(int index) {
     UserModel item = items[index];
     return DataRow.byIndex(index: index, cells: [
-      DataCell(Text("${item.nationalId}")),
-      DataCell(Text("${item.address}")),
-      DataCell(Text("${item.personalStatus}")),
-      DataCell(Text("${item.husbandName}")),
-      DataCell(Text("${item.socialStatus}")),
-      DataCell(Text("${item.birthDate}")),
-      DataCell(Text("${item.working}")),
-      DataCell(Text("${item.healthStatus}")),
-      DataCell(Text("${item.childrenNumber}")),
-      DataCell(Text("${item.housing}")),
-      DataCell(Text("${item.owning}")),
-      DataCell(Text("${item.owning}")),
+      DataCell(Text("${item.nationalId}", style: tableDataStyle)),
+      DataCell(Text("${item.address}", style: tableDataStyle)),
+      DataCell(Text("${item.personalStatus}", style: tableDataStyle)),
+      DataCell(Text("${item.husbandName}", style: tableDataStyle)),
+      DataCell(Text("${item.socialStatus}", style: tableDataStyle)),
+      DataCell(Text("${item.birthDate}", style: tableDataStyle)),
+      DataCell(Text("${item.working}", style: tableDataStyle)),
+      DataCell(Text("${item.healthStatus}", style: tableDataStyle)),
+      DataCell(Text("${item.childrenNumber}", style: tableDataStyle)),
+      DataCell(Text("${item.housing}", style: tableDataStyle)),
+      DataCell(Text("${item.owning}", style: tableDataStyle)),
+      DataCell(Text("${item.owning}", style: tableDataStyle)),
     ]);
   }
 
@@ -76,5 +84,5 @@ class TableRow extends DataTableSource {
   @override
   int get selectedRowCount => 0;
 
-  TableRow(this.items);
+  TableRow(this.items, this.context);
 }
