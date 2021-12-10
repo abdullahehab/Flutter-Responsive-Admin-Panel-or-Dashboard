@@ -10,4 +10,11 @@ class MenuController extends ChangeNotifier {
       _scaffoldKey.currentState!.openDrawer();
     }
   }
+
+  int _selectedMenuIndex = 0;
+  int get selectedMenuIndex => _selectedMenuIndex;
+  set setSelectedMenuIndex(int newVlu) {
+    _selectedMenuIndex = newVlu;
+    notifyListeners();
+  }
 }

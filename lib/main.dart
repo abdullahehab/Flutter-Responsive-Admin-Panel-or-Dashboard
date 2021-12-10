@@ -30,9 +30,9 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Admin Panel',
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
-          textTheme: Theme.of(context).textTheme.apply(
-                bodyColor: Colors.white,
-              ),
+          // textTheme: Theme.of(context).textTheme.apply(
+          //       bodyColor: Colors.white,
+          //     ),
           canvasColor: secondaryColor,
         ),
         // theme: ThemeData.dark().copyWith(

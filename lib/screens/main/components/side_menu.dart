@@ -1,17 +1,21 @@
+import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/models/side_menu_data.dart';
+import 'package:admin/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:admin/extensions/extension.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class SideMenu extends StatelessWidget {
   SideMenu({
-    required selectedIndex,
+    required selectedIndexChanged,
   });
   ValueChanged<int>? selectedIndexChanged;
 
   ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
   @override
   Widget build(BuildContext context) {
+    var provider = context.read<MenuController>();
     return Drawer(
       child: ValueListenableBuilder(
         valueListenable: _selectedIndexNotifier,
@@ -25,10 +29,8 @@ class SideMenu extends StatelessWidget {
               bool selected = index == selectedIndex;
               return InkWell(
                 onTap: () {
-                  print(
-                      'selectedIndexNotifier.value => ${_selectedIndexNotifier.value}');
-                  _selectedIndexNotifier.value = index;
-                  selectedIndexChanged!.call(index);
+                  provider.setSelectedMenuIndex = index;
+                  if (Responsive.isMobile(context)) Navigator.pop(context);
                 },
                 child: DrawerListTile(
                   title: e.title!,

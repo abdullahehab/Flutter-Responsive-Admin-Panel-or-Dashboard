@@ -1,17 +1,20 @@
 import 'package:admin/controllers/MenuController.dart';
+import 'package:admin/models/side_menu_items.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/screens/dashboard/dashboard_screen.dart';
+import 'package:admin/screens/people_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'components/side_menu.dart';
+import 'package:provider/provider.dart';
 
-class  MainScreen extends StatelessWidget {
+class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: context.read<MenuController>().scaffoldKey,
-      drawer: SideMenu(selectedIndex: (int val) {
+      drawer: SideMenu(selectedIndexChanged: (int val) {
         print('val => $val');
       }),
       body: SafeArea(
@@ -23,14 +26,20 @@ class  MainScreen extends StatelessWidget {
               Expanded(
                 // default flex = 1
                 // and it takes 1/6 part of the screen
-                child: SideMenu(selectedIndex: (int val) {
+                child: SideMenu(selectedIndexChanged: (int val) {
                   print('val => $val');
                 }),
               ),
             Expanded(
               // It takes 5/6 part of the screen
               flex: 5,
-              child: DashboardScreen(),
+              child: IndexedStack(
+                index: context.watch<MenuController>().selectedMenuIndex,
+                children: menuItems
+                    .map<Widget>((MenuItems item) => MainView(item))
+                    .toList(),
+              ),
+              // DashboardScreen(),
             ),
           ],
         ),
