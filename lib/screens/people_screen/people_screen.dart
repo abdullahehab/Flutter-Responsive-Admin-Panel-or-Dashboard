@@ -1,3 +1,5 @@
+import 'package:admin/controllers/MenuController.dart';
+import 'package:admin/models/side_menu_items.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/screens/main/components/side_menu.dart';
 import 'package:admin/utils/colors.dart';
@@ -5,6 +7,7 @@ import 'package:admin/widget/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:admin/extensions/extension.dart';
+import 'package:provider/provider.dart';
 
 class PeopleScreen extends StatelessWidget {
   const PeopleScreen({Key? key}) : super(key: key);
@@ -130,7 +133,10 @@ class PeopleScreen extends StatelessWidget {
             ],
           ),
           CustomButton(
-            onPressed: () {},
+            onPressed: () {
+              context.read<MenuController>().setSelectedMenuIndex =
+                  menuItems.indexOf(menuItems.last);
+            },
             height: 50.h,
             text: "عرض التفاصيل",
             buttonColor: AppColor.kPrimaryColor,
