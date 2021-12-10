@@ -1,21 +1,131 @@
-import 'package:admin/screens/dashboard/components/header.dart';
-import 'package:flutter/material.dart';
 
-import '../../constants.dart';
+import 'package:admin/utils/colors.dart';
+import 'package:admin/widget/main_button.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:admin/extensions/extension.dart';
 
 class PeopleScreen extends StatelessWidget {
   const PeopleScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: SingleChildScrollView(
-        padding: EdgeInsets.all(defaultPadding),
-      child: Column(
-        children: [
-          Header(),
-          SizedBox(height: defaultPadding),
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        title: Text('العملاء',  style: Theme.of(context).textTheme.headline6,),
+        centerTitle: false,
       ),
-    ));
+      backgroundColor: AppColor.kMainBackgroundColor,
+      body: SafeArea(
+          child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Wrap(
+              children: [
+                '1',
+                '2',
+                '3',
+                '4',
+                '5',
+                '6',
+                '1',
+                '2',
+                '3',
+                '4',
+                '5',
+                '6',
+              ]
+                  .map(
+                    (e) => buildSingleCard(context).addPaddingAll(10),
+                  )
+                  .toList(),
+            )
+          ],
+        ),
+      )),
+    );
+  }
+
+  Container buildSingleCard(BuildContext context) {
+    return Container(
+      width: 400,
+      padding: EdgeInsets.symmetric(horizontal: 2.w),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            Icons.person_outline,
+            color: Colors.black54,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 3,
+                child: ListTile(
+                  title: Text('الاسم'),
+                  subtitle: Text('عبد الله ايهاب سعد'),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: ListTile(
+                  title: Text('عدد الابناء'),
+                  subtitle: SizedBox(
+                    child: Text('5'),
+                    width: context.width * .4,
+                  ),
+                  // Text(''),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: ListTile(
+                  title: Text('تاريخ الميلاد'),
+                  subtitle: Text('8/3/1009'),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                flex: 3,
+                child: ListTile(
+                  title: Text('التليفون'),
+                  subtitle: Text('٠٠١١١٥٩٢٢٢٤٠'),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: ListTile(
+                  title: Text('السكن'),
+                  subtitle: Text('منزل'),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: ListTile(
+                  title: Text('الحاله الاجتماعيه'),
+                  subtitle: Text('اعزب'),
+                ),
+              ),
+            ],
+          ),
+          CustomButton(
+            onPressed: () {},
+            text: "عرض التفاصيل",
+            buttonColor: AppColor.kPrimaryColor,
+          )
+        ],
+      ).addPaddingHorizontalVertical(vertical: 20),
+    );
   }
 }

@@ -8,4 +8,7 @@ class AppColor {
   static Color bgSideMenu = Color(0xff131e29);
   static Color white = Colors.white;
   static Color black = Colors.black;
+  static Color kPrimaryColor = Color(0xff8286F4);
+  static Color kPrimaryDarkColor = Color(0xff4d59c1);
+  static Color kMainBackgroundColor = Color(0xfff5f5fd);
 }
