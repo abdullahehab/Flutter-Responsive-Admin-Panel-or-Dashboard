@@ -1,5 +1,6 @@
 import 'package:admin/responsive.dart';
 import 'package:admin/screens/dashboard/components/my_fields.dart';
+import 'package:admin/screens/main/components/side_menu.dart';
 import 'package:admin/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -11,10 +12,15 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.kMainBackgroundColor,
+      drawer: Responsive.isMobile(context) ? Drawer(child: SideMenu()) : null,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        title: Text('الرئيسية',  style: Theme.of(context).textTheme.headline6,),
+        title: Text(
+          'الرئيسية',
+          style: Theme.of(context).textTheme.headline6,
+        ),
         centerTitle: false,
       ),
       body: SafeArea(

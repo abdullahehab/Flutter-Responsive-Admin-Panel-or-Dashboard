@@ -14,9 +14,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: context.read<MenuController>().scaffoldKey,
-      drawer: SideMenu(selectedIndexChanged: (int val) {
-        print('val => $val');
-      }),
+      drawer: SideMenu(),
       body: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,9 +24,7 @@ class MainScreen extends StatelessWidget {
               Expanded(
                 // default flex = 1
                 // and it takes 1/6 part of the screen
-                child: SideMenu(selectedIndexChanged: (int val) {
-                  print('val => $val');
-                }),
+                child: SideMenu(),
               ),
             Expanded(
               // It takes 5/6 part of the screen

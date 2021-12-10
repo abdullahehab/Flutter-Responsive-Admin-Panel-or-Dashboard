@@ -1,4 +1,5 @@
-
+import 'package:admin/responsive.dart';
+import 'package:admin/screens/main/components/side_menu.dart';
 import 'package:admin/utils/colors.dart';
 import 'package:admin/widget/main_button.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +12,15 @@ class PeopleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Responsive.isMobile(context) ? Drawer(child: SideMenu()) : null,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        title: Text('العملاء',  style: Theme.of(context).textTheme.headline6,),
+        title: Text(
+          'العملاء',
+          style: Theme.of(context).textTheme.headline6,
+        ),
         centerTitle: false,
       ),
       backgroundColor: AppColor.kMainBackgroundColor,
@@ -23,6 +29,8 @@ class PeopleScreen extends StatelessWidget {
         child: Column(
           children: [
             Wrap(
+              spacing: Responsive.isMobile(context) ? 10 : 0,
+              runSpacing: Responsive.isMobile(context) ? 10 : 0,
               children: [
                 '1',
                 '2',
@@ -38,7 +46,9 @@ class PeopleScreen extends StatelessWidget {
                 '6',
               ]
                   .map(
-                    (e) => buildSingleCard(context).addPaddingAll(10),
+                    (e) => Responsive.isDesktop(context)
+                        ? buildSingleCard(context).addPaddingAll(10)
+                        : buildSingleMobileCard(context).addPaddingAll(0),
                   )
                   .toList(),
             )
@@ -118,6 +128,48 @@ class PeopleScreen extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          CustomButton(
+            onPressed: () {},
+            height: 50.h,
+            text: "عرض التفاصيل",
+            buttonColor: AppColor.kPrimaryColor,
+          )
+        ],
+      ).addPaddingHorizontalVertical(vertical: 20),
+    );
+  }
+
+  Container buildSingleMobileCard(BuildContext context) {
+    return Container(
+      width: 180,
+      padding: EdgeInsets.symmetric(horizontal: 2.w),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            Icons.person_outline,
+            color: Colors.black54,
+          ),
+          ListTile(
+            title: Text('الاسم'),
+            subtitle: Text('عبد الله ايهاب سعد'),
+          ),
+          ListTile(
+            title: Text('عدد الابناء'),
+            subtitle: SizedBox(
+              child: Text('5'),
+              width: context.width * .4,
+            ),
+            // Text(''),
+          ),
+          ListTile(
+            title: Text('الرقم القومي'),
+            subtitle: Text('١١١١١١١١١١١١١١'),
           ),
           CustomButton(
             onPressed: () {},

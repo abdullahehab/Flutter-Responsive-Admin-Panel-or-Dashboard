@@ -7,11 +7,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class SideMenu extends StatelessWidget {
-  SideMenu({
-    required selectedIndexChanged,
-  });
-  ValueChanged<int>? selectedIndexChanged;
-
   ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
   @override
   Widget build(BuildContext context) {
