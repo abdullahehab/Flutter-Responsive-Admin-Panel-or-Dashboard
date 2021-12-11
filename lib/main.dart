@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           // textTheme: Theme.of(context).textTheme.apply(
           //       bodyColor: Colors.white,
           //     ),
-          canvasColor: secondaryColor,
+          // canvasColor: secondaryColor,
         ),
         // theme: ThemeData.dark().copyWith(
         //   scaffoldBackgroundColor: bgColor,

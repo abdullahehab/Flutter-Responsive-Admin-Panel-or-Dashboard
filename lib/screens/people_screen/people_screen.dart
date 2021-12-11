@@ -25,6 +25,16 @@ class PeopleScreen extends StatelessWidget {
           style: Theme.of(context).textTheme.headline6,
         ),
         centerTitle: false,
+        actions: [
+          CustomButton(
+            width: 70.w,
+            height: 30.h,
+            text: 'إضافة جديد',
+            onPressed: () => context.read<MenuController>().setSelectedMenuIndex =
+                menuItems.indexOf(menuItems.last),
+            buttonColor: AppColor.kPrimaryDarkColor,
+          )
+        ],
       ),
       backgroundColor: AppColor.kMainBackgroundColor,
       body: SafeArea(
