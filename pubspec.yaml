@@ -40,6 +40,10 @@ dependencies:
   flutter_screenutil: ^4.0.3+2
   fluttertoast:
   get_it: ^6.0.0
+  flutter_datetime_picker: ^1.5.1
+  dotted_line: ^3.1.0
+  syncfusion_flutter_datepicker: ^19.3.44
+  jiffy: ^4.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

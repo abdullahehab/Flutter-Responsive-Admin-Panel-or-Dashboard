@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:admin/extensions/extension.dart';
 
-class StatusDropDownMenu extends StatelessWidget {
-  StatusDropDownMenu({@required this.onChanged, this.validator});
+class HealthDropDownMenu extends StatelessWidget {
+  HealthDropDownMenu({@required this.onChanged, this.validator});
 
   ValueNotifier<String?> _cityNotifier = ValueNotifier<String?>(null);
   ValueChanged<String>? onChanged;
@@ -19,7 +19,7 @@ class StatusDropDownMenu extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'الحالة الاجتماعية',
+              'الحالة الصحية',
             ),
             SizedBox(height: 10.h),
             FormField(
@@ -47,7 +47,7 @@ class StatusDropDownMenu extends StatelessWidget {
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
                         hint: Text(
-                          "اختر الحالة الاجتماعية",
+                          "اختر الحالة الصحية",
                         ),
                         value: govern,
                         icon: Icon(Icons.keyboard_arrow_down_rounded,
@@ -58,7 +58,7 @@ class StatusDropDownMenu extends StatelessWidget {
                           field.validate();
                           if (onChanged != null) onChanged!.call(newValue);
                         },
-                        items: statusKeys
+                        items: healthKeys
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,

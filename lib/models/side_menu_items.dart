@@ -34,9 +34,9 @@ List<MenuItems> menuItems = [
       onTap: () => print('people tapped'),
       iconData: FontAwesomeIcons.userFriends,
       itemWidget: PeopleDetails()),
-  MenuItems(
-      title: 'people',
-      onTap: () => print('people tapped'),
-      iconData: FontAwesomeIcons.userFriends,
-      itemWidget: NewPeople()),
+  // MenuItems(
+  //     title: 'people',
+  //     onTap: () => print('people tapped'),
+  //     iconData: FontAwesomeIcons.userFriends,
+  //     itemWidget: NewPeople()),
 ];

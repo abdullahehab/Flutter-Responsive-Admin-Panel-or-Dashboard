@@ -28,7 +28,7 @@ class SideMenu extends StatelessWidget {
                 return InkWell(
                   onTap: () {
                     provider.setSelectedMenuIndex = index;
-                    if (Responsive.isMobile(context)) Navigator.pop(context);
+                    if (Responsive.isMobile()) Navigator.pop(context);
                   },
                   child: DrawerListTile(
                     title: e.title!,

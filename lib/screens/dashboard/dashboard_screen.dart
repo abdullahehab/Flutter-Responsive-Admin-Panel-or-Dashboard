@@ -12,7 +12,7 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.kMainBackgroundColor,
-      drawer: Responsive.isMobile(context) ? Drawer(child: SideMenu()) : null,
+      drawer: Responsive.isMobile() ? Drawer(child: SideMenu()) : null,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.transparent,
@@ -39,13 +39,13 @@ class DashboardScreen extends StatelessWidget {
                         Summary(),
                         SizedBox(height: defaultPadding),
                         RecentFiles(),
-                        if (Responsive.isMobile(context))
+                        if (Responsive.isMobile())
                           SizedBox(height: defaultPadding),
                         // if (Responsive.isMobile(context)) LoggedInUserDetails(),
                       ],
                     ),
                   ),
-                  if (!Responsive.isMobile(context))
+                  if (!Responsive.isMobile())
                     SizedBox(width: defaultPadding),
                   // On Mobile means if the screen is less than 850 we dont want to show it
                   // if (!Responsive.isMobile(context))

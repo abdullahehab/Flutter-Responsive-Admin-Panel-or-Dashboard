@@ -25,6 +25,7 @@ class CustomTextField extends StatelessWidget {
   final double textFieldWidth;
   final TextStyle hintTextStyle;
   final int maxLines;
+  final int maxLength;
   final FocusNode focusNode;
   final ValueNotifier<bool> obscurePasswordNotifier;
   final VoidCallback obscureChanged;
@@ -82,6 +83,7 @@ class CustomTextField extends StatelessWidget {
                           enabled: enabled,
                           style: TextStyle(decoration: TextDecoration.none),
                           maxLines: maxLines ?? 1,
+                          maxLength: maxLength,
                           // cursorColor: AppColors.COLOR_1,
                           focusNode: focusNode,
                           decoration: new InputDecoration(
@@ -169,6 +171,7 @@ class CustomTextField extends StatelessWidget {
       this.contentPadding,
       this.obscureChanged,
       this.prefixIcon,
+      this.maxLength,
       this.obscurePasswordNotifier,
       this.backGroundColor,
       this.outLineText,

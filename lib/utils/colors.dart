@@ -10,6 +10,7 @@ class AppColor {
   static Color black = Colors.black;
   static Color kPrimaryColor = Color(0xff8286F4);
   static Color kPrimaryDarkColor = Color(0xff4d59c1);
+  static Color buttonColor = Color(0xff55ce63);
   static Color kMainBackgroundColor = Color(0xfff5f5fd);
   static Color mainBackgroundColor = Color(0xfff7f7f7);
 }

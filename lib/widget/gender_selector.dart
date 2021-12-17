@@ -1,4 +1,3 @@
-import 'package:admin/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:admin/extensions/extension.dart';
 
@@ -6,10 +5,11 @@ import '../constants.dart';
 
 class GenderSelector extends StatefulWidget {
   const GenderSelector({
+    Key? key,
     @required this.onSaved,
     this.onChanged,
     this.initValue,
-  });
+  }) : super(key: key);
   final FormFieldSetter<String>? onSaved;
   final FormFieldSetter<String>? onChanged;
   final String? initValue;
@@ -31,23 +31,20 @@ class _GenderSelectorState extends State<GenderSelector> {
   @override
   Widget build(BuildContext context) {
     return FormField<String>(
-      onSaved: (newValue) {
-        widget.onSaved!(genderNotifier.value);
-      },
       builder: (field) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'الجنس',
-            ).addPaddingHorizontalVertical(horizontal: 20),
+            ).addPaddingHorizontalVertical(horizontal: 6),
             const SizedBox(height: 10),
             ValueListenableBuilder<String>(
               valueListenable: genderNotifier,
               builder: (BuildContext context, String gender, _) => SizedBox(
                 width: context.width,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: genderKeys.map((String e) {
                     final selected = e == gender;
                     return Flexible(
@@ -57,22 +54,20 @@ class _GenderSelectorState extends State<GenderSelector> {
                           if (widget.onChanged != null) widget.onChanged!(e);
                         },
                         child: Container(
-                          width: 200,
                           decoration: BoxDecoration(
-                            color: selected ? AppColor.kPrimaryColor.withOpacity(.4) : null,
-                            border: Border.all(color: AppColor.kPrimaryColor),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(APP_BORDER_RADIUS)),
+                            color: selected ? const Color(0xFFF1F4FB) : null,
+                            border: Border.all(color: const Color(0xFFF3F7FF)),
+                            borderRadius: const BorderRadius.all(
+                                Radius.circular(APP_BORDER_RADIUS)),
                           ),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Radio<String>(
                                 materialTapTargetSize:
                                     MaterialTapTargetSize.shrinkWrap,
                                 value: e,
                                 groupValue: gender,
-                                activeColor: AppColor.kPrimaryDarkColor,
                                 onChanged: (String? value) {
                                   genderNotifier.value = e;
                                   if (widget.onChanged != null) {
@@ -89,7 +84,7 @@ class _GenderSelectorState extends State<GenderSelector> {
                           ).addPaddingHorizontalVertical(
                               horizontal: 8, vertical: 4),
                         ),
-                      ).addPaddingHorizontalVertical(horizontal: 16),
+                      ).addPaddingHorizontalVertical(horizontal: 8),
                     );
                   }).toList(),
                 ),

@@ -19,7 +19,7 @@ class PeopleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Responsive.isMobile(context) ? Drawer(child: SideMenu()) : null,
+      drawer: Responsive.isMobile() ? Drawer(child: SideMenu()) : null,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.transparent,
@@ -30,15 +30,15 @@ class PeopleScreen extends StatelessWidget {
         ),
         centerTitle: false,
         actions: [
-          CustomButton(
-            width: 70.w,
-            height: 30.h,
-            text: 'إضافة جديد',
-            onPressed: () => context
-                .read<MenuController>()
-                .setSelectedMenuIndex = menuItems.indexOf(menuItems.last),
-            buttonColor: AppColor.buttonColor,
-          )
+          // CustomButton(
+          //   width: 70.w,
+          //   height: 30.h,
+          //   text: 'إضافة جديد',
+          //   onPressed: () => context
+          //       .read<MenuController>()
+          //       .setSelectedMenuIndex = menuItems.indexOf(menuItems.last),
+          //   buttonColor: AppColor.buttonColor,
+          // )
         ],
       ),
       backgroundColor: AppColor.mainBackgroundColor,
@@ -46,42 +46,38 @@ class PeopleScreen extends StatelessWidget {
           child: SingleChildScrollView(
         child: Column(
           children: [
-            Wrap(
-              spacing: Responsive.isMobile(context) ? 10 : 0,
-              runSpacing: Responsive.isMobile(context) ? 10 : 0,
-              children: [
-                '1',
-                '2',
-                '3',
-                '4',
-                '5',
-                '6',
-                '1',
-                '2',
-                '3',
-                '4',
-                '5',
-                '6',
-              ]
-                  .map(
-                    (e) => Responsive.isDesktop(context)
-                        ? buildSingleCard(context).addPaddingAll(10)
-                        : buildSingleMobileCard(context).addPaddingAll(0),
+            Responsive.isDesktop()
+                ? Wrap(
+                    spacing: Responsive.isMobile() ? 10 : 0,
+                    runSpacing: Responsive.isMobile() ? 10 : 0,
+                    children: [
+                      '1',
+                      '2',
+                      '3',
+                      '4',
+                      '5',
+                      '6',
+                      '1',
+                      '2',
+                      '3',
+                      '4',
+                      '5',
+                      '6',
+                    ]
+                        .map((e) => buildSingleCard(context).addPaddingAll(10))
+                        .toList(),
                   )
-                  .toList(),
-            )
+                : buildSingleCard(context, width: context.width).addPaddingHorizontalVertical(horizontal: 20)
           ],
         ),
       )),
     );
   }
 
-
-
   Container buildSingleMobileCard(BuildContext context) {
     return Container(
-      width: 180,
-      padding: EdgeInsets.symmetric(horizontal: 2.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      margin: EdgeInsets.symmetric(horizontal: 16.w),
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(10.0)),

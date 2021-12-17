@@ -1,5 +1,7 @@
 import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/models/side_menu_items.dart';
+import 'package:admin/responsive.dart';
+import 'package:admin/utils/page_route_name.dart';
 import 'package:admin/utils/resources.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,12 +9,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:admin/extensions/extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-GestureDetector buildSingleCard(BuildContext context) {
+
+GestureDetector buildSingleCard(BuildContext context, {double? width}) {
   return GestureDetector(
-    onTap: () => context.read<MenuController>().setSelectedMenuIndex =
-        menuItems.indexOf(menuItems.last),
+    onTap: () {
+      if (Responsive.isDesktop()) {
+        context.read<MenuController>().setSelectedMenuIndex =
+            menuItems.indexOf(menuItems.last);
+        return;
+      }
+      Navigator.pushNamed(context, PageRouteName.DETAILS);
+    },
     child: Container(
-        width: 300,
+        width: width ?? 300,
         padding: EdgeInsets.symmetric(horizontal: 2.w),
         decoration: BoxDecoration(
           color: Colors.white,

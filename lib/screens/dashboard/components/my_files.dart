@@ -27,7 +27,7 @@ class MyFiles extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                   horizontal: defaultPadding * 1.5,
                   vertical:
-                      defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
+                      defaultPadding / (Responsive.isMobile() ? 2 : 1),
                 ),
               ),
               onPressed: () {},
