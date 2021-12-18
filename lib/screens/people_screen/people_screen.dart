@@ -3,6 +3,7 @@ import 'package:admin/models/side_menu_items.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/screens/main/components/side_menu.dart';
 import 'package:admin/utils/colors.dart';
+import 'package:admin/utils/page_route_name.dart';
 import 'package:admin/utils/resources.dart';
 import 'package:admin/widget/main_button.dart';
 import 'package:admin/widget/people_card.dart';
@@ -19,59 +20,69 @@ class PeopleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Responsive.isMobile() ? Drawer(child: SideMenu()) : null,
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        title: Text(
-          'العملاء',
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        centerTitle: false,
-        actions: [
-          // CustomButton(
-          //   width: 70.w,
-          //   height: 30.h,
-          //   text: 'إضافة جديد',
-          //   onPressed: () => context
-          //       .read<MenuController>()
-          //       .setSelectedMenuIndex = menuItems.indexOf(menuItems.last),
-          //   buttonColor: AppColor.buttonColor,
-          // )
-        ],
-      ),
-      backgroundColor: AppColor.mainBackgroundColor,
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Responsive.isDesktop()
-                ? Wrap(
-                    spacing: Responsive.isMobile() ? 10 : 0,
-                    runSpacing: Responsive.isMobile() ? 10 : 0,
-                    children: [
-                      '1',
-                      '2',
-                      '3',
-                      '4',
-                      '5',
-                      '6',
-                      '1',
-                      '2',
-                      '3',
-                      '4',
-                      '5',
-                      '6',
-                    ]
-                        .map((e) => buildSingleCard(context).addPaddingAll(10))
-                        .toList(),
-                  )
-                : buildSingleCard(context, width: context.width).addPaddingHorizontalVertical(horizontal: 20)
+        drawer: Responsive.isMobile() ? Drawer(child: SideMenu()) : null,
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          title: Text(
+            'العملاء',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          centerTitle: false,
+          actions: [
+            // CustomButton(
+            //   width: 70.w,
+            //   height: 30.h,
+            //   text: 'إضافة جديد',
+            //   onPressed: () => context
+            //       .read<MenuController>()
+            //       .setSelectedMenuIndex = menuItems.indexOf(menuItems.last),
+            //   buttonColor: AppColor.buttonColor,
+            // )
           ],
         ),
-      )),
-    );
+        backgroundColor: AppColor.mainBackgroundColor,
+        body: SafeArea(
+            child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Responsive.isDesktop()
+                  ? Wrap(
+                      spacing: Responsive.isMobile() ? 10 : 0,
+                      runSpacing: Responsive.isMobile() ? 10 : 0,
+                      children: [
+                        '1',
+                        '2',
+                        '3',
+                        '4',
+                        '5',
+                        '6',
+                        '1',
+                        '2',
+                        '3',
+                        '4',
+                        '5',
+                        '6',
+                      ]
+                          .map(
+                              (e) => buildSingleCard(context).addPaddingAll(10))
+                          .toList(),
+                    )
+                  : buildSingleCard(context, width: context.width)
+                      .addPaddingHorizontalVertical(horizontal: 20)
+            ],
+          ),
+        )),
+        floatingActionButton: CustomButton(
+          width: context.width * .3,
+          // height: 30.h,
+          text: 'إضافة جديد',
+          onPressed: () {
+            Navigator.pushNamed(context, PageRouteName.ADD_NEW);
+          },
+          buttonColor: AppColor.kPrimaryDarkColor,
+        ));
   }
 
   Container buildSingleMobileCard(BuildContext context) {
