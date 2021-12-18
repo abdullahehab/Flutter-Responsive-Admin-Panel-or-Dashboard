@@ -49,11 +49,11 @@ class NewPeople extends StatelessWidget {
           centerTitle: false,
         ),
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Form(
-                key: _formKey,
-                child: Container(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(3.0)),
@@ -219,16 +219,13 @@ class NewPeople extends StatelessWidget {
                       ),
                     ),
                   ).addPaddingAll(20),
-                ),
-              ).addPaddingAll(10),
-              SizedBox(
-                height: 0.h,
-              ),
-              ValueListenableBuilder(
-                  valueListenable: _statusNotifier,
-                  builder: (BuildContext? context, String? status, _) =>
-                      husbandForm(context!, status!))
-            ],
+                ).addPaddingAll(10),
+                ValueListenableBuilder(
+                    valueListenable: _statusNotifier,
+                    builder: (BuildContext? context, String? status, _) =>
+                        husbandForm(context!, status!))
+              ],
+            ),
           ),
         ),
         floatingActionButton: CustomButton(
@@ -238,7 +235,10 @@ class NewPeople extends StatelessWidget {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
+
+              print('send data to api');
             }
+
           },
           buttonColor: AppColor.kPrimaryDarkColor,
         ));
@@ -248,7 +248,7 @@ class NewPeople extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 500),
       curve: Curves.fastOutSlowIn,
-      height: status == statusKeys[1] ? 950 : 0,
+      height: status == statusKeys[1] ? 1000 : 0,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(3.0)),
