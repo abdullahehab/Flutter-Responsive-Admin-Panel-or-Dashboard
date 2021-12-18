@@ -1,5 +1,5 @@
 // @dart=2.9
-
+import 'package:admin/constants.dart';
 import 'package:admin/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:admin/extensions/extension.dart';
 
-import '../constants.dart';
 import 'get_date_from_picker_dialog.dart';
 
 typedef DateFormatter = String Function(DateTime dateTime);
@@ -69,11 +68,12 @@ class _DateSelectorState extends State<DateSelector> {
             if (widget.onSaved != null) widget.onSaved(newValue);
           },
           validator: (DateTime val) {
-            final isValid = (val ?? widget.dateTime).toString().isEmpty;
+            final isValid =
+                (val ?? widget.dateTime).toString().isNotEmptyOrNull;
+
             if (!isValid) {
               return 'برجاء إختيار تاريخ الميلاد';
             }
-
             return null;
           },
           builder: (FormFieldState<DateTime> field) {
@@ -93,12 +93,10 @@ class _DateSelectorState extends State<DateSelector> {
                               maxDate: widget.lastDate,
                               minDate: widget.firstDate);
                           if (data != null) {
-                            dateNotifier.value = data;
+                            dateNotifier.value = value;
+                            field.didChange(data);
                             field.validate();
-                            field.setValue(value);
-                            field.didChange(value);
-                            if (widget.onChanged != null)
-                              widget.onChanged.call(value);
+                            widget?.onChanged?.call(data);
                           }
                         }
                       : null,
@@ -123,7 +121,7 @@ class _DateSelectorState extends State<DateSelector> {
                               widget.prefixIcon ?? calenderIcon(),
                             Text(
                               isEmpty
-                                  ? (widget.hintKey ?? 'تاريخ الميلاد')
+                                  ? (widget.hintKey ?? 'select_a_date')
                                   : (widget.dateFormatter ??
                                       _defaultDateFormatter)(_date),
                             )
@@ -141,21 +139,25 @@ class _DateSelectorState extends State<DateSelector> {
                     ).addPaddingHorizontalVertical(horizontal: 10),
                   ),
                 ),
-                (field.hasError)
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            field?.errorText ?? '',
-                            style: TextStyle(
-                              fontSize: 10.h,
-                              height: 1.6,
-                              color: Colors.red.shade800,
-                            ),
-                          ).addPaddingHorizontalVertical(horizontal: 8),
-                        ],
-                      )
-                    : const SizedBox(),
+                SizedBox(
+                  height: 16,
+                  child: (field.hasError)
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              field?.errorText ?? '',
+                              style: TextStyle(
+                                fontSize: 10.h,
+                                height: 1.6,
+                                color: Colors.red.shade800,
+                              ),
+                            ).addPaddingHorizontalVertical(horizontal: 8),
+                            const SizedBox(),
+                          ],
+                        )
+                      : const SizedBox(),
+                ),
               ],
             );
           },
@@ -167,11 +169,8 @@ class _DateSelectorState extends State<DateSelector> {
   Widget calenderIcon() {
     return Row(
       children: const <Widget>[
-        Icon(
-          Icons.calendar_today_outlined,
-          color: Color(0xFFA0A0B4),
-          size: 18,
-        ),
+        SizedBox(width: 12),
+        Icon(Icons.calendar_today_outlined, color: Color(0xFFA0A0B4)),
         SizedBox(width: 10),
       ],
     );
