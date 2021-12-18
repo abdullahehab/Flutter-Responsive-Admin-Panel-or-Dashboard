@@ -44,6 +44,15 @@ dependencies:
   dotted_line: ^3.1.0
   syncfusion_flutter_datepicker: ^19.3.44
   jiffy: ^4.1.0
+
+  firebase_auth:
+    git:
+      url: https://github.com/collinjackson/plugins.git
+      ref: 441417c2fed0ff26bf84a49ab2c5ffd2aa5487de
+      path: packages/firebase_auth
+
+  cloud_firestore:
+  firebase_core:
 dev_dependencies:
   flutter_test:
     sdk: flutter

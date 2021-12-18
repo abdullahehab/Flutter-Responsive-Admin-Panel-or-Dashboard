@@ -3,6 +3,7 @@ import 'package:admin/screens/main/main_screen.dart';
 import 'package:admin/services/service_locator.dart';
 import 'package:admin/utils/page_route_name.dart';
 import 'package:admin/utils/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,10 +11,10 @@ import 'package:flutter_screenutil/screenutil_init.dart';
 import 'package:provider/provider.dart';
 
 import 'controllers/appProvider.dart';
+import 'controllers/auth_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await setupLocators();
 
   runApp(MultiProvider(providers: [
@@ -23,6 +24,9 @@ void main() async {
     ChangeNotifierProvider(
       create: (context) => AppProvider(),
     ),
+    ChangeNotifierProvider(
+      create: (context) => AuthProvider(),
+    ),
   ], child: MyApp()));
 }
 
@@ -30,6 +34,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    context.read<AuthProvider>().initUser();
     return ScreenUtilInit(
       designSize: const Size(414, 896),
       builder: () => MaterialApp(

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "612059373137",
+    "project_id": "test-fire-dart",
+    "storage_bucket": "test-fire-dart.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612059373137:android:2a465365d1488ecdf9a270",
+        "android_client_info": {
+          "package_name": "com.dewan.test_fire_dart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "612059373137-808281bee8k64u6gonedrfu6po6hrj1k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgy1Dm515mmbTOfKsWe8P3k01fJaB5BqE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "612059373137-808281bee8k64u6gonedrfu6po6hrj1k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
