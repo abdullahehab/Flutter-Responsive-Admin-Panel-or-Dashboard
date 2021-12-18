@@ -1,4 +1,6 @@
 import 'package:admin/screens/main/users_data.dart';
+import 'package:admin/services/service_locator.dart';
+import 'package:admin/utils/page_route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -13,8 +15,15 @@ class SideMenuData {
 
 List<SideMenuData> items = [
   SideMenuData(
-      title: 'الرئيسية', icon: FontAwesomeIcons.dashcube, onTap: () {}),
-  SideMenuData(title: 'العملاء', icon: FontAwesomeIcons.users, onTap: () {}),
+      title: 'الرئيسية',
+      icon: FontAwesomeIcons.dashcube,
+      onTap: () =>
+          Navigator.pushNamed(sL<BuildContext>(), PageRouteName.MAIN_SCREEN)),
+  SideMenuData(
+      title: 'العملاء',
+      icon: FontAwesomeIcons.users,
+      onTap: () =>
+          Navigator.pushNamed(sL<BuildContext>(), PageRouteName.PEOPLE_SCREEN)),
 ];
 
 List<SideMenuData> subItems = [
