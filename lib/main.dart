@@ -15,7 +15,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await setupLocators();
-  runApp(MyApp());
+
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (context) => MenuController(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => AppProvider(),
+    ),
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -29,11 +37,11 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Admin Panel',
         theme: ThemeData(
-          // textTheme: Theme.of(context).textTheme.apply(
-          //       bodyColor: Colors.white,
-          //     ),
-          // canvasColor: secondaryColor,
-        ),
+            // textTheme: Theme.of(context).textTheme.apply(
+            //       bodyColor: Colors.white,
+            //     ),
+            // canvasColor: secondaryColor,
+            ),
         // theme: ThemeData.dark().copyWith(
         //   scaffoldBackgroundColor: bgColor,
         //   textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
@@ -50,19 +58,8 @@ class MyApp extends StatelessWidget {
           Locale("ar", "AE"),
         ],
         locale: Locale("ar", "AE"),
-        home: MultiProvider(
-          providers: [
-            ChangeNotifierProvider(
-              create: (context) => MenuController(),
-            ),
-            ChangeNotifierProvider(
-              create: (context) => AppProvider(),
-            ),
-          ],
-          // child: MainScreen(),
-        ),
         onGenerateRoute: Routes.generateRoute,
-        initialRoute: PageRouteName.ADD_NEW,
+        initialRoute: PageRouteName.MAIN_SCREEN,
       ),
     );
   }

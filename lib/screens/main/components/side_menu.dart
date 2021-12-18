@@ -2,6 +2,7 @@ import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/models/side_menu_data.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/utils/colors.dart';
+import 'package:admin/utils/page_route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:admin/extensions/extension.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -26,10 +27,12 @@ class SideMenu extends StatelessWidget {
                 int index = items.indexOf(e);
                 bool selected = index == selectedIndex;
                 return InkWell(
-                  onTap: () {
-                    provider.setSelectedMenuIndex = index;
-                    if (Responsive.isMobile()) Navigator.pop(context);
-                  },
+                  onTap: Responsive.isMobile()
+                      ? e.onTap
+                      : () {
+                          provider.setSelectedMenuIndex = index;
+                          if (Responsive.isMobile()) Navigator.pop(context);
+                        },
                   child: DrawerListTile(
                     title: e.title!,
                     iconData: e.icon!,

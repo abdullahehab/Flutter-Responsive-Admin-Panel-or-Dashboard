@@ -75,7 +75,7 @@ class CustomTextField extends StatelessWidget {
                             if (onChanged != null) onChanged(v);
                           },
                           onFieldSubmitted: (val) {
-                            onFieldSubmitted(val);
+                            onFieldSubmitted.call(val);
                           },
                           obscureText: obSecure,
                           controller: controller,
@@ -85,7 +85,7 @@ class CustomTextField extends StatelessWidget {
                           maxLines: maxLines ?? 1,
                           maxLength: maxLength,
                           // cursorColor: AppColors.COLOR_1,
-                          focusNode: focusNode,
+                          // focusNode: focusNode,
                           decoration: new InputDecoration(
                             fillColor: Colors.red,
 
