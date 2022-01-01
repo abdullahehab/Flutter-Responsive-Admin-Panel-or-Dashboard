@@ -1,7 +1,7 @@
 import 'package:admin/screens/dashboard/dashboard_screen.dart';
 import 'package:admin/screens/main/main_screen.dart';
 import 'package:admin/screens/people_details/people_details.dart';
-import 'package:admin/screens/people_new/people_new.dart';
+import 'package:admin/screens/people_new/add_people.dart';
 import 'package:admin/screens/people_screen/people_screen.dart';
 import 'package:admin/utils/page_route_name.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class Routes {
 
       case PageRouteName.ADD_NEW:
         return MaterialPageRoute<dynamic>(
-            builder: (_) => NewPeople(), settings: settings);
+            builder: (_) => AddPeople(), settings: settings);
 
       case PageRouteName.MAIN_SCREEN:
         return MaterialPageRoute<dynamic>(

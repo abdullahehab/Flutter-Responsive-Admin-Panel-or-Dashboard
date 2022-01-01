@@ -1,5 +1,6 @@
 import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/screens/main/main_screen.dart';
+import 'package:admin/screens/people_new/add_people.dart';
 import 'package:admin/services/service_locator.dart';
 import 'package:admin/utils/page_route_name.dart';
 import 'package:admin/utils/routes.dart';
@@ -12,6 +13,7 @@ import 'package:provider/provider.dart';
 
 import 'controllers/appProvider.dart';
 import 'controllers/auth_provider.dart';
+import 'controllers/firebase_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +29,9 @@ void main() async {
     ChangeNotifierProvider(
       create: (context) => AuthProvider(),
     ),
+    ChangeNotifierProvider(
+      create: (context) => FireBaseProvider(),
+    ),
   ], child: MyApp()));
 }
 
@@ -35,6 +40,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<AuthProvider>().initUser();
+    // context.read<FireBaseProvider>().getHousing();
     return ScreenUtilInit(
       designSize: const Size(414, 896),
       builder: () => MaterialApp(
@@ -64,7 +70,8 @@ class MyApp extends StatelessWidget {
         ],
         locale: Locale("ar", "AE"),
         onGenerateRoute: Routes.generateRoute,
-        initialRoute: PageRouteName.MAIN_SCREEN,
+        initialRoute: PageRouteName.ADD_NEW,
+        home: AddPeople(),
       ),
     );
   }

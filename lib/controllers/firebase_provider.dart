@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:admin/models/general_model.dart';
 import 'package:admin/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +12,16 @@ class FireBaseProvider extends ChangeNotifier {
     DocumentSnapshot snap = await qs.get();
 
     return snap.data == null;
+  }
+
+  void getHousing() async {
+    List<GeneralModel> list;
+    DocumentReference snap =
+        Firestore.instance.collection('/constants').document('housing');
+    DocumentSnapshot documentSnapshot = await snap.get();
+    list = List<GeneralModel>.from(
+        documentSnapshot.data['data'].map((x) => GeneralModel.fromJson(x)));
+    // print('snap housing => ${list[0].title}');
   }
 
   void addToFirebase({@required UserModel? userModel}) async {

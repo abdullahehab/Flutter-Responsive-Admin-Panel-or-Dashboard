@@ -1,5 +1,8 @@
 extension Strings on String {
-  bool isEmptyOrNull() => this.isEmpty;
+  bool isEmptyOrNull() {
+    if (this == 'null') return true;
+    return this.isEmpty;
+  }
 
   bool get isNotEmptyOrNull => !isEmptyOrNull();
 

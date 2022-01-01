@@ -1,41 +1,40 @@
-// @dart=2.9
+import 'package:admin/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:admin/extensions/extension.dart';
 
+import '../constants.dart';
 import 'components.dart';
 
 class CustomTextField extends StatelessWidget {
-  final Widget suffixIcon;
-  final String hint;
-  final String outLineText;
-  final bool obscureText;
-  final TextEditingController controller;
-  final EdgeInsetsGeometry contentPadding;
-  final bool enabled;
-  final Color backGroundColor;
-  final TextInputType textInputType;
-  final ValueChanged<String> onFieldSubmitted;
-  final String iconPath;
-  final double iconPathWidth;
-  final double borderRadius;
-  final double height;
-  final Color borderColor;
-  final double textFieldWidth;
-  final TextStyle hintTextStyle;
-  final int maxLines;
-  final int maxLength;
-  final FocusNode focusNode;
-  final ValueNotifier<bool> obscurePasswordNotifier;
-  final VoidCallback obscureChanged;
-  final TextInputAction textInputAction;
-  final Widget prefixIcon;
-  final FormFieldSetter<String> onSaved;
-  final FormFieldValidator<String> validator;
-  final ValueChanged<String> onChanged;
-  final ValueChanged<String> onSubmitted;
-
+  final Widget? suffixIcon;
+  final String? hint;
+  final String? outLineText;
+  final bool? obscureText;
+  final ValueChanged<String>? onChangedText;
+  final TextEditingController? controller;
+  final EdgeInsetsGeometry? contentPadding;
+  final bool? enabled;
+  final Color? backGroundColor;
+  final TextInputType? textInputType;
+  final ValueChanged<String>? onFieldSubmitted;
+  final String? iconPath;
+  final double? iconPathWidth;
+  final double? borderRadius;
+  final double? height;
+  final Color? borderColor;
+  final double? textFieldWidth;
+  final TextStyle? hintTextStyle;
+  final int? maxLines;
+  final int? maxLength;
+  final FocusNode? focusNode;
+  final ValueNotifier<bool>? obscurePasswordNotifier;
+  final VoidCallback? obscureChanged;
+  final TextInputAction? textInputAction;
+  final Widget? prefixIcon;
+  final FormFieldValidator<String>? validator;
+  final String? initialValue;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,7 +42,7 @@ class CustomTextField extends StatelessWidget {
       children: [
         if (outLineText != null)
           Text(
-            outLineText,
+            outLineText!,
           ),
         SizedBox(height: 5),
         ValueListenableBuilder(
@@ -51,9 +50,10 @@ class CustomTextField extends StatelessWidget {
                 obscurePasswordNotifier ?? ValueNotifier<bool>(false),
             builder: (BuildContext context, bool obSecure, _) =>
                 FormField<String>(
-                  validator: (String value) {
+                  validator: (String? value) {
                     if (validator != null) {
-                      final String valid = validator(value ?? '');
+                      final String? valid = validator!(value ?? '');
+
                       return valid;
                     }
 
@@ -68,36 +68,34 @@ class CustomTextField extends StatelessWidget {
                         height: height ?? 43.h,
                         child: TextFormField(
                           textInputAction: textInputAction,
-                          onChanged: (v) {
-                            field.setValue(v);
+                          onChanged: (String value) {
+                            field.setValue(value);
                             field.validate();
 
-                            if (onChanged != null) onChanged(v);
+                            onChangedText!.call(value);
                           },
-                          onFieldSubmitted: (val) {
-                            onFieldSubmitted.call(val);
-                          },
+                          onFieldSubmitted: onFieldSubmitted,
                           obscureText: obSecure,
+                          initialValue: initialValue ?? null,
                           controller: controller,
                           keyboardType: textInputType,
                           enabled: enabled,
                           style: TextStyle(decoration: TextDecoration.none),
                           maxLines: maxLines ?? 1,
                           maxLength: maxLength,
-                          // cursorColor: AppColors.COLOR_1,
-                          // focusNode: focusNode,
+                          focusNode: focusNode,
                           decoration: new InputDecoration(
+                            counterText: "",
                             fillColor: Colors.red,
-
                             suffixIcon: obscurePasswordNotifier != null
                                 ? Container(
-                                    // decoration: BoxDecoration(
-                                    //   color: AppColors.COLOR_9,
-                                    //   borderRadius: BorderRadius.circular(
-                                    //       borderRadius ??  Constants.APP_BORDER_RADIUS),
-                                    // ),
+                                    decoration: BoxDecoration(
+                                      color: AppColor.white,
+                                      borderRadius: BorderRadius.circular(
+                                          borderRadius ?? APP_BORDER_RADIUS),
+                                    ),
                                     child: IconButton(
-                                      // color: AppColors.BLACK_COLOR,
+                                      color: AppColor.black,
                                       iconSize: 18,
                                       icon: Icon(
                                         obSecure
@@ -105,10 +103,10 @@ class CustomTextField extends StatelessWidget {
                                             : FontAwesomeIcons.solidEyeSlash,
                                       ),
                                       onPressed: () {
-                                        obscurePasswordNotifier.value =
+                                        obscurePasswordNotifier!.value =
                                             !obSecure;
                                         if (obscureChanged != null) {
-                                          obscureChanged();
+                                          obscureChanged!();
                                         }
                                       },
                                     ),
@@ -117,7 +115,7 @@ class CustomTextField extends StatelessWidget {
                             border: InputBorder.none,
                             hintText: hint,
                             contentPadding: contentPadding ?? EdgeInsets.zero,
-                            // hintStyle: hintTextStyle ?? textFiledHintTextStyle,
+                            hintStyle: hintTextStyle,
                             prefixIcon: prefixIcon,
                             focusedBorder: inputBorder(
                                 borderColor:
@@ -131,23 +129,25 @@ class CustomTextField extends StatelessWidget {
                             disabledBorder: inputBorder(
                                 borderColor:
                                     field.hasError ? Colors.red : borderColor),
+                            focusedErrorBorder: inputBorder(
+                                borderColor:
+                                    field.hasError ? Colors.red : borderColor),
                           ),
                         ),
                       ),
                       if (validator != null)
-                        SizedBox(
-                          height: 12,
-                          child: (field.hasError)
-                              ? Text(
-                                  '  ${field?.errorText}',
-                                  style: TextStyle(
-                                    fontSize: 10.h,
-                                    height: 0.6,
-                                    color: Colors.red.shade800,
-                                  ),
-                                )
-                              : const SizedBox(),
-                        ).addPaddingOnly(top: field.hasError ? 10 : 0)
+                        (field.hasError)
+                            ? Text(
+                                '${field.errorText}',
+                                style: TextStyle(
+                                  fontSize: 10.h,
+                                  height: 0.6,
+                                  color: Colors.red.shade800,
+                                ),
+                              ).addPaddingOnly(right: 0, top: 10)
+                            : const SizedBox(
+                                height: 0,
+                              ),
                     ],
                   ),
                 )),
@@ -165,23 +165,22 @@ class CustomTextField extends StatelessWidget {
       this.height,
       this.hintTextStyle,
       this.maxLines,
+      this.maxLength,
       this.borderColor,
       this.onFieldSubmitted,
       this.textFieldWidth,
       this.contentPadding,
       this.obscureChanged,
       this.prefixIcon,
-      this.maxLength,
       this.obscurePasswordNotifier,
       this.backGroundColor,
       this.outLineText,
       this.borderRadius,
       this.textInputAction,
-      this.focusNode,
-      this.obscureText = false,
-      this.onChanged,
-      this.onSaved,
       this.validator,
-      this.onSubmitted,
-      this.enabled = true});
+      this.focusNode,
+      this.initialValue,
+      this.obscureText = false,
+      this.onChangedText,
+      this.enabled});
 }

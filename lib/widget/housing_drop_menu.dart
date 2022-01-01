@@ -1,4 +1,5 @@
 import 'package:admin/constants.dart';
+import 'package:admin/models/general_model.dart';
 import 'package:admin/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,20 +8,21 @@ import 'package:admin/extensions/extension.dart';
 class StatusDropDownMenu extends StatelessWidget {
   StatusDropDownMenu({@required this.onChanged, this.validator});
 
-  ValueNotifier<String?> _cityNotifier = ValueNotifier<String?>(null);
-  ValueChanged<String>? onChanged;
+  List<GeneralModel> list = [GeneralModel(title: 'test', id: 1)];
+  ValueNotifier<GeneralModel?> _cityNotifier =
+      ValueNotifier<GeneralModel?>(null);
+  ValueChanged<GeneralModel>? onChanged;
   final FormFieldValidator<String>? validator;
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
+    return ValueListenableBuilder<GeneralModel?>(
       valueListenable: _cityNotifier,
-      builder: (BuildContext context, String? govern, _) {
-        print('status => $govern');
+      builder: (BuildContext context, GeneralModel? govern, _) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'الحالة الاجتماعية',
+              'السكن',
             ),
             SizedBox(height: 10.h),
             FormField(
@@ -46,24 +48,24 @@ class StatusDropDownMenu extends StatelessWidget {
                                 ? Colors.red
                                 : AppColor.kPrimaryDarkColor)),
                     child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
+                      child: DropdownButton<GeneralModel>(
                         hint: Text(
                           "اختر الحالة الاجتماعية",
                         ),
                         value: govern,
                         icon: Icon(Icons.keyboard_arrow_down_rounded,
                             color: AppColor.kPrimaryColor.withOpacity(.4)),
-                        onChanged: (String? newValue) {
+                        onChanged: (GeneralModel? newValue) {
                           _cityNotifier.value = newValue!;
                           field.setValue(newValue);
                           field.validate();
                           if (onChanged != null) onChanged!.call(newValue);
                         },
-                        items: statusKeys
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
+                        items: list.map<DropdownMenuItem<GeneralModel>>(
+                            (GeneralModel value) {
+                          return DropdownMenuItem<GeneralModel>(
                             value: value,
-                            child: Text(value),
+                            child: Text(value.title!),
                           );
                         }).toList(),
                       ),

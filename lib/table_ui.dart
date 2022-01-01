@@ -63,7 +63,7 @@ class TableRow extends DataTableSource {
       DataCell(Text("${item.nationalId}", style: tableDataStyle)),
       DataCell(Text("${item.address}", style: tableDataStyle)),
       DataCell(Text("${item.personalStatus}", style: tableDataStyle)),
-      DataCell(Text("${item.husbandName}", style: tableDataStyle)),
+      DataCell(Text("${item.husbandId}", style: tableDataStyle)),
       DataCell(Text("${item.socialStatus}", style: tableDataStyle)),
       DataCell(Text("${item.birthDate}", style: tableDataStyle)),
       DataCell(Text("${item.working}", style: tableDataStyle)),
