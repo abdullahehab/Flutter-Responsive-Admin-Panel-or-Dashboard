@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
         ],
         locale: Locale("ar", "AE"),
         onGenerateRoute: Routes.generateRoute,
-        initialRoute: PageRouteName.ADD_NEW,
+        initialRoute: PageRouteName.MAIN_SCREEN,
         home: AddPeople(),
       ),
     );

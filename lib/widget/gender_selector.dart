@@ -23,7 +23,7 @@ class _GenderSelectorState extends State<GenderSelector> {
       ValueNotifier<String>(genderKeys[0]);
 
   _GenderSelectorState() {
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       genderNotifier.value = widget.initValue ?? genderKeys[0];
     });
   }
