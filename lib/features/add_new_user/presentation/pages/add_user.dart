@@ -68,7 +68,6 @@ class AddPeople extends GetView<UserController> {
                 SizedBox(height: 10),
                 GenderSelector(
                   onChanged: (newValue) {print('new => $newValue');},
-                  onSaved: (newValue) {},
                 ),
                 SizedBox(height: 10),
                 CustomTextField(

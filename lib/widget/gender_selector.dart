@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:admin/extensions/extension.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../constants.dart';
 import 'package:get/get.dart';
+
 class GenderSelector extends StatefulWidget {
   const GenderSelector({
     Key? key,
@@ -44,48 +45,46 @@ class _GenderSelectorState extends State<GenderSelector> {
               builder: (BuildContext context, String gender, _) => SizedBox(
                 width: context.width,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: genderKeys.map((String e) {
                     final selected = e == gender;
-                    return Flexible(
-                      child: InkWell(
-                        onTap: () {
-                          genderNotifier.value = e;
-                          if (widget.onChanged != null) widget.onChanged!(e);
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: selected ? const Color(0xFFF1F4FB) : null,
-                            border: Border.all(color: const Color(0xFFF3F7FF)),
-                            borderRadius: const BorderRadius.all(
-                                Radius.circular(APP_BORDER_RADIUS)),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Radio<String>(
-                                materialTapTargetSize:
-                                    MaterialTapTargetSize.shrinkWrap,
-                                value: e,
-                                groupValue: gender,
-                                onChanged: (String? value) {
-                                  genderNotifier.value = e;
-                                  if (widget.onChanged != null) {
-                                    widget.onChanged!(e);
-                                  }
-                                },
-                              ),
-                              Text(
-                                e,
-                              ),
-                              const SizedBox(),
-                              const SizedBox(),
-                            ],
-                          ).addPaddingHorizontalVertical(
-                              horizontal: 8, vertical: 4),
+                    return InkWell(
+                      onTap: () {
+                        genderNotifier.value = e;
+                        if (widget.onChanged != null) widget.onChanged!(e);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF1F4FB),
+                          border: Border.all(color: const Color(0xFFF3F7FF)),
+                          borderRadius: const BorderRadius.all(
+                              Radius.circular(APP_BORDER_RADIUS)),
                         ),
-                      ).addPaddingHorizontalVertical(horizontal: 8),
-                    );
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Radio<String>(
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              value: e,
+                              groupValue: gender,
+                              onChanged: (String? value) {
+                                genderNotifier.value = e;
+                                if (widget.onChanged != null) {
+                                  widget.onChanged!(e);
+                                }
+                              },
+                            ),
+                            Text(
+                              e,
+                            ),
+                            const SizedBox(),
+                            const SizedBox(),
+                          ],
+                        ).addPaddingHorizontalVertical(
+                            horizontal: 8, vertical: 4),
+                      ),
+                    ).addPaddingHorizontalVertical(horizontal: 8);
                   }).toList(),
                 ),
               ),
