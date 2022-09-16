@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:admin/extensions/extension.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../constants.dart';
 import 'package:get/get.dart';
 
 class GenderSelector extends StatefulWidget {
   const GenderSelector({
     Key? key,
-    @required this.onSaved,
-    this.onChanged,
+    required this.onChanged,
     this.initValue,
   }) : super(key: key);
-  final FormFieldSetter<String>? onSaved;
   final FormFieldSetter<String>? onChanged;
   final String? initValue;
 
