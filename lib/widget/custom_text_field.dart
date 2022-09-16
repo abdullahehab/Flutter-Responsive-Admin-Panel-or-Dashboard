@@ -35,15 +35,32 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final FormFieldValidator<String>? validator;
   final String? initialValue;
+  bool requiredFiled = false;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (outLineText != null)
-          Text(
-            outLineText!,
+          Row(
+            children: [
+              Text(
+                outLineText!,
+              ),
+              requiredFiled
+                  ? Text(
+                '*',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                  height: 1,
+                ),
+              )
+                  : SizedBox.shrink(),
+            ],
           ),
+
         SizedBox(height: 5),
         ValueListenableBuilder(
             valueListenable:
@@ -181,6 +198,7 @@ class CustomTextField extends StatelessWidget {
       this.focusNode,
       this.initialValue,
       this.obscureText = false,
+      this.requiredFiled = false,
       this.onChangedText,
       this.enabled});
 }
