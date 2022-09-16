@@ -7,6 +7,7 @@ import 'package:admin/extensions/extension.dart';
 import '../constants.dart';
 import 'components.dart';
 import 'package:get/get.dart';
+
 class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final String? hint;
@@ -46,21 +47,25 @@ class CustomTextField extends StatelessWidget {
             children: [
               Text(
                 outLineText!,
-              ),
-              requiredFiled
-                  ? Text(
-                '*',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.red,
                   height: 1,
                 ),
-              )
+              ),
+              requiredFiled
+                  ? Text(
+                      '*',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
+                        height: 1,
+                      ),
+                    )
                   : SizedBox.shrink(),
             ],
           ),
-
         SizedBox(height: 5),
         ValueListenableBuilder(
             valueListenable:
@@ -134,21 +139,12 @@ class CustomTextField extends StatelessWidget {
                             contentPadding: contentPadding ?? EdgeInsets.zero,
                             hintStyle: hintTextStyle,
                             prefixIcon: prefixIcon,
-                            focusedBorder: inputBorder(
-                                borderColor:
-                                    field.hasError ? Colors.red : borderColor),
-                            enabledBorder: inputBorder(
-                                borderColor:
-                                    field.hasError ? Colors.red : borderColor),
-                            errorBorder: inputBorder(
-                                borderColor:
-                                    field.hasError ? Colors.red : borderColor),
-                            disabledBorder: inputBorder(
-                                borderColor:
-                                    field.hasError ? Colors.red : borderColor),
-                            focusedErrorBorder: inputBorder(
-                                borderColor:
-                                    field.hasError ? Colors.red : borderColor),
+                            focusedBorder: border(hasError: field.hasError),
+                            enabledBorder: border(hasError: field.hasError),
+                            errorBorder: border(hasError: field.hasError),
+                            disabledBorder: border(hasError: field.hasError),
+                            focusedErrorBorder:
+                                border(hasError: field.hasError),
                           ),
                         ),
                       ),
@@ -170,6 +166,12 @@ class CustomTextField extends StatelessWidget {
                 )),
       ],
     );
+  }
+
+  InputBorder? border({required hasError}) {
+    return inputBorder(
+        borderColor:
+            hasError ? Colors.red : borderColor ?? AppColor.kPrimaryColor);
   }
 
   CustomTextField(
