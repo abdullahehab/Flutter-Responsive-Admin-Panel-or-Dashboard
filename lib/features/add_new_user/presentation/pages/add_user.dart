@@ -13,8 +13,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../../../constants.dart';
+import '../../../../core/shared_components/drop_down_widget.dart';
 import '../../../../models/user_model.dart';
 import 'package:get/get.dart';
+
 ValueNotifier<String?> _selectedStatus = ValueNotifier<String?>(null);
 ValueNotifier<String?> _selectedHealth = ValueNotifier<String?>(null);
 final ValueNotifier<DateTime?> checkInNotifier = ValueNotifier<DateTime?>(null);
@@ -67,7 +69,9 @@ class AddPeople extends GetView<UserController> {
                 // Wrap your DaysList in Expanded and provide scrollController to it
                 SizedBox(height: 10),
                 GenderSelector(
-                  onChanged: (newValue) {print('new => $newValue');},
+                  onChanged: (newValue) {
+                    print('new => $newValue');
+                  },
                 ),
                 SizedBox(height: 10),
                 CustomTextField(
@@ -129,27 +133,13 @@ class AddPeople extends GetView<UserController> {
                   textInputAction: TextInputAction.next,
                 ),
                 SizedBox(height: 10),
-                ValueListenableBuilder(
-                    valueListenable: _selectedStatus,
-                    builder: (BuildContext context, String? status, _) {
-                      return AppDropdownButton<String>(
-                          validator: TextFieldValidators.isNotEmpty,
-                          outLineText: 'الحالة الاجتماعية',
-                          hintText: 'اختر الحالة الاجتماعية',
-                          value: status,
-                          items: statusKeys
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onSaved: (vlu) => print('value => $vlu'),
-                          onChanged: (dynamic value) {
-                            _selectedStatus.value = value;
-                            // userModel.nationalId = text,
-                          });
-                    }),
+                DropDownWidgetX(
+                  labelText: 'الحالة الاجتماعية',
+                  maxHeight: 100,
+                  items: statusKeys,
+                  selectedItem: statusKeys.first,
+                  onChanged: (value) {},
+                ),
                 SizedBox(height: 10),
                 Column(
                   children: <Widget>[
