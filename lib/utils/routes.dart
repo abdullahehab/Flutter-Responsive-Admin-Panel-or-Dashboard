@@ -1,7 +1,7 @@
 import 'package:admin/screens/dashboard/dashboard_screen.dart';
 import 'package:admin/screens/main/main_screen.dart';
 import 'package:admin/screens/people_details/people_details.dart';
-import 'package:admin/screens/people_new/add_people.dart';
+import 'package:admin/features/add_new_user/presentation/pages/add_user.dart';
 import 'package:admin/screens/people_screen/people_screen.dart';
 import 'package:admin/utils/page_route_name.dart';
 import 'package:flutter/material.dart';

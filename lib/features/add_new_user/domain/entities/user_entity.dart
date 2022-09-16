@@ -1,11 +1,6 @@
-import 'dart:convert';
-
-import 'package:admin/features/add_new_user/domain/entities/user_entity.dart';
-
-class UserModel extends UserEntity {
-  UserModel({
+class UserEntity {
+  UserEntity({
     this.nationalId,
-    this.name,
     this.address,
     this.husbandId,
     this.socialStatus,
@@ -17,22 +12,9 @@ class UserModel extends UserEntity {
     this.childrenNumber,
     this.housing,
     this.parentId,
+    this.name,
     this.owning,
-  }) : super(
-            nationalId: nationalId,
-            name: name,
-            address: address,
-            husbandId: husbandId,
-            socialStatus: socialStatus,
-            personalStatus: personalStatus,
-            birthDate: birthDate,
-            phone: phone,
-            working: working,
-            healthStatus: healthStatus,
-            childrenNumber: childrenNumber,
-            housing: housing,
-            parentId: parentId,
-            owning: owning);
+  });
 
   String? nationalId;
   String? address;
@@ -48,48 +30,10 @@ class UserModel extends UserEntity {
   int? childrenNumber;
   String? housing;
   String? owning;
-
-  factory UserModel.fromRawJson(String str) =>
-      UserModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        nationalId: json["nationalId"],
-        address: json["address"],
-        parentId: json["parentId"],
-        husbandId: json["husbandId"],
-        socialStatus: json["socialStatus"],
-        personalStatus: json["personalStatus"],
-        birthDate: json["birthDate"],
-        phone: json["phone"],
-        working: json["working"],
-        healthStatus: json["healthStatus"],
-        childrenNumber: json["childrenNumber"],
-        housing: json["housing"],
-        owning: json["owning"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "nationalId": nationalId,
-        "address": address,
-        "parentId": parentId,
-        "husbandId": husbandId,
-        "socialStatus": socialStatus,
-        "personalStatus": personalStatus,
-        "birthDate": birthDate,
-        "phone": phone,
-        "working": working,
-        "healthStatus": healthStatus,
-        "childrenNumber": childrenNumber,
-        "housing": housing,
-        "owning": owning,
-      };
 }
 
-List<UserModel> usersList = [
-  UserModel(
+List<UserEntity> usersList = [
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -102,7 +46,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -115,7 +59,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -128,7 +72,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -141,7 +85,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -154,7 +98,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -167,7 +111,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -180,7 +124,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -193,7 +137,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -206,7 +150,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -219,7 +163,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -232,7 +176,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -245,7 +189,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -258,7 +202,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -271,7 +215,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -284,7 +228,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -297,7 +241,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -310,7 +254,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -323,7 +267,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -336,7 +280,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -349,7 +293,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -362,7 +306,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -375,7 +319,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -388,7 +332,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -401,7 +345,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -414,7 +358,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -427,7 +371,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -440,7 +384,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -453,7 +397,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -466,7 +410,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -479,7 +423,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -492,7 +436,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -505,7 +449,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -518,7 +462,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -531,7 +475,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -544,7 +488,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -557,7 +501,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -570,7 +514,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -583,7 +527,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -596,7 +540,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',
@@ -609,7 +553,7 @@ List<UserModel> usersList = [
       childrenNumber: 1,
       housing: "شفه",
       owning: "شفه"),
-  UserModel(
+  UserEntity(
       nationalId: "112312321",
       address: 'شارع ١٢ القطعه ٤',
       husbandId: 'ثناء عادل محمد',

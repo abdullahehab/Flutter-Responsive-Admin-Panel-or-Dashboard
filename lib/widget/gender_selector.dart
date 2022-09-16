@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:admin/extensions/extension.dart';
 
 import '../constants.dart';
-
+import 'package:get/get.dart';
 class GenderSelector extends StatefulWidget {
   const GenderSelector({
     Key? key,

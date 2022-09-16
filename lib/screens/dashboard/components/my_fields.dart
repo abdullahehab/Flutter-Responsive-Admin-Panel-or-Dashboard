@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:admin/extensions/extension.dart';
 import '../../../constants.dart';
 import 'file_info_card.dart';
-
+import 'package:get/get.dart';
 class Summary extends StatelessWidget {
   const Summary({
     Key? key,

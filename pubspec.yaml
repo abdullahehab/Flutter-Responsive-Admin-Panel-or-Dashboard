@@ -44,7 +44,8 @@ dependencies:
   dotted_line: ^3.1.0
   syncfusion_flutter_datepicker: ^19.3.44
   jiffy: ^4.1.0
-
+  get: 4.6.5
+  dartz: ^0.10.0
   firebase_auth:
     git:
       url: https://github.com/collinjackson/plugins.git

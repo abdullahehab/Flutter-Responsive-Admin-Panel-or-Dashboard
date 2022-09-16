@@ -1,4 +1,5 @@
 import 'package:admin/extensions/extension.dart';
+import 'package:admin/features/add_new_user/presentation/controller/user_controller.dart';
 import 'package:admin/utils/colors.dart';
 import 'package:admin/utils/text_field_validator.dart';
 import 'package:admin/widget/app_drop_down.dart';
@@ -9,14 +10,16 @@ import 'package:admin/widget/get_date_from_picker_dialog.dart';
 import 'package:admin/widget/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
-import '../../constants.dart';
-
+import '../../../../constants.dart';
+import '../../../../models/user_model.dart';
+import 'package:get/get.dart';
 ValueNotifier<String?> _selectedStatus = ValueNotifier<String?>(null);
 ValueNotifier<String?> _selectedHealth = ValueNotifier<String?>(null);
 final ValueNotifier<DateTime?> checkInNotifier = ValueNotifier<DateTime?>(null);
 
-class AddPeople extends StatelessWidget {
+class AddPeople extends GetView<UserController> {
   final _formKey = GlobalKey<FormState>();
 
   Future<void> openPickerDateSingle(BuildContext context) async {
@@ -30,6 +33,15 @@ class AddPeople extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isEdit = false;
+    UserModel userModel;
+    if (Get.arguments == null) {
+      userModel = UserModel();
+    } else {
+      isEdit = true;
+      userModel = Get.arguments as UserModel;
+    }
+
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -40,7 +52,7 @@ class AddPeople extends StatelessWidget {
                 borderRadius: 6,
                 width: 70,
                 buttonPadding: EdgeInsets.zero,
-                text: "حفظ",
+                text: "tes",
                 withoutPadding: true,
                 onPressed: () => print('test')
                 // Navigator.pushNamed(context, PageRouteName.DONE),
@@ -55,15 +67,14 @@ class AddPeople extends StatelessWidget {
                 // Wrap your DaysList in Expanded and provide scrollController to it
                 SizedBox(height: 10),
                 GenderSelector(
-                  onChanged: (newValue) {},
+                  onChanged: (newValue) {print('new => $newValue');},
                   onSaved: (newValue) {},
                 ),
                 SizedBox(height: 10),
                 CustomTextField(
                   prefixIcon: Icon(FontAwesomeIcons.user, size: APP_ICON_SIZE),
                   contentPadding: EdgeInsets.only(right: 10),
-                  // borderColor: AppColor.BORDER_COLOR,
-                  onChangedText: (String text) => print('test => $text'),
+                  onChangedText: (String text) => userModel.name = text,
                   outLineText: 'الاسم',
                   hint: 'الاسم',
                   iconPathWidth: 17,
@@ -75,8 +86,7 @@ class AddPeople extends StatelessWidget {
                   contentPadding: EdgeInsets.only(right: 10),
                   prefixIcon:
                       Icon(FontAwesomeIcons.addressBook, size: APP_ICON_SIZE),
-                  // borderColor: AppColor.BORDER_COLOR,
-                  onChangedText: (String text) => print('test => $text'),
+                  onChangedText: (String text) => userModel.address = text,
                   outLineText: 'العنوان',
                   hint: 'العنوان',
                   iconPathWidth: 17,
@@ -88,8 +98,7 @@ class AddPeople extends StatelessWidget {
                   contentPadding: EdgeInsets.only(right: 10),
                   prefixIcon:
                       Icon(FontAwesomeIcons.idCard, size: APP_ICON_SIZE),
-                  // borderColor: AppColor.BORDER_COLOR,
-                  onChangedText: (String text) => print('test => $text'),
+                  onChangedText: (String text) => userModel.nationalId = text,
                   outLineText: 'الرقم القومي',
                   hint: 'الرقم القومي',
                   iconPathWidth: 17,
@@ -101,7 +110,7 @@ class AddPeople extends StatelessWidget {
                   contentPadding: EdgeInsets.only(right: 10),
                   prefixIcon: Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
                   // borderColor: AppColor.BORDER_COLOR,
-                  onChangedText: (String text) => print('test => $text'),
+                  onChangedText: (String text) => userModel.phone = text,
                   outLineText: 'التليفون',
                   hint: 'التليفون',
                   iconPathWidth: 17,
@@ -113,7 +122,7 @@ class AddPeople extends StatelessWidget {
                   contentPadding: EdgeInsets.only(right: 10),
                   prefixIcon: Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
                   // borderColor: AppColor.BORDER_COLOR,
-                  onChangedText: (String text) => print('test => $text'),
+                  onChangedText: (String text) => userModel.owning = text,
                   outLineText: 'حيازه',
                   hint: 'حيازه',
                   iconPathWidth: 17,
@@ -139,6 +148,7 @@ class AddPeople extends StatelessWidget {
                           onSaved: (vlu) => print('value => $vlu'),
                           onChanged: (dynamic value) {
                             _selectedStatus.value = value;
+                            // userModel.nationalId = text,
                           });
                     }),
                 SizedBox(height: 10),
@@ -170,7 +180,7 @@ class AddPeople extends StatelessWidget {
                   contentPadding: EdgeInsets.only(right: 10),
                   prefixIcon: Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
                   // borderColor: AppColor.BORDER_COLOR,
-                  onChangedText: (String text) => print('test => $text'),
+                  onChangedText: (String text) => userModel.working = text,
                   outLineText: 'الوظيفه',
                   hint: 'الوظيفه',
                   iconPathWidth: 17,
@@ -210,7 +220,7 @@ class AddPeople extends StatelessWidget {
                           child: status == statusKeys[1] ? child : SizedBox());
                     }),
               ],
-            ).addPaddingOnly(bottom: context.bottomSafeArea),
+            ).addPaddingOnly(bottom: context.mediaQueryPadding.bottom),
           ),
         ).addPaddingHorizontalVertical(horizontal: 16));
   }
@@ -339,5 +349,5 @@ Widget husbandForm(BuildContext context) {
         height: 10,
       ),
     ],
-  ).addPaddingOnly(bottom: context.bottomSafeArea);
+  ).addPaddingOnly(bottom: context.mediaQueryPadding.bottom);
 }

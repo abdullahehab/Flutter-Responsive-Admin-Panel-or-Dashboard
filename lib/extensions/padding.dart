@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:admin/extensions/extension.dart';
-
+import 'package:get/get.dart';
 extension PaddingToWidget on Widget {
   Widget addPadding(EdgeInsetsGeometry padding) {
     return Padding(
@@ -19,7 +18,7 @@ extension PaddingToWidget on Widget {
   Widget addAnimatedPadding(BuildContext context) {
     return AnimatedPadding(
       padding: EdgeInsets.only(
-          bottom: context.keyboardHeight + 12, top: 8, right: 16, left: 16),
+          bottom: context.mediaQueryViewInsets.bottom + 12, top: 8, right: 16, left: 16),
       duration: Duration(milliseconds: 200),
       child: this,
     );

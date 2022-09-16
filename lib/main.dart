@@ -1,78 +1,55 @@
-import 'package:admin/controllers/MenuController.dart';
-import 'package:admin/screens/main/main_screen.dart';
-import 'package:admin/screens/people_new/add_people.dart';
+import 'package:admin/features/add_new_user/data/datasource/remote_datasource.dart';
+import 'package:admin/features/add_new_user/data/repositories/user_repositories_imp.dart';
+import 'package:admin/features/add_new_user/domain/usecase/add_user_usecase.dart';
+import 'package:admin/screens/main/components/main_screen_controller.dart';
 import 'package:admin/services/service_locator.dart';
+import 'package:admin/utils/app_pages.dart';
 import 'package:admin/utils/page_route_name.dart';
 import 'package:admin/utils/routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/screenutil_init.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 
 import 'controllers/appProvider.dart';
 import 'controllers/auth_provider.dart';
-import 'controllers/firebase_provider.dart';
+import 'features/add_new_user/presentation/controller/user_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocators();
 
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (context) => MenuController(),
+  runApp(ScreenUtilInit(
+    designSize: const Size(414, 896),
+    builder: () => GetMaterialApp(
+      title: "Dewan Project",
+      debugShowCheckedModeBanner: false,
+      initialRoute: PageRouteName.MAIN_SCREEN,
+      getPages: AppPages.routes,
+      locale: const Locale('ar', 'EG'),
+      initialBinding: Binding(),
+      theme: ThemeData(
+        fontFamily: 'Cairo',
+      ),
     ),
-    ChangeNotifierProvider(
-      create: (context) => AppProvider(),
-    ),
-    ChangeNotifierProvider(
-      create: (context) => AuthProvider(),
-    ),
-    ChangeNotifierProvider(
-      create: (context) => FireBaseProvider(),
-    ),
-  ], child: MyApp()));
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class Binding extends Bindings {
   @override
-  Widget build(BuildContext context) {
-    context.read<AuthProvider>().initUser();
-    // context.read<FireBaseProvider>().getHousing();
-    return ScreenUtilInit(
-      designSize: const Size(414, 896),
-      builder: () => MaterialApp(
-        navigatorKey: sL<AppProvider>().navigatorKey,
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Admin Panel',
-        theme: ThemeData(
-            // textTheme: Theme.of(context).textTheme.apply(
-            //       bodyColor: Colors.white,
-            //     ),
-            // canvasColor: secondaryColor,
-            ),
-        // theme: ThemeData.dark().copyWith(
-        //   scaffoldBackgroundColor: bgColor,
-        //   textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-        //       .apply(bodyColor: Colors.white),
-        //   canvasColor: secondaryColor,
-        // ),
-        localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          DefaultCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: [
-          Locale("ar", "AE"),
-        ],
-        locale: Locale("ar", "AE"),
-        onGenerateRoute: Routes.generateRoute,
-        initialRoute: PageRouteName.MAIN_SCREEN,
-        home: AddPeople(),
-      ),
+  void dependencies() {
+    Get.lazyPut(() => UserRemoteDataSourceImp());
+    Get.lazyPut(() => UserRepositoryImp(Get.find<UserRemoteDataSourceImp>()));
+    Get.lazyPut(() => AddUserUsecase(Get.find<UserRepositoryImp>()));
+
+    Get.put(UserController(Get.find<AddUserUsecase>()), permanent: true);
+
+    Get.lazyPut<MainScreenController>(
+      () => MainScreenController(),
+      fenix: true,
     );
   }
 }

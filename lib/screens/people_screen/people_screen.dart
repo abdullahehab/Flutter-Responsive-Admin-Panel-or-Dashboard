@@ -1,18 +1,14 @@
-import 'package:admin/controllers/MenuController.dart';
-import 'package:admin/models/side_menu_items.dart';
+import 'package:admin/extensions/extension.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/screens/main/components/side_menu.dart';
 import 'package:admin/utils/colors.dart';
 import 'package:admin/utils/page_route_name.dart';
-import 'package:admin/utils/resources.dart';
 import 'package:admin/widget/main_button.dart';
 import 'package:admin/widget/people_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:admin/extensions/extension.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class PeopleScreen extends StatelessWidget {
   const PeopleScreen({Key? key}) : super(key: key);
@@ -79,7 +75,7 @@ class PeopleScreen extends StatelessWidget {
           // height: 30.h,
           text: 'إضافة جديد',
           onPressed: () {
-            Navigator.pushNamed(context, PageRouteName.ADD_NEW);
+            Get.toNamed(PageRouteName.ADD_NEW);
           },
           buttonColor: AppColor.kPrimaryDarkColor,
         ));

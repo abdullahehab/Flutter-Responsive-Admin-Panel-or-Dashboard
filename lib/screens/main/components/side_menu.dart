@@ -1,18 +1,18 @@
-import 'package:admin/controllers/MenuController.dart';
+import 'package:admin/extensions/extension.dart';
 import 'package:admin/models/side_menu_data.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/utils/colors.dart';
-import 'package:admin/utils/page_route_name.dart';
 import 'package:flutter/material.dart';
-import 'package:admin/extensions/extension.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
-class SideMenu extends StatelessWidget {
+import 'main_screen_controller.dart';
+
+class SideMenu extends GetView<MainScreenController> {
   ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
   @override
   Widget build(BuildContext context) {
-    var provider = context.read<MenuController>();
+    var controller = Get.find<MainScreenController>();
     return Drawer(
       child: ValueListenableBuilder(
         valueListenable: _selectedIndexNotifier,
@@ -30,9 +30,9 @@ class SideMenu extends StatelessWidget {
                   onTap: Responsive.isMobile()
                       ? e.onTap
                       : () {
-                          provider.setSelectedMenuIndex = index;
-                          if (Responsive.isMobile()) Navigator.pop(context);
-                        },
+                    controller.setSelectedMenuIndex = index;
+                    if (Responsive.isMobile()) Navigator.pop(context);
+                  },
                   child: DrawerListTile(
                     title: e.title!,
                     iconData: e.icon!,
@@ -66,11 +66,11 @@ class SideMenu extends StatelessWidget {
                       children: subItems
                           .map(
                             (e) => DrawerListTile(
-                              title: e.title,
-                              iconData: e.icon,
-                              selected: false,
-                            ).addPaddingOnly(right: 20),
-                          )
+                          title: e.title,
+                          iconData: e.icon,
+                          selected: false,
+                        ).addPaddingOnly(right: 20),
+                      )
                           .toList())),
             ],
           ),
