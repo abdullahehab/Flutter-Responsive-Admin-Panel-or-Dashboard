@@ -95,7 +95,7 @@ class AddPeople extends GetView<UserController> {
                     contentPadding: EdgeInsets.only(right: 10),
                     prefixIcon:
                         Icon(FontAwesomeIcons.addressBook, size: APP_ICON_SIZE),
-                    onChangedText: (String text) => userModel.address = text,
+                    onChangedText: (String text) => userModel.phone = text,
                     hint: 'رقم الهاتف',
                     iconPathWidth: 17,
                     textInputType: TextInputType.phone,
@@ -125,7 +125,7 @@ class AddPeople extends GetView<UserController> {
                     prefixIcon:
                         Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
                     // borderColor: AppColor.BORDER_COLOR,
-                    onChangedText: (String text) => userModel.phone = text,
+                    onChangedText: (String text) => userModel.owning = text,
                     hint: 'حيازه',
                     iconPathWidth: 17,
                     textInputType: TextInputType.phone,
@@ -140,7 +140,7 @@ class AddPeople extends GetView<UserController> {
                     prefixIcon:
                         Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
                     // borderColor: AppColor.BORDER_COLOR,
-                    onChangedText: (String text) => userModel.phone = text,
+                    onChangedText: (String text) => userModel.housing = text,
                     hint: 'السكن',
                     iconPathWidth: 17,
                     textInputType: TextInputType.phone,
@@ -178,7 +178,7 @@ class AddPeople extends GetView<UserController> {
                   child: buildDateTimePickerField(
                     // initialValue: customerModels.value.idExpireDate,
                     firstDate: DateTime.now().year,
-                    onSaved: (value) {},
+                    onSaved: (value) => userModel.birthDate = value,
                   ),
                 ),
                 SizedBox(height: 10),
@@ -188,7 +188,7 @@ class AddPeople extends GetView<UserController> {
                     maxHeight: 100,
                     items: healthKeys,
                     selectedItem: healthKeys.first,
-                    onChanged: (value) {},
+                    onChanged: (value) => userModel.healthStatus = 1,
                   ),
                 ),
                 SizedBox(
@@ -197,9 +197,7 @@ class AddPeople extends GetView<UserController> {
                 HorizontalLabeledWidget(
                   label: 'النوع',
                   child: GenderSelector(
-                    onChanged: (newValue) {
-                      print('new => $newValue');
-                    },
+                    onChanged: (newValue) => userModel.gender = newValue,
                   ),
                 ),
               ],
