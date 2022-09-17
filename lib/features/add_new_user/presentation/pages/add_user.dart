@@ -89,6 +89,21 @@ class AddPeople extends GetView<UserController> {
                 ),
                 SizedBox(height: 10),
                 HorizontalLabeledWidget(
+                  label: 'رقم الهاتف',
+                  child: CustomTextField(
+                    validator: TextFieldValidators.isPhone,
+                    contentPadding: EdgeInsets.only(right: 10),
+                    prefixIcon:
+                        Icon(FontAwesomeIcons.addressBook, size: APP_ICON_SIZE),
+                    onChangedText: (String text) => userModel.address = text,
+                    hint: 'رقم الهاتف',
+                    iconPathWidth: 17,
+                    textInputType: TextInputType.phone,
+                    textInputAction: TextInputAction.next,
+                  ),
+                ),
+                SizedBox(height: 10),
+                HorizontalLabeledWidget(
                   label: 'الرقم القومي',
                   child: CustomTextField(
                     validator: TextFieldValidators.isNationalId,
@@ -112,6 +127,21 @@ class AddPeople extends GetView<UserController> {
                     // borderColor: AppColor.BORDER_COLOR,
                     onChangedText: (String text) => userModel.phone = text,
                     hint: 'حيازه',
+                    iconPathWidth: 17,
+                    textInputType: TextInputType.phone,
+                    textInputAction: TextInputAction.next,
+                  ),
+                ),
+                SizedBox(height: 10),
+                HorizontalLabeledWidget(
+                  label: 'السكن',
+                  child: CustomTextField(
+                    contentPadding: EdgeInsets.only(right: 10),
+                    prefixIcon:
+                        Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
+                    // borderColor: AppColor.BORDER_COLOR,
+                    onChangedText: (String text) => userModel.phone = text,
+                    hint: 'السكن',
                     iconPathWidth: 17,
                     textInputType: TextInputType.phone,
                     textInputAction: TextInputAction.next,
