@@ -72,6 +72,7 @@ class _DropDownWidgetXState<T> extends State<DropDownWidgetX<T>> {
         Container(
           height: widget.fieldHeight ?? 43.h,
           width: widget.fieldWidth,
+          color: Colors.transparent,
           child: DropdownSearch<T>(
             enabled: widget.enabled,
             maxHeight: widget.maxHeight,
@@ -82,7 +83,7 @@ class _DropDownWidgetXState<T> extends State<DropDownWidgetX<T>> {
             selectedItem: widget.selectedItem,
             itemAsString: widget.itemAsString,
             dropdownSearchDecoration: InputDecoration(
-                fillColor: Colors.white,
+                fillColor: Colors.transparent,
                 contentPadding: EdgeInsets.symmetric(horizontal: 10),
                 filled: true,
                 hintText: widget.hintText == null

@@ -33,9 +33,6 @@ class _GenderSelectorState extends State<GenderSelector> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'الجنس',
-            ).addPaddingHorizontalVertical(horizontal: 6),
             const SizedBox(height: 10),
             ValueListenableBuilder<String>(
               valueListenable: genderNotifier,

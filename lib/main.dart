@@ -27,7 +27,7 @@ void main() async {
     builder: () => GetMaterialApp(
       title: "Dewan Project",
       debugShowCheckedModeBanner: false,
-      initialRoute: PageRouteName.MAIN_SCREEN,
+      initialRoute: PageRouteName.ADD_NEW,
       getPages: AppPages.routes,
       locale: const Locale('ar', 'EG'),
       initialBinding: Binding(),
