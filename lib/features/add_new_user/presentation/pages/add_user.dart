@@ -13,6 +13,8 @@ import '../../../../constants.dart';
 import '../../../../core/shared_components/build_date_time_picker_field.dart';
 import '../../../../core/shared_components/drop_down_widget.dart';
 import '../../../../models/user_model.dart';
+import '../../../../utils/text_field_validator.dart';
+import '../../../../widget/date_selector.dart';
 
 class AddPeople extends GetView<UserController> {
   final _formKey = GlobalKey<FormState>();
@@ -40,7 +42,12 @@ class AddPeople extends GetView<UserController> {
                 buttonPadding: EdgeInsets.zero,
                 text: "tes",
                 withoutPadding: true,
-                onPressed: () => print('test')
+                onPressed: () {
+                  if (_formKey.currentState!.validate() == false) {
+                    return;
+                  }
+                  _formKey.currentState!.save();
+                }
                 // Navigator.pushNamed(context, PageRouteName.DONE),
                 ).addPaddingOnly(left: 10, top: 10, bottom: 10)
           ],
@@ -54,6 +61,7 @@ class AddPeople extends GetView<UserController> {
                 HorizontalLabeledWidget(
                   label: 'الاسم',
                   child: CustomTextField(
+                    validator: TextFieldValidators.isName,
                     prefixIcon:
                         Icon(FontAwesomeIcons.user, size: APP_ICON_SIZE),
                     contentPadding: EdgeInsets.only(right: 10),
@@ -68,6 +76,7 @@ class AddPeople extends GetView<UserController> {
                 HorizontalLabeledWidget(
                   label: 'العنوان',
                   child: CustomTextField(
+                    validator: TextFieldValidators.isAddress,
                     contentPadding: EdgeInsets.only(right: 10),
                     prefixIcon:
                         Icon(FontAwesomeIcons.addressBook, size: APP_ICON_SIZE),
@@ -82,6 +91,7 @@ class AddPeople extends GetView<UserController> {
                 HorizontalLabeledWidget(
                   label: 'الرقم القومي',
                   child: CustomTextField(
+                    validator: TextFieldValidators.isNationalId,
                     contentPadding: EdgeInsets.only(right: 10),
                     prefixIcon:
                         Icon(FontAwesomeIcons.idCard, size: APP_ICON_SIZE),
@@ -121,6 +131,7 @@ class AddPeople extends GetView<UserController> {
                 HorizontalLabeledWidget(
                   label: 'الوظيفه',
                   child: CustomTextField(
+                    validator: TextFieldValidators.isNotEmpty,
                     contentPadding: EdgeInsets.only(right: 10),
                     prefixIcon:
                         Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
