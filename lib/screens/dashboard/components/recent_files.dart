@@ -26,7 +26,7 @@ class RecentFiles extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: TableUI(
-              items: usersList,
+              items: [],
               onChanged: (bool newVlu) {
                 // _showAddForm.value = newVlu;
               },
