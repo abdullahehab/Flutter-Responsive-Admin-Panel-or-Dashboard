@@ -47,14 +47,14 @@ dependencies:
   get: 4.6.5
   dartz: ^0.10.0
   dropdown_search: ^3.0.1
-  firebase_auth:
-    git:
-      url: https://github.com/collinjackson/plugins.git
-      ref: 441417c2fed0ff26bf84a49ab2c5ffd2aa5487de
-      path: packages/firebase_auth
+#  firebase_auth:
+#    git:
+#      url: https://github.com/collinjackson/plugins.git
+#      ref: 441417c2fed0ff26bf84a49ab2c5ffd2aa5487de
+#      path: packages/firebase_auth
 
-  cloud_firestore:
-  firebase_core:
+  cloud_firestore: ^3.5.1
+  firebase_core: ^1.24.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
