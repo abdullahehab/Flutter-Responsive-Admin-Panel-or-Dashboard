@@ -48,11 +48,8 @@ class AddPeople extends GetView<UserController> {
                   }
                   _formKey.currentState!.save();
 
-                  print('user => $userModel');
-                  // controller.addUser(userModel);
-                }
-                // Navigator.pushNamed(context, PageRouteName.DONE),
-                ).addPaddingOnly(left: 10, top: 10, bottom: 10)
+                  controller.addUser(userModel);
+                }).addPaddingOnly(left: 10, top: 10, bottom: 10)
           ],
         ),
         body: SingleChildScrollView(
@@ -63,8 +60,7 @@ class AddPeople extends GetView<UserController> {
                 SizedBox(height: 10),
                 CustomTextField(
                   validator: TextFieldValidators.isName,
-                  prefixIcon:
-                      Icon(FontAwesomeIcons.user, size: APP_ICON_SIZE),
+                  prefixIcon: Icon(FontAwesomeIcons.user, size: APP_ICON_SIZE),
                   contentPadding: EdgeInsets.only(right: 10),
                   onChangedText: (String text) => userModel.name = text,
                   hint: 'الاسم',
@@ -115,8 +111,7 @@ class AddPeople extends GetView<UserController> {
                 SizedBox(height: 10),
                 CustomTextField(
                   contentPadding: EdgeInsets.only(right: 10),
-                  prefixIcon:
-                      Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
+                  prefixIcon: Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
                   // borderColor: AppColor.BORDER_COLOR,
                   onChangedText: (String text) => userModel.owning = text,
                   hint: 'حيازه',
@@ -128,8 +123,7 @@ class AddPeople extends GetView<UserController> {
                 SizedBox(height: 10),
                 CustomTextField(
                   contentPadding: EdgeInsets.only(right: 10),
-                  prefixIcon:
-                      Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
+                  prefixIcon: Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
                   // borderColor: AppColor.BORDER_COLOR,
                   onChangedText: (String text) => userModel.housing = text,
                   hint: 'السكن',
@@ -150,8 +144,7 @@ class AddPeople extends GetView<UserController> {
                 CustomTextField(
                   validator: TextFieldValidators.isNotEmpty,
                   contentPadding: EdgeInsets.only(right: 10),
-                  prefixIcon:
-                      Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
+                  prefixIcon: Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
                   onChangedText: (String text) => userModel.working = text,
                   hint: 'الوظيفه',
                   outLineText: 'الوظيفه',
