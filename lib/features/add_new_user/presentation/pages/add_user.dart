@@ -138,7 +138,7 @@ class AddPeople extends GetView<UserController> {
                   maxHeight: 100,
                   items: statusKeys,
                   selectedItem: statusKeys.first,
-                  onChanged: (value) {},
+                  onChanged: (value) => userModel.socialStatus = value as String,
                 ),
                 SizedBox(height: 10),
                 CustomTextField(
