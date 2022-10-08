@@ -30,6 +30,12 @@ class TextFieldValidators {
     if (Validator.isNotEmpty(value!)) return null;
     return 'برجاء إدخال البيانات';
   }
+
+  static String? dateIsNotEmpty(int? value) {
+    if (Validator.dateIsNotEmpty(value!)) return null;
+    return 'برجاء إدخال تاريخ الميلاد';
+  }
+
   static String? isBirthDate(String value) {
     if (Validator.isNotEmpty(value)) return null;
     return 'برجاء إدخال تاريخ الميلاد';
