@@ -2,23 +2,25 @@ import 'dart:convert';
 
 import 'package:admin/features/add_new_user/domain/entities/user_entity.dart';
 
+import '../constants.dart';
+
 class UserModel extends UserEntity {
   UserModel({
     this.nationalId,
     this.name,
     this.address,
     this.husbandId,
-    this.socialStatus,
+    this.socialStatus = 'اعزب',
     this.personalStatus,
     this.birthDate,
     this.phone,
     this.working,
-    this.healthStatus,
+    this.healthStatus= 1,
     this.childrenNumber,
     this.housing,
     this.parentId,
     this.owning,
-    this.gender,
+    this.gender  = 'ذكر',
   }) : super(
             nationalId: nationalId,
             address: address,
@@ -41,7 +43,7 @@ class UserModel extends UserEntity {
   String? gender;
   String? husbandId;
   String? parentId;
-  int? socialStatus;
+  String? socialStatus;
   int? personalStatus;
   int? birthDate;
   String? phone;

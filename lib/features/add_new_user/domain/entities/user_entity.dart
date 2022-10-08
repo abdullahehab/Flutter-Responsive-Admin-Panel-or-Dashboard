@@ -1,17 +1,19 @@
+import '../../../../constants.dart';
+
 class UserEntity {
   UserEntity({
     this.address,
     this.birthDate,
     this.childrenNumber,
-    this.gender,
-    this.healthStatus,
+    this.gender = 'ذكر',
+    this.healthStatus = 1,
     this.housing,
     this.husbandId,
     this.nationalId,
     this.owning,
     this.parentId,
     this.phone,
-    this.socialStatus,
+    this.socialStatus = 'اعزب',
     this.name,
     this.working,
   });
@@ -22,7 +24,7 @@ class UserEntity {
   String? gender;
   String? husbandId;
   String? parentId;
-  int? socialStatus;
+  String? socialStatus;
   int? birthDate;
   String? phone;
   String? working;
