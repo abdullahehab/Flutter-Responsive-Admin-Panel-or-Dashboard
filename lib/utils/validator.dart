@@ -19,6 +19,10 @@ class Validator {
     return !value.isEmptyOrNull();
   }
 
+  static bool dateIsNotEmpty(int value) {
+    return !value.toString().isEmptyOrNull();
+  }
+
   static bool isSmsCode(String code) {
     return code.length == 5;
   }
