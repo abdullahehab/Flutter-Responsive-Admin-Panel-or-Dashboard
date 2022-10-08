@@ -6,6 +6,7 @@ import '../../../../models/user_model.dart';
 
 abstract class UserDataSource {
   Future<Either<Failure, Unit>> addUser(UserModel user);
+  Future<Either<Failure, Unit>> updateUser(UserModel user);
 }
 
 class UserRemoteDataSourceImp implements UserDataSource {
@@ -16,6 +17,27 @@ class UserRemoteDataSourceImp implements UserDataSource {
     final CollectionReference _mainCollection = _fireStore.collection('users');
     DocumentReference documentReferencer =
         _mainCollection.doc(user.nationalId.toString());
+
+    bool isExist = await userIsExist(user.nationalId.toString());
+    if (isExist) {
+      return Left(UnAuthFailure(mess: "موجود بالفعل"));
+    }
+
+    try {
+      await documentReferencer.set(user.toJson());
+
+      return Right(unit);
+    } catch (e) {
+      return Left(UnAuthFailure(mess: e.toString()));
+    }
+  }
+
+
+  @override
+  Future<Either<Failure, Unit>> updateUser(UserModel user) async {
+    final CollectionReference _mainCollection = _fireStore.collection('users');
+    DocumentReference documentReferencer =
+    _mainCollection.doc(user.nationalId.toString());
 
     bool isExist = await userIsExist(user.nationalId.toString());
     if (isExist) {

@@ -12,4 +12,9 @@ class UserRepositoryImp implements UserRepository {
   Future<Either<Failure, Unit>> addUser(UserModel user) {
     return remoteDataSourceImp.addUser(user);
   }
+
+  @override
+  Future<Either<Failure, Unit>> updateUser(UserModel user) {
+    return remoteDataSourceImp.updateUser(user);
+  }
 }
