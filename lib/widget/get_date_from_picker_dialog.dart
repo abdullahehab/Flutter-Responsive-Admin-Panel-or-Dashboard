@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:admin/extensions/extension.dart';
+
+import '../core/shared_components/build_dialog.dart';
+
 enum PickerSelectionMode {
   single,
   range,
@@ -18,13 +21,9 @@ Future<dynamic> getDateFromPickerDialog(
   return await showDialog<dynamic>(
       context: context,
       builder: (BuildContext context) {
-        return Dialog(
-          backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+        return AppDialog(
+          title: '',
           child: Container(
-            height: 380,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: Colors.white,
