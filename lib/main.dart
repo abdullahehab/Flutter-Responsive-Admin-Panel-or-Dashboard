@@ -1,6 +1,7 @@
 import 'package:admin/features/add_new_user/data/datasource/remote_datasource.dart';
 import 'package:admin/features/add_new_user/data/repositories/user_repositories_imp.dart';
 import 'package:admin/features/add_new_user/domain/usecase/add_user_usecase.dart';
+import 'package:admin/features/add_new_user/domain/usecase/update_user_usecase.dart';
 import 'package:admin/screens/main/components/main_screen_controller.dart';
 import 'package:admin/services/service_locator.dart';
 import 'package:admin/utils/app_pages.dart';
@@ -43,8 +44,9 @@ class Binding extends Bindings {
     Get.lazyPut(() => UserRemoteDataSourceImp());
     Get.lazyPut(() => UserRepositoryImp(Get.find<UserRemoteDataSourceImp>()));
     Get.lazyPut(() => AddUserUsecase(Get.find<UserRepositoryImp>()));
+    Get.lazyPut(() => UpdateUserUsecase(Get.find<UserRepositoryImp>()));
 
-    Get.put(UserController(Get.find<AddUserUsecase>()), permanent: true);
+    Get.put(UserController(Get.find<AddUserUsecase>(), Get.find<UpdateUserUsecase>()), permanent: true);
 
     Get.lazyPut<MainScreenController>(
       () => MainScreenController(),

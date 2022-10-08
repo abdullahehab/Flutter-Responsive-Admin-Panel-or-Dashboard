@@ -77,6 +77,7 @@ class UserModel extends UserEntity {
 
   Map<String, dynamic> toJson() => {
         "nationalId": nationalId,
+        "name": name,
         "address": address,
         "parentId": parentId,
         "husbandId": husbandId,

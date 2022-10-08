@@ -32,20 +32,15 @@ class UserRemoteDataSourceImp implements UserDataSource {
     }
   }
 
-
   @override
   Future<Either<Failure, Unit>> updateUser(UserModel user) async {
     final CollectionReference _mainCollection = _fireStore.collection('users');
-    DocumentReference documentReferencer =
-    _mainCollection.doc(user.nationalId.toString());
 
-    bool isExist = await userIsExist(user.nationalId.toString());
-    if (isExist) {
-      return Left(UnAuthFailure(mess: "موجود بالفعل"));
-    }
+    DocumentReference documentReferencer =
+        _mainCollection.doc('٧٨٧٨٧٨٧٨٧٨٧٨٧٨');
 
     try {
-      await documentReferencer.set(user.toJson());
+      await documentReferencer.update(user.toJson());
 
       return Right(unit);
     } catch (e) {
