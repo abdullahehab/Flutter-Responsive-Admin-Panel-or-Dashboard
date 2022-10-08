@@ -5,22 +5,21 @@ import 'package:admin/screens/main/components/main_screen_controller.dart';
 import 'package:admin/services/service_locator.dart';
 import 'package:admin/utils/app_pages.dart';
 import 'package:admin/utils/page_route_name.dart';
-import 'package:admin/utils/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/screenutil_init.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:provider/provider.dart';
-
-import 'controllers/appProvider.dart';
-import 'controllers/auth_provider.dart';
 import 'features/add_new_user/presentation/controller/user_controller.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocators();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(ScreenUtilInit(
     designSize: const Size(414, 896),
