@@ -88,4 +88,9 @@ class UserModel extends UserEntity {
         "housing": housing,
         "owning": owning,
       };
+
+  @override
+  String toString() {
+    return '{nationalId: $nationalId, address: $address, name: $name, gender: $gender, husbandId: $husbandId, parentId: $parentId, socialStatus: $socialStatus, personalStatus: $personalStatus, birthDate: $birthDate, phone: $phone, working: $working, healthStatus: $healthStatus, childrenNumber: $childrenNumber, housing: $housing, owning: $owning}';
+  }
 }
