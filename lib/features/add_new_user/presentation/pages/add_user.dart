@@ -47,6 +47,9 @@ class AddPeople extends GetView<UserController> {
                     return;
                   }
                   _formKey.currentState!.save();
+
+                  print('user => $userModel');
+                  // controller.addUser(userModel);
                 }
                 // Navigator.pushNamed(context, PageRouteName.DONE),
                 ).addPaddingOnly(left: 10, top: 10, bottom: 10)
@@ -58,147 +61,125 @@ class AddPeople extends GetView<UserController> {
             child: Column(
               children: <Widget>[
                 SizedBox(height: 10),
-                HorizontalLabeledWidget(
-                  label: 'الاسم',
-                  child: CustomTextField(
-                    validator: TextFieldValidators.isName,
-                    prefixIcon:
-                        Icon(FontAwesomeIcons.user, size: APP_ICON_SIZE),
-                    contentPadding: EdgeInsets.only(right: 10),
-                    onChangedText: (String text) => userModel.name = text,
-                    hint: 'الاسم',
-                    iconPathWidth: 17,
-                    textInputType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                  ),
+                CustomTextField(
+                  validator: TextFieldValidators.isName,
+                  prefixIcon:
+                      Icon(FontAwesomeIcons.user, size: APP_ICON_SIZE),
+                  contentPadding: EdgeInsets.only(right: 10),
+                  onChangedText: (String text) => userModel.name = text,
+                  hint: 'الاسم',
+                  outLineText: 'الاسم',
+                  iconPathWidth: 17,
+                  textInputType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(height: 10),
-                HorizontalLabeledWidget(
-                  label: 'العنوان',
-                  child: CustomTextField(
-                    validator: TextFieldValidators.isAddress,
-                    contentPadding: EdgeInsets.only(right: 10),
-                    prefixIcon:
-                        Icon(FontAwesomeIcons.addressBook, size: APP_ICON_SIZE),
-                    onChangedText: (String text) => userModel.address = text,
-                    hint: 'العنوان',
-                    iconPathWidth: 17,
-                    textInputType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                  ),
+                CustomTextField(
+                  validator: TextFieldValidators.isAddress,
+                  contentPadding: EdgeInsets.only(right: 10),
+                  prefixIcon:
+                      Icon(FontAwesomeIcons.addressBook, size: APP_ICON_SIZE),
+                  onChangedText: (String text) => userModel.address = text,
+                  hint: 'العنوان',
+                  outLineText: 'العنوان',
+                  iconPathWidth: 17,
+                  textInputType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(height: 10),
-                HorizontalLabeledWidget(
-                  label: 'رقم الهاتف',
-                  child: CustomTextField(
-                    validator: TextFieldValidators.isPhone,
-                    contentPadding: EdgeInsets.only(right: 10),
-                    prefixIcon:
-                        Icon(FontAwesomeIcons.addressBook, size: APP_ICON_SIZE),
-                    onChangedText: (String text) => userModel.phone = text,
-                    hint: 'رقم الهاتف',
-                    iconPathWidth: 17,
-                    textInputType: TextInputType.phone,
-                    textInputAction: TextInputAction.next,
-                  ),
+                CustomTextField(
+                  validator: TextFieldValidators.isPhone,
+                  contentPadding: EdgeInsets.only(right: 10),
+                  prefixIcon:
+                      Icon(FontAwesomeIcons.addressBook, size: APP_ICON_SIZE),
+                  onChangedText: (String text) => userModel.phone = text,
+                  hint: 'رقم الهاتف',
+                  outLineText: 'رقم الهاتف',
+                  iconPathWidth: 17,
+                  textInputType: TextInputType.phone,
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(height: 10),
-                HorizontalLabeledWidget(
-                  label: 'الرقم القومي',
-                  child: CustomTextField(
-                    validator: TextFieldValidators.isNationalId,
-                    contentPadding: EdgeInsets.only(right: 10),
-                    prefixIcon:
-                        Icon(FontAwesomeIcons.idCard, size: APP_ICON_SIZE),
-                    onChangedText: (String text) => userModel.nationalId = text,
-                    hint: 'الرقم القومي',
-                    iconPathWidth: 17,
-                    textInputType: TextInputType.number,
-                    textInputAction: TextInputAction.next,
-                  ),
+                CustomTextField(
+                  validator: TextFieldValidators.isNationalId,
+                  contentPadding: EdgeInsets.only(right: 10),
+                  prefixIcon:
+                      Icon(FontAwesomeIcons.idCard, size: APP_ICON_SIZE),
+                  onChangedText: (String text) => userModel.nationalId = text,
+                  hint: 'الرقم القومي',
+                  outLineText: 'الرقم القومي',
+                  iconPathWidth: 17,
+                  textInputType: TextInputType.number,
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(height: 10),
-                HorizontalLabeledWidget(
-                  label: 'حيازه',
-                  child: CustomTextField(
-                    contentPadding: EdgeInsets.only(right: 10),
-                    prefixIcon:
-                        Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
-                    // borderColor: AppColor.BORDER_COLOR,
-                    onChangedText: (String text) => userModel.owning = text,
-                    hint: 'حيازه',
-                    iconPathWidth: 17,
-                    textInputType: TextInputType.phone,
-                    textInputAction: TextInputAction.next,
-                  ),
+                CustomTextField(
+                  contentPadding: EdgeInsets.only(right: 10),
+                  prefixIcon:
+                      Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
+                  // borderColor: AppColor.BORDER_COLOR,
+                  onChangedText: (String text) => userModel.owning = text,
+                  hint: 'حيازه',
+                  outLineText: 'حيازه',
+                  iconPathWidth: 17,
+                  textInputType: TextInputType.phone,
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(height: 10),
-                HorizontalLabeledWidget(
-                  label: 'السكن',
-                  child: CustomTextField(
-                    contentPadding: EdgeInsets.only(right: 10),
-                    prefixIcon:
-                        Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
-                    // borderColor: AppColor.BORDER_COLOR,
-                    onChangedText: (String text) => userModel.housing = text,
-                    hint: 'السكن',
-                    iconPathWidth: 17,
-                    textInputType: TextInputType.phone,
-                    textInputAction: TextInputAction.next,
-                  ),
+                CustomTextField(
+                  contentPadding: EdgeInsets.only(right: 10),
+                  prefixIcon:
+                      Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
+                  // borderColor: AppColor.BORDER_COLOR,
+                  onChangedText: (String text) => userModel.housing = text,
+                  hint: 'السكن',
+                  outLineText: 'السكن',
+                  iconPathWidth: 17,
+                  textInputType: TextInputType.phone,
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(height: 10),
-                HorizontalLabeledWidget(
-                  label: 'الحالة الاجتماعية',
-                  child: DropDownWidgetX(
-                    maxHeight: 100,
-                    items: statusKeys,
-                    selectedItem: statusKeys.first,
-                    onChanged: (value) {},
-                  ),
+                DropDownWidgetX(
+                  labelText: 'الحاله الاجتماعيه',
+                  maxHeight: 100,
+                  items: statusKeys,
+                  selectedItem: statusKeys.first,
+                  onChanged: (value) {},
                 ),
                 SizedBox(height: 10),
-                HorizontalLabeledWidget(
-                  label: 'الوظيفه',
-                  child: CustomTextField(
-                    validator: TextFieldValidators.isNotEmpty,
-                    contentPadding: EdgeInsets.only(right: 10),
-                    prefixIcon:
-                        Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
-                    onChangedText: (String text) => userModel.working = text,
-                    hint: 'الوظيفه',
-                    iconPathWidth: 17,
-                    textInputType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                  ),
+                CustomTextField(
+                  validator: TextFieldValidators.isNotEmpty,
+                  contentPadding: EdgeInsets.only(right: 10),
+                  prefixIcon:
+                      Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
+                  onChangedText: (String text) => userModel.working = text,
+                  hint: 'الوظيفه',
+                  outLineText: 'الوظيفه',
+                  iconPathWidth: 17,
+                  textInputType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(height: 10),
-                HorizontalLabeledWidget(
-                  label: 'تاريخ الميلاد',
-                  child: buildDateTimePickerField(
-                    // initialValue: customerModels.value.idExpireDate,
-                    firstDate: DateTime.now().year,
-                    onSaved: (value) => userModel.birthDate = value,
-                  ),
+                buildDateTimePickerField(
+                  labelText: 'تاريخ الميلاد',
+                  // initialValue: customerModels.value.idExpireDate,
+                  firstDate: DateTime.now().year,
+                  onSaved: (value) => userModel.birthDate = value,
                 ),
                 SizedBox(height: 10),
-                HorizontalLabeledWidget(
-                  label: 'الحالة الصحية',
-                  child: DropDownWidgetX(
-                    maxHeight: 100,
-                    items: healthKeys,
-                    selectedItem: healthKeys.first,
-                    onChanged: (value) => userModel.healthStatus = 1,
-                  ),
+                DropDownWidgetX(
+                  maxHeight: 100,
+                  labelText: 'الحالة الصحية',
+                  items: healthKeys,
+                  selectedItem: healthKeys.first,
+                  onChanged: (value) => userModel.healthStatus = 1,
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                HorizontalLabeledWidget(
-                  label: 'النوع',
-                  child: GenderSelector(
-                    onChanged: (newValue) => userModel.gender = newValue,
-                  ),
+                GenderSelector(
+                  outLineText: 'النوع',
+                  onChanged: (newValue) => userModel.gender = newValue,
                 ),
               ],
             ).addPaddingOnly(bottom: context.mediaQueryPadding.bottom),
