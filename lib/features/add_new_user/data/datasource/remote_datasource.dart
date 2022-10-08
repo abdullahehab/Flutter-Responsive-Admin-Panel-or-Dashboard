@@ -9,35 +9,33 @@ abstract class UserDataSource {
 }
 
 class UserRemoteDataSourceImp implements UserDataSource {
+  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+
   @override
   Future<Either<Failure, Unit>> addUser(UserModel user) async {
-    Firestore.instance.document(user.nationalId.toString());
+    final CollectionReference _mainCollection = _fireStore.collection('users');
+    DocumentReference documentReferencer =
+        _mainCollection.doc(user.nationalId.toString());
 
-    Firestore.instance.settings(persistenceEnabled: true);
-
-    bool isExist = await doesNameAlreadyExist(user.nationalId.toString());
-    if (!isExist) {
-      print('موجود بالفعل');
-      return Left(ServerFailure());
+    bool isExist = await userIsExist(user.nationalId.toString());
+    if (isExist) {
+      return Left(UnAuthFailure(mess: "موجود بالفعل"));
     }
 
     try {
-      await Firestore.instance
-          .collection('users')
-          .document(user.nationalId.toString())
-          .setData(user.toJson());
+      await documentReferencer.set(user.toJson());
 
       return Right(unit);
     } catch (e) {
-      return Left(ServerFailure());
+      return Left(UnAuthFailure(mess: e.toString()));
     }
   }
 
-  Future<bool> doesNameAlreadyExist(String nationalId) async {
-    DocumentReference qs =
-        Firestore.instance.collection('users').document(nationalId);
-    DocumentSnapshot snap = await qs.get();
+  Future<bool> userIsExist(String nationalId) async {
+    final CollectionReference _mainCollection = _fireStore.collection('users');
+    DocumentReference dr = _mainCollection.doc(nationalId);
+    DocumentSnapshot snap = await dr.get();
 
-    return snap.data == null;
+    return snap.exists;
   }
 }
