@@ -8,10 +8,11 @@ class GenderSelector extends StatefulWidget {
     Key? key,
     required this.onChanged,
     this.initValue,
+    this.outLineText,
   }) : super(key: key);
   final FormFieldSetter<String>? onChanged;
   final String? initValue;
-
+  final String? outLineText;
   @override
   _GenderSelectorState createState() => _GenderSelectorState();
 }
@@ -33,6 +34,19 @@ class _GenderSelectorState extends State<GenderSelector> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (widget.outLineText != null)
+              Row(
+                children: [
+                  Text(
+                    widget.outLineText!,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      height: 1,
+                    ),
+                  ),
+                ],
+              ),
             const SizedBox(height: 10),
             ValueListenableBuilder<String>(
               valueListenable: genderNotifier,
