@@ -1,5 +1,4 @@
 import 'package:admin/controllers/MenuController.dart';
-import 'package:admin/models/side_menu_items.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/utils/page_route_name.dart';
 import 'package:admin/utils/resources.dart';
@@ -10,12 +9,14 @@ import 'package:provider/provider.dart';
 import 'package:admin/extensions/extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../models/side_menu_data.dart';
+
 GestureDetector buildSingleCard(BuildContext context, {double? width}) {
   return GestureDetector(
     onTap: () {
       if (Responsive.isDesktop()) {
         context.read<MenuController>().setSelectedMenuIndex =
-            menuItems.indexOf(menuItems.last);
+            items.indexOf(items.last);
         return;
       }
       Navigator.pushNamed(context, PageRouteName.DETAILS);

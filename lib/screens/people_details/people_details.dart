@@ -1,18 +1,15 @@
-import 'package:admin/controllers/MenuController.dart';
-import 'package:admin/models/side_menu_items.dart';
-import 'package:admin/screens/people_screen/people_screen.dart';
+import 'package:admin/extensions/extension.dart';
 import 'package:admin/utils/colors.dart';
 import 'package:admin/utils/resources.dart';
 import 'package:admin/widget/main_button.dart';
 import 'package:admin/widget/people_card.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:admin/extensions/extension.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../responsive.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
+import '../../responsive.dart';
 class PeopleDetails extends StatelessWidget {
   const PeopleDetails({Key? key}) : super(key: key);
 

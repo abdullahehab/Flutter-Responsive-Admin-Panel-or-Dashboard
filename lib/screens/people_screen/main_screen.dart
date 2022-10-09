@@ -1,11 +1,12 @@
-import 'package:admin/models/side_menu_items.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../models/side_menu_data.dart';
 
 
 class MainView extends StatefulWidget {
   const MainView(this.item, {Key? key}) : super(key: key);
-  final MenuItems item;
+  final SideMenuData item;
 
   @override
   _MainViewState createState() => _MainViewState();

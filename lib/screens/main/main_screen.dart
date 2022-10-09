@@ -1,16 +1,12 @@
-import 'package:admin/controllers/MenuController.dart';
-import 'package:admin/models/side_menu_items.dart';
 import 'package:admin/responsive.dart';
-import 'package:admin/screens/dashboard/dashboard_screen.dart';
 import 'package:admin/screens/people_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:provider/provider.dart';
 
+import '../../models/side_menu_data.dart';
 import 'components/main_screen_controller.dart';
 import 'components/side_menu.dart';
-import 'package:provider/provider.dart';
 
 class MainScreen extends GetView<MainScreenController> {
   @override
@@ -35,8 +31,8 @@ class MainScreen extends GetView<MainScreenController> {
                 flex: 5,
                 child: IndexedStack(
                   index: controller.selectedMenuIndex,
-                  children: menuItems
-                      .map<Widget>((MenuItems item) => MainView(item))
+                  children: items
+                      .map<Widget>((SideMenuData item) => MainView(item))
                       .toList(),
                 ),
                 // DashboardScreen(),
