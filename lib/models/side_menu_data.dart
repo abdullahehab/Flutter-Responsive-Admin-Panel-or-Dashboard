@@ -25,9 +25,6 @@ List<SideMenuData> items = [
       icon: FontAwesomeIcons.users,
       onTap: () =>
           Navigator.pushNamed(Get.context!, PageRouteName.PEOPLE_SCREEN)),
-];
-
-List<SideMenuData> subItems = [
   SideMenuData(
       title: 'الحالة الاجتماعية', icon: FontAwesomeIcons.users, onTap: () {}),
   SideMenuData(
@@ -38,3 +35,5 @@ List<SideMenuData> subItems = [
   SideMenuData(title: 'السكمن', icon: FontAwesomeIcons.houseUser, onTap: () {}),
   SideMenuData(title: 'حيازه', icon: FontAwesomeIcons.userTag, onTap: () {}),
 ];
+
+

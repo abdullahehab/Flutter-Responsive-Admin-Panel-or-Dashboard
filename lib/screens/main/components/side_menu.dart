@@ -40,38 +40,6 @@ class SideMenu extends GetView<MainScreenController> {
                   ),
                 );
               }),
-              ListTileTheme(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 13),
-                  dense: true,
-                  child: ExpansionTile(
-                      tilePadding: EdgeInsets.zero,
-                      childrenPadding: EdgeInsets.zero,
-                      initiallyExpanded: false,
-                      iconColor: Colors.white54,
-                      collapsedIconColor: Colors.white54,
-                      title: ListTile(
-                        title: Text(
-                          'بيانات اخري',
-                          style: TextStyle(
-                            color: Colors.white54,
-                          ),
-                        ),
-                        contentPadding: EdgeInsets.zero,
-                        leading: Icon(
-                          FontAwesomeIcons.usersCog,
-                          size: 14,
-                          color: Colors.white54,
-                        ).addPaddingOnly(right: 15),
-                      ),
-                      children: subItems
-                          .map(
-                            (e) => DrawerListTile(
-                          title: e.title,
-                          iconData: e.icon,
-                          selected: false,
-                        ).addPaddingOnly(right: 20),
-                      )
-                          .toList())),
             ],
           ),
         ),
