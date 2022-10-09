@@ -10,11 +10,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../constants.dart';
+import '../main/components/main_screen_controller.dart';
+
 class PeopleScreen extends StatelessWidget {
   const PeopleScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.find<MainScreenController>();
     return Scaffold(
         drawer: Responsive.isMobile() ? Drawer(child: SideMenu()) : null,
         appBar: AppBar(
@@ -75,7 +79,8 @@ class PeopleScreen extends StatelessWidget {
           // height: 30.h,
           text: 'إضافة جديد',
           onPressed: () {
-            Get.toNamed(PageRouteName.ADD_NEW);
+            controller.setSelectedKey = ADD_USER_KEY;
+            // Get.toNamed(PageRouteName.ADD_NEW);
           },
           buttonColor: AppColor.kPrimaryDarkColor,
         ));

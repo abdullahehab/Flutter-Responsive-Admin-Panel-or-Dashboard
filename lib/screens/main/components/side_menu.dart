@@ -30,7 +30,8 @@ class SideMenu extends GetView<MainScreenController> {
                   onTap: Responsive.isMobile()
                       ? e.onTap
                       : () {
-                    controller.setSelectedMenuIndex = index;
+                    // controller.setSelectedMenuIndex = index;
+                    controller.setSelectedKey = e.key!;
                     if (Responsive.isMobile()) Navigator.pop(context);
                   },
                   child: DrawerListTile(

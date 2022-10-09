@@ -27,16 +27,18 @@ class MainScreen extends GetView<MainScreenController> {
                   child: SideMenu(),
                 ),
               Expanded(
-                // It takes 5/6 part of the screen
-                flex: 5,
-                child: IndexedStack(
-                  index: controller.selectedMenuIndex,
-                  children: items
-                      .map<Widget>((SideMenuData item) => MainView(item))
-                      .toList(),
-                ),
-                // DashboardScreen(),
-              ),
+                  // It takes 5/6 part of the screen
+                  flex: 5,
+                  child: controller.selectedWidget!
+
+                  // IndexedStack(
+                  //   index: controller.selectedMenuIndex,
+                  //   children: items
+                  //       .map<Widget>((SideMenuData item) => MainView(item))
+                  //       .toList(),
+                  // ),
+                  // DashboardScreen(),
+                  ),
             ],
           ),
         ),
