@@ -79,8 +79,7 @@ class PeopleScreen extends StatelessWidget {
           // height: 30.h,
           text: 'إضافة جديد',
           onPressed: () {
-            controller.setSelectedKey = ADD_USER_KEY;
-            // Get.toNamed(PageRouteName.ADD_NEW);
+            Get.toNamed(PageRouteName.ADD_NEW);
           },
           buttonColor: AppColor.kPrimaryDarkColor,
         ));

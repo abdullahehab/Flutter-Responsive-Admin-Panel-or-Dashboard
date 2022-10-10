@@ -13,6 +13,7 @@ import '../../../../constants.dart';
 import '../../../../core/shared_components/build_date_time_picker_field.dart';
 import '../../../../core/shared_components/drop_down_widget.dart';
 import '../../../../models/user_model.dart';
+import '../../../../screens/main/components/main_screen_controller.dart';
 import '../../../../utils/text_field_validator.dart';
 import '../../../../widget/date_selector.dart';
 
@@ -21,8 +22,10 @@ class AddPeople extends GetView<UserController> {
 
   @override
   Widget build(BuildContext context) {
+    var mainScreenController = Get.find<MainScreenController>();
     bool isEdit = false;
     UserModel userModel;
+    print('Get.arguments => ${Get.arguments}');
     if (Get.arguments == null) {
       userModel = UserModel();
     } else {
@@ -34,21 +37,35 @@ class AddPeople extends GetView<UserController> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
+          title: CustomButton(
+              buttonColor: AppColor.kPrimaryDarkColor,
+              borderRadius: 6,
+              width: 70,
+              height: 40,
+              buttonPadding: EdgeInsets.zero,
+              text: "حفظ",
+              withoutPadding: true,
+              onPressed: () {
+                if (_formKey.currentState!.validate() == false) {
+                  return;
+                }
+                _formKey.currentState!.save();
+
+                controller.addUser(userModel);
+              }).addPaddingOnly(left: 10, top: 10, bottom: 10),
+          centerTitle: false,
           actions: [
             CustomButton(
                 buttonColor: AppColor.kPrimaryDarkColor,
                 borderRadius: 6,
                 width: 70,
+                height: 40,
                 buttonPadding: EdgeInsets.zero,
-                text: "tes",
+                text: "رجوع",
                 withoutPadding: true,
                 onPressed: () {
-                  if (_formKey.currentState!.validate() == false) {
-                    return;
-                  }
-                  _formKey.currentState!.save();
 
-                  controller.addUser(userModel);
+                  mainScreenController.setSelectedKey = USERS_KEY;
                 }).addPaddingOnly(left: 10, top: 10, bottom: 10)
           ],
         ),
