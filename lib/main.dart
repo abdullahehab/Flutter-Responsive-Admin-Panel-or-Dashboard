@@ -13,8 +13,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil_init.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:sembast/sembast.dart';
 import 'features/add_new_user/presentation/controller/user_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'features/social_status/data/datasource/local_datasource.dart';
 import 'features/social_status/data/datasource/remote_datasource.dart';
 import 'features/social_status/domain/repositories/base_social_status_repository.dart';
 import 'features/social_status/domain/usecase/add_social_statues_usecase.dart';
@@ -65,10 +67,14 @@ class Binding extends Bindings {
       () => MainScreenController(),
       fenix: true,
     );
+    Get.lazyPut<MainScreenController>(
+      () => MainScreenController(),
+      fenix: true,
+    );
 
     Get.lazyPut(() => SocialStatusRemoteDataSource());
-    Get.lazyPut(
-        () => SocialStatusRepository(Get.find<SocialStatusRemoteDataSource>()));
+    Get.lazyPut(() => SocialStatusRepository(
+        Get.find<SocialStatusRemoteDataSource>()));
     Get.lazyPut(
         () => GetSocialStatuesUseCase(Get.find<SocialStatusRepository>()));
     Get.lazyPut(
