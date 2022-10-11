@@ -48,22 +48,19 @@ class SocialStatuesList extends GetView<SocialStatusController> {
                     dataColumnItem(title: 'الاسم'),
                     dataColumnItem(title: 'الاجرائات'),
                   ],
-                  rows: List.generate(
-                    unitsRoomList!.length,
-                    (index) => DataRow(
+                  rows: List.generate(unitsRoomList!.length, (index) {
+                    var item = unitsRoomList.elementAt(index);
+                    return DataRow(
                       cells: [
-                        dataCellItem(
-                            data: unitsRoomList.elementAt(index).id.toString()),
-                        dataCellItem(
-                            data: unitsRoomList.elementAt(index).title!),
+                        dataCellItem(data: item.id.toString()),
+                        dataCellItem(data: item.title!),
                         dataController(
                           onEditPressed: () {},
-                          onViewPressed: () {},
                           onRemovePressed: () {},
                         )
                       ],
-                    ),
-                  ),
+                    );
+                  }),
                 ),
               ],
             ),
