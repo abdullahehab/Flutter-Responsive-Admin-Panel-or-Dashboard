@@ -55,7 +55,11 @@ class SocialStatuesList extends GetView<SocialStatusController> {
                         dataCellItem(data: item.id.toString()),
                         dataCellItem(data: item.title!),
                         dataController(
-                          onEditPressed: () {},
+                          onEditPressed: () {
+                            var model =
+                                SocialStatus(id: item.id, title: item.title);
+                            addNewSocialStatues(model: model);
+                          },
                           onRemovePressed: () {},
                         )
                       ],
@@ -70,9 +74,18 @@ class SocialStatuesList extends GetView<SocialStatusController> {
     );
   }
 
-  void addNewSocialStatues() {
-    TextEditingController nameController = TextEditingController();
+  void addNewSocialStatues({SocialStatus? model}) {
     final _formKey = GlobalKey<FormState>();
+    bool isEdit = false;
+
+    SocialStatus? socialStatus;
+    if (model == null) {
+      socialStatus = SocialStatus(title: '', id: null);
+    } else {
+      isEdit = true;
+      socialStatus = model;
+    }
+
     showDialog(
       context: Get.context!,
       barrierColor: Colors.grey[500]!.withOpacity(.4),
@@ -84,14 +97,19 @@ class SocialStatuesList extends GetView<SocialStatusController> {
           child: Column(
             children: [
               SizedBox(height: 30),
-              Header(text: 'اضافة حالة اجتماعية جديدة'),
+              Header(
+                  text: isEdit
+                      ? 'تعديل حالة اجتماعية'
+                      : 'اضافة حالة اجتماعية جديدة'),
               Divider(),
               SizedBox(height: 20),
               CustomTextField(
                 validator: TextFieldValidators.isName,
+                requiredFiled: true,
+                initialValue: socialStatus?.title,
                 prefixIcon: Icon(FontAwesomeIcons.user, size: APP_ICON_SIZE),
                 contentPadding: EdgeInsets.only(right: 10),
-                onChangedText: (String text) => nameController.text = text,
+                onChangedText: (String text) => socialStatus?.title = text,
                 hint: 'الاسم',
                 outLineText: 'الاسم',
                 iconPathWidth: 17,
@@ -112,7 +130,12 @@ class SocialStatuesList extends GetView<SocialStatusController> {
                     }
                     _formKey.currentState!.save();
 
-                    controller.addSocialStatutes(title: nameController.text);
+                    if (isEdit) {
+                      print('editing');
+                      return;
+                    }
+
+                    controller.addSocialStatutes(title: socialStatus!.title!);
                     Get.back();
                   })
             ],
