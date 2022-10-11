@@ -7,5 +7,6 @@ abstract class BaseSocialStatusRepository {
   Future<Either<Failure, List<SocialStatus>>> getAllSocialStatues();
   Future<Either<Failure, Unit>> add({required String title});
   Future<Either<Failure, Unit>> update({required SocialStatus model});
-  Future<Either<Failure, Unit>> delete();
+  Future<Either<Failure, Unit>> deleteAll();
+  Future<Either<Failure, Unit>> deleteItem({required String id});
 }

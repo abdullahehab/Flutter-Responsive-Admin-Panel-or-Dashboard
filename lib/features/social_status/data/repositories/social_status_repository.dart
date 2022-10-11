@@ -29,7 +29,7 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> delete() {
+  Future<Either<Failure, Unit>> deleteAll() {
     return _dataSource.deleteAll();
   }
 
@@ -39,5 +39,10 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
         SocialStatusModel(id: model.id, title: model.title);
 
     return _dataSource.update(model: socialStatusModel);
+  }
+
+  @override
+  Future<Either<Failure, Unit>> deleteItem({required String id}) {
+    return _dataSource.deleteItem(id: id);
   }
 }

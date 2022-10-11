@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../../../widget/components.dart';
-import '../../domain/usecase/delete_social_statues_usecase.dart';
+import '../../domain/usecase/delete_all_social_statues_usecase.dart';
 import '../../domain/usecase/update_social_statues_usecase.dart';
 
 class SocialStatusController extends GetxController with StateMixin {
@@ -13,11 +13,11 @@ class SocialStatusController extends GetxController with StateMixin {
       this._getSocialStatuesUseCase,
       this._addSocialStatusUsecase,
       this._updateSocialStatusUsecase,
-      this._removeSocialStatuesUseCase);
+      this._removeAllSocialStatuesUseCase);
   GetSocialStatuesUseCase _getSocialStatuesUseCase;
   AddSocialStatusUsecase _addSocialStatusUsecase;
   UpdateSocialStatusUsecase _updateSocialStatusUsecase;
-  RemoveSocialStatuesUseCase _removeSocialStatuesUseCase;
+  RemoveAllSocialStatuesUseCase _removeAllSocialStatuesUseCase;
   var isLoading = false.obs;
 
   @override
@@ -72,7 +72,7 @@ class SocialStatusController extends GetxController with StateMixin {
   }
 
   deleteSocialStatutes() async {
-    var data = await _removeSocialStatuesUseCase.execute();
+    var data = await _removeAllSocialStatuesUseCase.execute();
 
     data.fold(
       (failure) {
