@@ -74,7 +74,8 @@ class CustomTextField extends StatelessWidget {
                 FormField<String>(
                   validator: (String? value) {
                     if (validator != null) {
-                      final String? valid = validator!(value ?? '');
+                      final String? valid =
+                          validator!(value ?? initialValue ?? '');
 
                       return valid;
                     }
