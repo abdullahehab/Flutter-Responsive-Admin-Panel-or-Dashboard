@@ -53,16 +53,19 @@ class SocialStatusRemoteDataSource implements BaseRemoteDataSource {
 
     var list = await getAllSocialStatues();
 
-    var item = list.firstWhere((element) => element.id == model.id);
+    var reversedList = list.reversed.toList();
 
-    int index = list.indexOf(item);
+    var item = reversedList.firstWhere((element) => element.id == model.id);
 
-    list.remove(item);
-    list.insert(index, model);
+    int index = reversedList.indexOf(item);
 
+    reversedList.remove(item);
+    reversedList.insert(index, model);
+
+    await delete();
 
     try {
-      for (item in list) {
+      for (item in reversedList) {
         await _mainCollection.set({
           'data': FieldValue.arrayUnion([item.toJson()])
         }, SetOptions(merge: true));
@@ -76,8 +79,17 @@ class SocialStatusRemoteDataSource implements BaseRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, Unit>> delete() {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> delete() async {
+    final DocumentReference _mainCollection =
+        _fireStore.collection('constants').doc('socialStatuses');
+
+    try {
+      await _mainCollection.delete();
+      await _mainCollection
+          .set({'data': FieldValue.arrayUnion([])}, SetOptions(merge: true));
+      return Right(unit);
+    } on FirebaseException catch (e) {
+      return Left(FirebaseFailure(mess: e.message!));
+    }
   }
 }

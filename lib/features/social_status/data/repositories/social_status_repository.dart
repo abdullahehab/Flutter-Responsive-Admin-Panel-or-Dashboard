@@ -30,8 +30,7 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
 
   @override
   Future<Either<Failure, Unit>> delete() {
-    // TODO: implement delete
-    throw UnimplementedError();
+    return _dataSource.delete();
   }
 
   @override

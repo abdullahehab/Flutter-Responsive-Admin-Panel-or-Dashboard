@@ -5,19 +5,25 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../../../widget/components.dart';
+import '../../domain/usecase/delete_social_statues_usecase.dart';
 import '../../domain/usecase/update_social_statues_usecase.dart';
 
 class SocialStatusController extends GetxController with StateMixin {
-  SocialStatusController(this._getSocialStatuesUseCase,
-      this._addSocialStatusUsecase, this._updateSocialStatusUsecase);
+  SocialStatusController(
+      this._getSocialStatuesUseCase,
+      this._addSocialStatusUsecase,
+      this._updateSocialStatusUsecase,
+      this._removeSocialStatuesUseCase);
   GetSocialStatuesUseCase _getSocialStatuesUseCase;
   AddSocialStatusUsecase _addSocialStatusUsecase;
   UpdateSocialStatusUsecase _updateSocialStatusUsecase;
+  RemoveSocialStatuesUseCase _removeSocialStatuesUseCase;
   var isLoading = false.obs;
 
   @override
   void onReady() async {
     await getSocialStatutes();
+    // change(null, status: RxStatus.empty());
     return super.onInit();
   }
 
@@ -53,6 +59,20 @@ class SocialStatusController extends GetxController with StateMixin {
 
   updateSocialStatutes({required SocialStatus model}) async {
     var data = await _updateSocialStatusUsecase.execute(model: model);
+
+    data.fold(
+      (failure) {
+        showToast(message: failure.mess);
+      },
+      (done) async {
+        showToast(message: 'تم التعديبل بنجاح');
+        await getSocialStatutes();
+      },
+    );
+  }
+
+  deleteSocialStatutes() async {
+    var data = await _removeSocialStatuesUseCase.execute();
 
     data.fold(
       (failure) {

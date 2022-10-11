@@ -60,7 +60,8 @@ class SocialStatuesList extends GetView<SocialStatusController> {
                                 SocialStatus(id: item.id, title: item.title);
                             addNewSocialStatues(model: model);
                           },
-                          onRemovePressed: () {},
+                          onRemovePressed: () =>
+                              controller.deleteSocialStatutes(),
                         )
                       ],
                     );
