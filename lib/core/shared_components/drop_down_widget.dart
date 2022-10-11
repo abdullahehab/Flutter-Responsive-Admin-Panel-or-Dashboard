@@ -1,7 +1,7 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../constants.dart';
+import '../constants/constants.dart';
 import '../../utils/colors.dart';
 
 class DropDownWidgetX<T> extends StatefulWidget {

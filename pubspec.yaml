@@ -47,6 +47,7 @@ dependencies:
   get: 4.6.5
   dartz: ^0.10.0
   dropdown_search: ^3.0.1
+  sembast: ^3.2.0+1
 #  firebase_auth:
 #    git:
 #      url: https://github.com/collinjackson/plugins.git

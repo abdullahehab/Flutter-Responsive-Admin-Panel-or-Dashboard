@@ -1,4 +1,4 @@
-import '../../../../constants.dart';
+import '../../../../core/constants/constants.dart';
 
 class UserEntity {
   UserEntity({

@@ -9,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-import '../../../../constants.dart';
+import '../../../../core/constants/constants.dart';
 import '../../../../core/shared_components/build_date_time_picker_field.dart';
 import '../../../../core/shared_components/drop_down_widget.dart';
 import '../../../../models/user_model.dart';

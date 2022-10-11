@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../constants.dart';
+import '../core/constants/constants.dart';
 class ProfileDropDownMenu extends StatelessWidget {
   ProfileDropDownMenu({@required this.onChanged});
 

@@ -1,7 +1,7 @@
 import 'package:admin/core/shared_components/title_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
+import '../constants/constants.dart';
 import '../../utils/colors.dart';
 
 

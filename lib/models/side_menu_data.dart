@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-import '../constants.dart';
+import '../core/constants/constants.dart';
 import '../features/social_status/presentation/screens/list.dart';
 import '../screens/dashboard/dashboard_screen.dart';
 import '../screens/people_screen/people_screen.dart';

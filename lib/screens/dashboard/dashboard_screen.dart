@@ -4,7 +4,7 @@ import 'package:admin/screens/main/components/side_menu.dart';
 import 'package:admin/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
+import '../../core/constants/constants.dart';
 import 'components/recent_files.dart';
 
 class DashboardScreen extends StatelessWidget {

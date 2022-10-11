@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../constants.dart';
+import '../core/constants/constants.dart';
 
 Widget customRichText({
   @required BuildContext context,

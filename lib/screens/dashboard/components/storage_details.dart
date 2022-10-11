@@ -1,7 +1,7 @@
 import 'package:admin/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
-import '../../../constants.dart';
+import '../../../core/constants/constants.dart';
 import 'package:admin/extensions/extension.dart';
 class LoggedInUserDetails extends StatelessWidget {
   const LoggedInUserDetails({

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:admin/features/add_new_user/domain/entities/user_entity.dart';
 
-import '../constants.dart';
+import '../core/constants/constants.dart';
 
 class UserModel extends UserEntity {
   UserModel({

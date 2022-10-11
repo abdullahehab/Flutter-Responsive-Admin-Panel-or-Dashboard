@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'constants.dart';
+import 'core/constants/constants.dart';
 import 'models/data_table.dart';
 import 'models/user_model.dart';
 

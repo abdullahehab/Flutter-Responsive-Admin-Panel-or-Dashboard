@@ -1,5 +1,5 @@
 // @dart=2.9
-import 'package:admin/constants.dart';
+import 'package:admin/core/constants/constants.dart';
 import 'package:admin/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

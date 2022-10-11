@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import '../../constants.dart';
+import '../../core/constants/constants.dart';
 import '../main/components/main_screen_controller.dart';
 
 class PeopleScreen extends StatelessWidget {

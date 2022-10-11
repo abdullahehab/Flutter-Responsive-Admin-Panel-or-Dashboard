@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:admin/extensions/extension.dart';
 
-import '../constants.dart';
+import '../core/constants/constants.dart';
 import 'components.dart';
 import 'package:get/get.dart';
 

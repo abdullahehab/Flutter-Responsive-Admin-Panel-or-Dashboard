@@ -1,4 +1,4 @@
-import 'package:admin/constants.dart';
+import 'package:admin/core/constants/constants.dart';
 import 'package:admin/models/general_model.dart';
 import 'package:admin/utils/colors.dart';
 import 'package:flutter/material.dart';

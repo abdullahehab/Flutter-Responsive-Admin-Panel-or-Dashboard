@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:admin/extensions/extension.dart';
 
-import '../../constants.dart';
+import '../constants/constants.dart';
 
 
 Widget buildDateTimePickerField({

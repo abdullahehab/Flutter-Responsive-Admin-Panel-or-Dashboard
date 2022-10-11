@@ -2,7 +2,7 @@
 import 'package:admin/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:admin/models/MyFiles.dart';
-import '../../../constants.dart';
+import '../../../core/constants/constants.dart';
 import 'file_info_card.dart';
 
 class MyFiles extends StatelessWidget {
