@@ -30,6 +30,13 @@ class UnAuthFailure extends Failure {
   List<Object?> get props => [mess];
 }
 
+class FirebaseFailure extends Failure {
+  FirebaseFailure({required this.mess}) : super(mess: mess);
+  final String mess;
+  @override
+  List<Object?> get props => [mess];
+}
+
 class UnknownFailure extends Failure {
   @override
   List<Object?> get props => [];

@@ -30,5 +30,5 @@ Map<String, Widget> namedPages = {
   USERS_KEY: PeopleScreen(),
   ADD_USER_KEY: AddPeople(),
 };
-
+const kTextFiledBorderRadius = 5.0;
 const String egPhoneRegex = r'(010|011|012|015)[0-9]{8}$';

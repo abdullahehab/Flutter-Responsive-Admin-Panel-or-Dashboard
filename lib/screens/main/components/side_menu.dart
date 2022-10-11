@@ -21,7 +21,13 @@ class SideMenu extends GetView<MainScreenController> {
           child: ListView(
             children: [
               DrawerHeader(
-                child: Image.asset("assets/images/logo.png"),
+                child: Center(
+                  child: Text(
+                    'جمعيه الديوان \nالنوبيه الخيريه',
+                    style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                // child: Image.asset("assets/images/logo.png"),
               ),
               ...items.map((e) {
                 int index = items.indexOf(e);
@@ -30,10 +36,10 @@ class SideMenu extends GetView<MainScreenController> {
                   onTap: Responsive.isMobile()
                       ? e.onTap
                       : () {
-                    controller.setSelectedMenuIndex = index;
-                    // controller.setSelectedKey = e.key!;
-                    if (Responsive.isMobile()) Navigator.pop(context);
-                  },
+                          controller.setSelectedMenuIndex = index;
+                          // controller.setSelectedKey = e.key!;
+                          if (Responsive.isMobile()) Navigator.pop(context);
+                        },
                   child: DrawerListTile(
                     title: e.title!,
                     iconData: e.icon!,

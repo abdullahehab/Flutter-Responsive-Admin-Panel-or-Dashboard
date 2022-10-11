@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:admin/extensions/extension.dart';
 
+import '../utils/colors.dart';
+
 class CustomButton extends StatelessWidget {
   const CustomButton(
       {@required this.text,
@@ -14,7 +16,7 @@ class CustomButton extends StatelessWidget {
       this.forwardButton,
       this.backButton,
       this.titleStyle,
-      this.buttonColor,
+      this.buttonColor = const Color(0xff4d59c1),
       this.withoutPadding = false,
       this.padding});
 

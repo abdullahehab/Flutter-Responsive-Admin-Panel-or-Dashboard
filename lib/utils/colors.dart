@@ -13,4 +13,5 @@ class AppColor {
   static Color buttonColor = Color(0xff55ce63);
   static Color kMainBackgroundColor = Color(0xfff5f5fd);
   static Color mainBackgroundColor = Color(0xfff7f7f7);
+  static Color borderColor = Color(0xffDDDDDD);
 }

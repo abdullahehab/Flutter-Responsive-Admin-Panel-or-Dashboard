@@ -1,3 +1,4 @@
+import 'package:admin/features/social_status/presentation/screens/list.dart';
 import 'package:admin/screens/dashboard/dashboard_screen.dart';
 import 'package:admin/screens/main/main_screen.dart';
 import 'package:admin/screens/people_details/people_details.dart';
@@ -25,6 +26,10 @@ class Routes {
       case PageRouteName.PEOPLE_SCREEN:
         return MaterialPageRoute<dynamic>(
             builder: (_) => PeopleScreen(), settings: settings);
+
+      case PageRouteName.SOCIAL_STATUES_SCREEN:
+        return MaterialPageRoute<dynamic>(
+            builder: (_) => SocialStatuesList(), settings: settings);
 
       default:
         return MaterialPageRoute<dynamic>(

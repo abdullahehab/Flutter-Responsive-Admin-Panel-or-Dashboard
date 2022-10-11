@@ -2,6 +2,8 @@ import 'package:admin/features/add_new_user/data/datasource/remote_datasource.da
 import 'package:admin/features/add_new_user/data/repositories/user_repositories_imp.dart';
 import 'package:admin/features/add_new_user/domain/usecase/add_user_usecase.dart';
 import 'package:admin/features/add_new_user/domain/usecase/update_user_usecase.dart';
+import 'package:admin/features/social_status/data/repositories/social_status_repository.dart';
+import 'package:admin/features/social_status/domain/usecase/get_social_statues_usecase.dart';
 import 'package:admin/screens/main/components/main_screen_controller.dart';
 import 'package:admin/services/service_locator.dart';
 import 'package:admin/utils/app_pages.dart';
@@ -13,7 +15,12 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'features/add_new_user/presentation/controller/user_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'features/social_status/data/datasource/remote_datasource.dart';
+import 'features/social_status/domain/repositories/base_social_status_repository.dart';
+import 'features/social_status/domain/usecase/add_social_statues_usecase.dart';
+import 'features/social_status/presentation/controller/controller.dart';
 import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocators();
@@ -46,11 +53,29 @@ class Binding extends Bindings {
     Get.lazyPut(() => AddUserUsecase(Get.find<UserRepositoryImp>()));
     Get.lazyPut(() => UpdateUserUsecase(Get.find<UserRepositoryImp>()));
 
-    Get.put(UserController(Get.find<AddUserUsecase>(), Get.find<UpdateUserUsecase>()), permanent: true);
+    Get.put(
+        UserController(
+            Get.find<AddUserUsecase>(), Get.find<UpdateUserUsecase>()),
+        permanent: true);
 
     Get.lazyPut<MainScreenController>(
       () => MainScreenController(),
       fenix: true,
     );
+
+    Get.lazyPut(() => SocialStatusRemoteDataSource());
+    Get.lazyPut(
+        () => SocialStatusRepository(Get.find<SocialStatusRemoteDataSource>()));
+    Get.lazyPut(
+        () => GetSocialStatuesUseCase(Get.find<SocialStatusRepository>()));
+    Get.lazyPut(
+        () => AddSocialStatusUsecase(Get.find<SocialStatusRepository>()));
+
+    Get.put(
+        SocialStatusController(
+          Get.find<GetSocialStatuesUseCase>(),
+          Get.find<AddSocialStatusUsecase>(),
+        ),
+        permanent: true);
   }
 }
