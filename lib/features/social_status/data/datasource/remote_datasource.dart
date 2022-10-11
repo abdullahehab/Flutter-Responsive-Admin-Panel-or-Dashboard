@@ -8,7 +8,7 @@ import '../../domain/entities/social_status.dart';
 abstract class BaseRemoteDataSource {
   Future<List<SocialStatusModel>> getAllSocialStatues();
   Future<Either<Failure, Unit>> add({required String title});
-  Future<Either<Failure, Unit>> update();
+  Future<Either<Failure, Unit>> update({required SocialStatusModel model});
   Future<Either<Failure, Unit>> delete();
 }
 
@@ -46,14 +46,38 @@ class SocialStatusRemoteDataSource implements BaseRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, Unit>> delete() {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> update(
+      {required SocialStatusModel model}) async {
+    final DocumentReference _mainCollection =
+        _fireStore.collection('constants').doc('socialStatuses');
+
+    var list = await getAllSocialStatues();
+
+    var item = list.firstWhere((element) => element.id == model.id);
+
+    int index = list.indexOf(item);
+
+    list.remove(item);
+    list.insert(index, model);
+
+
+    try {
+      for (item in list) {
+        await _mainCollection.set({
+          'data': FieldValue.arrayUnion([item.toJson()])
+        }, SetOptions(merge: true));
+      }
+
+      return Right(unit);
+    } catch (e) {
+      print('e => $e');
+      return Left(UnAuthFailure(mess: e.toString()));
+    }
   }
 
   @override
-  Future<Either<Failure, Unit>> update() {
-    // TODO: implement update
+  Future<Either<Failure, Unit>> delete() {
+    // TODO: implement delete
     throw UnimplementedError();
   }
 }

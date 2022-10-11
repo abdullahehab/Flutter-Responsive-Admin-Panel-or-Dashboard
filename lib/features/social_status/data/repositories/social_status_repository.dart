@@ -1,5 +1,6 @@
 import 'package:admin/core/error/failures.dart';
 import 'package:admin/features/social_status/data/datasource/remote_datasource.dart';
+import 'package:admin/features/social_status/data/models/social_status_model.dart';
 
 import 'package:admin/features/social_status/domain/entities/social_status.dart';
 
@@ -34,8 +35,10 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> update() {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> update({required SocialStatus model}) {
+    SocialStatusModel socialStatusModel =
+        SocialStatusModel(id: model.id, title: model.title);
+
+    return _dataSource.update(model: socialStatusModel);
   }
 }

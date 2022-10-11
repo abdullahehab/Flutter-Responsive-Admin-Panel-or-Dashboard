@@ -6,6 +6,6 @@ import '../../../../core/error/failures.dart';
 abstract class BaseSocialStatusRepository {
   Future<Either<Failure, List<SocialStatus>>> getAllSocialStatues();
   Future<Either<Failure, Unit>> add({required String title});
-  Future<Either<Failure, Unit>> update();
+  Future<Either<Failure, Unit>> update({required SocialStatus model});
   Future<Either<Failure, Unit>> delete();
 }

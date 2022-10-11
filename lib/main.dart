@@ -18,6 +18,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'features/social_status/data/datasource/remote_datasource.dart';
 import 'features/social_status/domain/repositories/base_social_status_repository.dart';
 import 'features/social_status/domain/usecase/add_social_statues_usecase.dart';
+import 'features/social_status/domain/usecase/update_social_statues_usecase.dart';
 import 'features/social_status/presentation/controller/controller.dart';
 import 'firebase_options.dart';
 
@@ -70,11 +71,14 @@ class Binding extends Bindings {
         () => GetSocialStatuesUseCase(Get.find<SocialStatusRepository>()));
     Get.lazyPut(
         () => AddSocialStatusUsecase(Get.find<SocialStatusRepository>()));
+    Get.lazyPut(
+        () => UpdateSocialStatusUsecase(Get.find<SocialStatusRepository>()));
 
     Get.put(
         SocialStatusController(
           Get.find<GetSocialStatuesUseCase>(),
           Get.find<AddSocialStatusUsecase>(),
+          Get.find<UpdateSocialStatusUsecase>(),
         ),
         permanent: true);
   }

@@ -131,7 +131,8 @@ class SocialStatuesList extends GetView<SocialStatusController> {
                     _formKey.currentState!.save();
 
                     if (isEdit) {
-                      print('editing');
+                      controller.updateSocialStatutes(model: model!);
+                      Get.back();
                       return;
                     }
 
