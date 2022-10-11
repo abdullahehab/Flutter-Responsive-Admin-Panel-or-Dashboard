@@ -9,7 +9,7 @@ abstract class BaseRemoteDataSource {
   Future<List<SocialStatusModel>> getAllSocialStatues();
   Future<Either<Failure, Unit>> add({required String title});
   Future<Either<Failure, Unit>> update({required SocialStatusModel model});
-  Future<Either<Failure, Unit>> delete();
+  Future<Either<Failure, Unit>> deleteAll();
 }
 
 class SocialStatusRemoteDataSource implements BaseRemoteDataSource {
@@ -62,7 +62,7 @@ class SocialStatusRemoteDataSource implements BaseRemoteDataSource {
     reversedList.remove(item);
     reversedList.insert(index, model);
 
-    await delete();
+    await deleteAll();
 
     try {
       for (item in reversedList) {
@@ -79,7 +79,7 @@ class SocialStatusRemoteDataSource implements BaseRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, Unit>> delete() async {
+  Future<Either<Failure, Unit>> deleteAll() async {
     final DocumentReference _mainCollection =
         _fireStore.collection('constants').doc('socialStatuses');
 

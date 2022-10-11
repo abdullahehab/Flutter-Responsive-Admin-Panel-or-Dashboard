@@ -30,7 +30,7 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
 
   @override
   Future<Either<Failure, Unit>> delete() {
-    return _dataSource.delete();
+    return _dataSource.deleteAll();
   }
 
   @override
