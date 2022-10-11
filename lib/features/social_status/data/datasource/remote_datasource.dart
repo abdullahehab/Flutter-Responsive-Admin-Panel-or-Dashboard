@@ -119,7 +119,6 @@ class SocialStatusRemoteDataSource implements BaseRemoteDataSource {
 
       return Right(unit);
     } catch (e) {
-      print('e => $e');
       return Left(UnAuthFailure(mess: e.toString()));
     }
   }

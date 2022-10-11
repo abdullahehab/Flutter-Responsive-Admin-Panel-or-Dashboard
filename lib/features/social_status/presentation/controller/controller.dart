@@ -6,6 +6,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../../../widget/components.dart';
 import '../../domain/usecase/delete_all_social_statues_usecase.dart';
+import '../../domain/usecase/delete_social_status_usecase.dart';
 import '../../domain/usecase/update_social_statues_usecase.dart';
 
 class SocialStatusController extends GetxController with StateMixin {
@@ -13,11 +14,11 @@ class SocialStatusController extends GetxController with StateMixin {
       this._getSocialStatuesUseCase,
       this._addSocialStatusUsecase,
       this._updateSocialStatusUsecase,
-      this._removeAllSocialStatuesUseCase);
+      this._removeSocialStatuesUseCase);
   GetSocialStatuesUseCase _getSocialStatuesUseCase;
   AddSocialStatusUsecase _addSocialStatusUsecase;
   UpdateSocialStatusUsecase _updateSocialStatusUsecase;
-  RemoveAllSocialStatuesUseCase _removeAllSocialStatuesUseCase;
+  RemoveSocialStatuesUseCase _removeSocialStatuesUseCase;
   var isLoading = false.obs;
 
   @override
@@ -71,15 +72,15 @@ class SocialStatusController extends GetxController with StateMixin {
     );
   }
 
-  deleteSocialStatutes() async {
-    var data = await _removeAllSocialStatuesUseCase.execute();
+  deleteSocialStatutes({required String id}) async {
+    var data = await _removeSocialStatuesUseCase.execute(id: id);
 
     data.fold(
       (failure) {
         showToast(message: failure.mess);
       },
       (done) async {
-        showToast(message: 'تم التعديبل بنجاح');
+        showToast(message: 'تم الحذف بنجاح');
         await getSocialStatutes();
       },
     );
