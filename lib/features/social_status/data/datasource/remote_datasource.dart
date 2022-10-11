@@ -10,6 +10,7 @@ abstract class BaseRemoteDataSource {
   Future<Either<Failure, Unit>> add({required String title});
   Future<Either<Failure, Unit>> update({required SocialStatusModel model});
   Future<Either<Failure, Unit>> deleteAll();
+  Future<Either<Failure, Unit>> deleteItem({required String id});
 }
 
 class SocialStatusRemoteDataSource implements BaseRemoteDataSource {
@@ -90,6 +91,36 @@ class SocialStatusRemoteDataSource implements BaseRemoteDataSource {
       return Right(unit);
     } on FirebaseException catch (e) {
       return Left(FirebaseFailure(mess: e.message!));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> deleteItem({required String id}) async {
+    final DocumentReference _mainCollection =
+        _fireStore.collection('constants').doc('socialStatuses');
+
+    var list = await getAllSocialStatues();
+
+    var reversedList = list.reversed.toList();
+
+    var item =
+        reversedList.firstWhere((element) => element.id.toString() == id);
+
+    reversedList.remove(item);
+
+    await deleteAll();
+
+    try {
+      for (item in reversedList) {
+        await _mainCollection.set({
+          'data': FieldValue.arrayUnion([item.toJson()])
+        }, SetOptions(merge: true));
+      }
+
+      return Right(unit);
+    } catch (e) {
+      print('e => $e');
+      return Left(UnAuthFailure(mess: e.toString()));
     }
   }
 }
