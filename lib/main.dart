@@ -12,19 +12,21 @@ import 'package:admin/screens/main/components/main_screen_controller.dart';
 import 'package:admin/services/service_locator.dart';
 import 'package:admin/utils/app_pages.dart';
 import 'package:admin/utils/page_route_name.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil_init.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:sembast/sembast.dart';
+import 'package:path/path.dart';
+import 'package:sembast/sembast_io.dart';
+import 'package:sembast_web/sembast_web.dart';
+
 import 'features/add_new_user/presentation/controller/user_controller.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'features/social_status/data/datasource/local_datasource.dart';
 import 'features/social_status/data/datasource/remote_datasource.dart';
-import 'features/social_status/domain/repositories/base_social_status_repository.dart';
 import 'features/social_status/domain/usecase/add_social_statues_usecase.dart';
-import 'features/social_status/domain/usecase/delete_all_social_statues_usecase.dart';
 import 'features/social_status/domain/usecase/delete_social_status_usecase.dart';
 import 'features/social_status/domain/usecase/update_social_statues_usecase.dart';
 import 'features/social_status/presentation/controller/controller.dart';
@@ -33,6 +35,7 @@ import 'features/working/data/repositories/social_status_repository.dart';
 import 'features/working/domain/usecase/get_works_usecase.dart';
 import 'firebase_options.dart';
 
+var db;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocators();
@@ -40,6 +43,16 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  if (kIsWeb) {
+    var factory = databaseFactoryWeb;
+
+    // Open the database
+    db = await factory.openDatabase('test');
+  } else {
+    db = await databaseFactoryIo.openDatabase(
+        join('.dart_tool', 'sembast', 'example', 'record_demo.db'));
+  }
 
   runApp(ScreenUtilInit(
     designSize: const Size(414, 896),
@@ -59,7 +72,7 @@ void main() async {
 
 class Binding extends Bindings {
   @override
-  void dependencies() {
+  void dependencies() async {
     Get.lazyPut(() => UserRemoteDataSourceImp());
     Get.lazyPut(() => UserRepositoryImp(Get.find<UserRemoteDataSourceImp>()));
     Get.lazyPut(() => AddUserUsecase(Get.find<UserRepositoryImp>()));
@@ -96,8 +109,10 @@ class Binding extends Bindings {
         permanent: true);
 
     Get.lazyPut(() => SocialStatusRemoteDataSource());
-    Get.lazyPut(
-        () => SocialStatusRepository(Get.find<SocialStatusRemoteDataSource>()));
+    Get.lazyPut(() => SocialStatusLocalDataSource(db));
+    Get.lazyPut(() => SocialStatusRepository(
+        Get.find<SocialStatusRemoteDataSource>(),
+        Get.find<SocialStatusLocalDataSource>()));
     Get.lazyPut(
         () => GetSocialStatuesUseCase(Get.find<SocialStatusRepository>()));
     Get.lazyPut(
@@ -107,13 +122,11 @@ class Binding extends Bindings {
     Get.lazyPut(
         () => RemoveSocialStatuesUseCase(Get.find<SocialStatusRepository>()));
 
-    Get.put(
-        SocialStatusController(
+    Get.lazyPut(() => SocialStatusController(
           Get.find<GetSocialStatuesUseCase>(),
           Get.find<AddSocialStatusUsecase>(),
           Get.find<UpdateSocialStatusUsecase>(),
           Get.find<RemoveSocialStatuesUseCase>(),
-        ),
-        permanent: true);
+        ));
   }
 }
