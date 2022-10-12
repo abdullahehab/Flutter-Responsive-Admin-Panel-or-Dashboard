@@ -66,7 +66,7 @@ class SocialStatusController extends GetxController with StateMixin {
         showToast(message: failure.mess);
       },
       (done) async {
-        showToast(message: 'تم التعديبل بنجاح');
+        showToast(message: 'تم التعديل بنجاح');
         await getSocialStatutes();
       },
     );
