@@ -22,13 +22,13 @@ class SocialStatusController extends GetxController with StateMixin {
   var isLoading = false.obs;
 
   @override
-  void onReady() async {
+  void onInit() async {
     await getSocialStatutes();
-    // change(null, status: RxStatus.empty());
     return super.onInit();
   }
 
   getSocialStatutes() async {
+    change(null, status: RxStatus.loading());
     var data = await _getSocialStatuesUseCase.execute();
     data.fold(
       (failure) {
@@ -45,6 +45,7 @@ class SocialStatusController extends GetxController with StateMixin {
   }
 
   addSocialStatutes({required String title}) async {
+    change(null, status: RxStatus.loading());
     var data = await _addSocialStatusUsecase.execute(title: title);
 
     data.fold(
@@ -59,6 +60,7 @@ class SocialStatusController extends GetxController with StateMixin {
   }
 
   updateSocialStatutes({required SocialStatus model}) async {
+    change(null, status: RxStatus.loading());
     var data = await _updateSocialStatusUsecase.execute(model: model);
 
     data.fold(
@@ -73,6 +75,7 @@ class SocialStatusController extends GetxController with StateMixin {
   }
 
   deleteSocialStatutes({required String id}) async {
+    change(null, status: RxStatus.loading());
     var data = await _removeSocialStatuesUseCase.execute(id: id);
 
     data.fold(
