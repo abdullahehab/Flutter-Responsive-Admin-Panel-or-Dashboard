@@ -1,6 +1,8 @@
+import 'package:admin/extensions/extension.dart';
 import 'package:admin/features/social_status/domain/entities/social_status.dart';
 import 'package:admin/features/social_status/presentation/controller/controller.dart';
 import 'package:admin/widget/main_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,6 +11,8 @@ import 'package:get/get.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/shared_components/build_dialog.dart';
+import '../../../../core/shared_components/loader/circular_laod.dart';
+import '../../../../core/shared_components/loader/display_custom_loader.dart';
 import '../../../../core/shared_components/styled_content_widget.dart';
 import '../../../../core/shared_page/app_empty.dart';
 import '../../../../utils/colors.dart';
@@ -24,6 +28,11 @@ class SocialStatuesList extends GetView<SocialStatusController> {
   @override
   Widget build(BuildContext context) {
     return controller.obx((state) => buildBody(state),
+        onLoading: Scaffold(
+          body: Center(
+            child: CupertinoActivityIndicator(),
+          ),
+        ),
         onEmpty: appEmpty(onPressed: () => addNewSocialStatues()));
   }
 
