@@ -4,4 +4,5 @@ class PageRouteName {
   static const String MAIN_SCREEN = '/mainScreen';
   static const String PEOPLE_SCREEN = '/PeopleScreen';
   static const String SOCIAL_STATUES_SCREEN = '/socialStatuesScreen';
+  static const String WORKS_SCREEN = '/worksScreen';
 }

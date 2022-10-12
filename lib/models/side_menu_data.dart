@@ -1,3 +1,4 @@
+import 'package:admin/features/working/presentation/screens/list.dart';
 import 'package:admin/screens/main/users_data.dart';
 import 'package:admin/services/service_locator.dart';
 import 'package:admin/utils/page_route_name.dart';
@@ -44,15 +45,16 @@ List<SideMenuData> items = [
       title: 'الحالة الاجتماعية',
       key: '',
       icon: FontAwesomeIcons.users,
-      onTap: () =>
-          Navigator.pushNamed(Get.context!, PageRouteName.SOCIAL_STATUES_SCREEN),
+      onTap: () => Navigator.pushNamed(
+          Get.context!, PageRouteName.SOCIAL_STATUES_SCREEN),
       itemWidget: SocialStatuesList()),
   SideMenuData(
       title: 'الوظيفه',
       key: '',
       icon: FontAwesomeIcons.briefcase,
-      onTap: () {},
-      itemWidget: Center(child: Text('الوظيفه'))),
+      onTap: () =>
+          Navigator.pushNamed(Get.context!, PageRouteName.WORKS_SCREEN),
+      itemWidget: WorksList()),
   SideMenuData(
       title: 'السكمن',
       key: '',
