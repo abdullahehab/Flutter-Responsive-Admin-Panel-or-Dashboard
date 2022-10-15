@@ -53,7 +53,7 @@ class WorkRemoteDataSource implements WorkBaseRemoteDataSource {
     final DocumentReference _mainCollection =
         _fireStore.collection('constants').doc('occupation');
 
-    var list = await getWorkStatues();
+    var list = await getWorks();
 
     var reversedList = list.reversed.toList();
 
@@ -100,7 +100,7 @@ class WorkRemoteDataSource implements WorkBaseRemoteDataSource {
     final DocumentReference _mainCollection =
         _fireStore.collection('constants').doc('occupation');
 
-    var list = await getWorkStatues();
+    var list = await getWorks();
 
     var reversedList = list.reversed.toList();
 
