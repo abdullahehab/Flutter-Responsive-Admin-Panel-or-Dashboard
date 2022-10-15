@@ -57,10 +57,22 @@ class WorkRepository implements BaseWorkRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> update({required Work model}) {
-    WorkModel workModel = WorkModel(id: model.id, title: model.title);
+  Future<Either<Failure, Unit>> update({required Work model}) async {
+    WorkModel socialStatusModel =
+    WorkModel(id: model.id, title: model.title);
 
-    return _dataSource.update(model: workModel);
+    try {
+      await _dataSource.update(model: socialStatusModel);
+
+      await _localDataSource
+          .update(model: socialStatusModel)
+          .then((value) => print('work updated success local'))
+          .catchError((e) => print('updated local error => $e'));
+
+      return Right(unit);
+    } catch (e) {
+      return Left(ServerFailure(mess: 'لم يتم التعديل بشكل صحيح'));
+    }
   }
 
   @override
