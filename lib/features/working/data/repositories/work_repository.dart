@@ -46,8 +46,14 @@ class WorkRepository implements BaseWorkRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> deleteAll() {
-    return _dataSource.deleteAll();
+  Future<Either<Failure, Unit>> deleteAll() async {
+    try {
+      await _dataSource.deleteAll();
+      await _localDataSource.deleteAll();
+      return Right(unit);
+    } catch (e) {
+      return Left(ServerFailure(mess: 'لم يتم الحذف الكلي بشكل صحيح'));
+    }
   }
 
   @override
