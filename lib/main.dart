@@ -35,11 +35,13 @@ import 'features/working/domain/usecase/get_works_usecase.dart';
 import 'firebase_options.dart';
 
 StoreRef<int, Map<String, Object?>>? _socialStatusStore;
+StoreRef<int, Map<String, Object?>>? _workStore;
 
 late final Database? _db;
 
 Future initLocalStorage() async {
   _socialStatusStore = intMapStoreFactory.store(DBConstants.SOCIAL_STATUS_NAME);
+  _workStore = intMapStoreFactory.store(DBConstants.WORK_NAME);
   var factory = databaseFactoryWeb;
 
   // Open the database
