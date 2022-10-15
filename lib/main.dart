@@ -29,6 +29,7 @@ import 'features/social_status/domain/usecase/add_social_statues_usecase.dart';
 import 'features/social_status/domain/usecase/delete_social_status_usecase.dart';
 import 'features/social_status/domain/usecase/update_social_statues_usecase.dart';
 import 'features/social_status/presentation/controller/controller.dart';
+import 'features/working/data/datasource/local_datasource.dart';
 import 'features/working/data/datasource/remote_datasource.dart';
 import 'features/working/data/repositories/social_status_repository.dart';
 import 'features/working/domain/usecase/get_works_usecase.dart';
@@ -91,6 +92,7 @@ class Binding extends Bindings {
     // register local storage
 
     Get.put(SocialStatusLocalDataSource(_socialStatusStore, _db));
+    Get.put(WorkLocalDataSource(_workStore, _db));
     // end register local storage
 
     Get.lazyPut(() => UserRemoteDataSourceImp());
