@@ -42,7 +42,7 @@ class SocialStatusLocalDataSource implements BaseLocalDataSource {
       socialStatuesList = recordSnapshots.map((snapshot) {
         final socialStatus = SocialStatusModel.fromJson(snapshot.value);
         // An ID is a key of a record from the database.
-        socialStatus.id = snapshot.key;
+        // socialStatus.id = snapshot.key;
         return socialStatus;
       }).toList();
     }

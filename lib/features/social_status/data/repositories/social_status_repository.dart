@@ -17,6 +17,7 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
 
   @override
   Future<Either<Failure, List<SocialStatus>>> getAllSocialStatues() async {
+    await _localDataSource.deleteAll();
     var cachedList = await _localDataSource.getCachedSocialStatues();
     if (cachedList.length > 0) {
       return Right(cachedList);
@@ -66,7 +67,12 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
 
     try {
       await _dataSource.update(model: socialStatusModel);
-      _localDataSource.update(model: socialStatusModel);
+
+      await _localDataSource
+          .update(model: socialStatusModel)
+          .then((value) => print('social status updated success local'))
+          .catchError((e) => print('updated local error => $e'));
+
       return Right(unit);
     } catch (e) {
       return Left(ServerFailure(mess: 'لم يتم التعديل بشكل صحيح'));
