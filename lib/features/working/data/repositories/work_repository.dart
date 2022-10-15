@@ -4,16 +4,17 @@ import 'package:admin/features/working/domain/entities/work.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../domain/repositories/base_work_repository.dart';
+import '../datasource/local_datasource.dart';
 import '../datasource/remote_datasource.dart';
 
 class WorkRepository implements BaseWorkRepository {
-  WorkRepository(this._dataSource);
+  WorkRepository(this._dataSource, this._localDataSource);
   WorkBaseRemoteDataSource _dataSource;
-
+  WorkBaseLocalDataSource _localDataSource;
   @override
   Future<Either<Failure, List<Work>>> getAllWorks() async {
     try {
-      var list = await _dataSource.getWorkStatues();
+      var list = await _dataSource.getWorks();
       return Right(list);
     } catch (e) {
       return Left(ServerFailure(mess: e.toString()));
@@ -32,8 +33,7 @@ class WorkRepository implements BaseWorkRepository {
 
   @override
   Future<Either<Failure, Unit>> update({required Work model}) {
-    WorkModel workModel =
-    WorkModel(id: model.id, title: model.title);
+    WorkModel workModel = WorkModel(id: model.id, title: model.title);
 
     return _dataSource.update(model: workModel);
   }
