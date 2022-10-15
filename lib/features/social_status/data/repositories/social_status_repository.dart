@@ -17,7 +17,6 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
 
   @override
   Future<Either<Failure, List<SocialStatus>>> getAllSocialStatues() async {
-    await _localDataSource.deleteAll();
     var cachedList = await _localDataSource.getCachedSocialStatues();
     if (cachedList.length > 0) {
       return Right(cachedList);
