@@ -76,7 +76,13 @@ class WorkRepository implements BaseWorkRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> deleteItem({required String id}) {
-    return _dataSource.deleteItem(id: id);
+  Future<Either<Failure, Unit>> deleteItem({required String id}) async {
+    try {
+      await _dataSource.deleteItem(id: id);
+      await _localDataSource.deleteItem(id: id);
+      return Right(unit);
+    } catch (e) {
+      return Left(ServerFailure(mess: 'لم يتم حذف الحاله بكشل صحيح'));
+    }
   }
 }
