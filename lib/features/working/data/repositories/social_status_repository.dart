@@ -16,7 +16,7 @@ class WorkRepository implements BaseWorkRepository {
       var list = await _dataSource.getWorkStatues();
       return Right(list);
     } catch (e) {
-      return Left(ServerFailure());
+      return Left(ServerFailure(mess: e.toString()));
     }
   }
 

@@ -19,9 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil_init.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:path/path.dart';
-import 'package:sembast/sembast_io.dart';
-import 'package:sembast_web/sembast_web.dart';
+
 
 import 'features/add_new_user/presentation/controller/user_controller.dart';
 import 'features/social_status/data/datasource/local_datasource.dart';
@@ -36,6 +34,7 @@ import 'features/working/domain/usecase/get_works_usecase.dart';
 import 'firebase_options.dart';
 
 var db;
+var _socialStatusStore;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocators();
@@ -44,15 +43,16 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  if (kIsWeb) {
-    var factory = databaseFactoryWeb;
-
-    // Open the database
-    db = await factory.openDatabase('test');
-  } else {
-    db = await databaseFactoryIo.openDatabase(
-        join('.dart_tool', 'sembast', 'example', 'record_demo.db'));
-  }
+  // if (kIsWeb) {
+  //   _socialStatusStore = intMapStoreFactory.store();
+  //   var factory = databaseFactoryWeb;
+  //   db = await factory.openDatabase('test');
+  // } else {
+  //   _socialStatusStore =
+  //       intMapStoreFactory.store(DBConstants.SOCIAL_STATUS_NAME);
+  //   db = await databaseFactoryIo.openDatabase(
+  //       join('.dart_tool', 'sembast', 'example', 'record_demo.db'));
+  // }
 
   runApp(ScreenUtilInit(
     designSize: const Size(414, 896),
@@ -109,10 +109,11 @@ class Binding extends Bindings {
         permanent: true);
 
     Get.lazyPut(() => SocialStatusRemoteDataSource());
-    Get.lazyPut(() => SocialStatusLocalDataSource(db));
+    Get.lazyPut(() => SocialStatusLocalDataSource());
     Get.lazyPut(() => SocialStatusRepository(
-        Get.find<SocialStatusRemoteDataSource>(),
-        Get.find<SocialStatusLocalDataSource>()));
+          Get.find<SocialStatusRemoteDataSource>(),
+          Get.find<SocialStatusLocalDataSource>(),
+        ));
     Get.lazyPut(
         () => GetSocialStatuesUseCase(Get.find<SocialStatusRepository>()));
     Get.lazyPut(

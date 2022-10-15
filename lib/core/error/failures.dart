@@ -14,8 +14,10 @@ class OfflineFailure extends Failure {
 }
 
 class ServerFailure extends Failure {
+  ServerFailure({this.mess}) : super(mess: mess);
+  final String? mess;
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [mess];
 }
 
 class UnauthorizedFailure extends Failure {

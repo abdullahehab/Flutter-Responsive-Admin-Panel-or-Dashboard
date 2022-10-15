@@ -1,4 +1,5 @@
 import 'package:admin/core/error/failures.dart';
+import 'package:admin/features/social_status/data/datasource/local_datasource.dart';
 import 'package:admin/features/social_status/data/datasource/remote_datasource.dart';
 import 'package:admin/features/social_status/data/models/social_status_model.dart';
 
@@ -10,8 +11,9 @@ import 'package:easy_localization/easy_localization.dart';
 import '../../domain/repositories/base_social_status_repository.dart';
 
 class SocialStatusRepository implements BaseSocialStatusRepository {
-  SocialStatusRepository(this._dataSource);
+  SocialStatusRepository(this._dataSource, this._localDataSource);
   BaseRemoteDataSource _dataSource;
+  BaseLocalDataSource _localDataSource;
 
   @override
   Future<Either<Failure, List<SocialStatus>>> getAllSocialStatues() async {
@@ -19,13 +21,21 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
       var list = await _dataSource.getAllSocialStatues();
       return Right(list);
     } catch (e) {
-      return Left(ServerFailure());
+      return Left(ServerFailure(mess: ''));
     }
   }
 
   @override
   Future<Either<Failure, Unit>> add({required String title}) async {
-    return await _dataSource.add(title: title);
+    try {
+      await _dataSource.add(title: title);
+      await _localDataSource.insert(
+          model: SocialStatusModel(
+              id: DateTime.now().millisecondsSinceEpoch, title: title));
+      return Right(unit);
+    } catch (e) {
+      return Left(ServerFailure(mess: ''));
+    }
   }
 
   @override

@@ -6,7 +6,7 @@ class SocialStatusModel extends SocialStatus {
   factory SocialStatusModel.fromJson(Map<String, dynamic> json) =>
       SocialStatusModel(id: json['id'], title: json['title']);
 
-  Map<String, dynamic> toJson() {
+  Map<String, Object?> toJson() {
     return {'title': title, 'id': id};
   }
 }
