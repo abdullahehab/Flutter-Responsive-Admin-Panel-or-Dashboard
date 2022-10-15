@@ -14,13 +14,14 @@ import 'package:admin/utils/app_pages.dart';
 import 'package:admin/utils/page_route_name.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil_init.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:sembast/sembast.dart';
+import 'package:sembast_web/sembast_web.dart';
 
-
+import 'core/constants/db_constants.dart';
 import 'features/add_new_user/presentation/controller/user_controller.dart';
 import 'features/social_status/data/datasource/local_datasource.dart';
 import 'features/social_status/data/datasource/remote_datasource.dart';
@@ -33,11 +34,23 @@ import 'features/working/data/repositories/social_status_repository.dart';
 import 'features/working/domain/usecase/get_works_usecase.dart';
 import 'firebase_options.dart';
 
-var db;
-var _socialStatusStore;
+StoreRef<int, Map<String, Object?>>? _socialStatusStore;
+
+late final Database? _db;
+
+Future initLocalStorage() async {
+  _socialStatusStore = intMapStoreFactory.store(DBConstants.SOCIAL_STATUS_NAME);
+  var factory = databaseFactoryWeb;
+
+  // Open the database
+  _db = await factory.openDatabase('dewan_project');
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocators();
+
+  await initLocalStorage();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -73,6 +86,11 @@ void main() async {
 class Binding extends Bindings {
   @override
   void dependencies() async {
+    // register local storage
+
+    Get.put(SocialStatusLocalDataSource(_socialStatusStore, _db));
+    // end register local storage
+
     Get.lazyPut(() => UserRemoteDataSourceImp());
     Get.lazyPut(() => UserRepositoryImp(Get.find<UserRemoteDataSourceImp>()));
     Get.lazyPut(() => AddUserUsecase(Get.find<UserRepositoryImp>()));
@@ -109,7 +127,6 @@ class Binding extends Bindings {
         permanent: true);
 
     Get.lazyPut(() => SocialStatusRemoteDataSource());
-    Get.lazyPut(() => SocialStatusLocalDataSource());
     Get.lazyPut(() => SocialStatusRepository(
           Get.find<SocialStatusRemoteDataSource>(),
           Get.find<SocialStatusLocalDataSource>(),

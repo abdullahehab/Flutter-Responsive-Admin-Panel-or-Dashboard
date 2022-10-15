@@ -17,8 +17,18 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
 
   @override
   Future<Either<Failure, List<SocialStatus>>> getAllSocialStatues() async {
+    var cachedList = await _localDataSource.getCachedSocialStatues();
+    if (cachedList.length > 0) {
+      return Right(cachedList);
+    }
+
     try {
       var list = await _dataSource.getAllSocialStatues();
+      if (list.length > 0) {
+        for (var value in list) {
+          _localDataSource.insert(model: value);
+        }
+      }
       return Right(list);
     } catch (e) {
       return Left(ServerFailure(mess: ''));

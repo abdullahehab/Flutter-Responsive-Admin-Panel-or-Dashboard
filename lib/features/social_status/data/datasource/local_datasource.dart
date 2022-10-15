@@ -6,45 +6,18 @@ import '../../../../core/constants/db_constants.dart';
 import '../models/social_status_model.dart';
 
 abstract class BaseLocalDataSource {
-  Future<List<SocialStatusModel>> getAllSocialStatues();
+  Future<List<SocialStatusModel>> getCachedSocialStatues();
   Future<int> insert({required SocialStatusModel model});
   Future<int> update({required SocialStatusModel model});
   Future deleteAll();
   Future<int> deleteItem({required String id});
 }
 
-Future? _doneFuture;
-StoreRef<int, Map<String, Object?>>? _socialStatusStore;
-
-// database instance
-late final Database? _db;
-
 class SocialStatusLocalDataSource implements BaseLocalDataSource {
-  // Constructor
-  SocialStatusLocalDataSource() {
-    _doneFuture = init();
-  }
-  // {
-  //   if (kIsWeb) {
-  //     print('is => web');
-  //     _socialStatusStore = intMapStoreFactory.store();
-  //   } else {
-  //     print('is => not web');
-  //     _socialStatusStore =
-  //         intMapStoreFactory.store(DBConstants.SOCIAL_STATUS_NAME);
-  //   }
-  // }
+  SocialStatusLocalDataSource(this._socialStatusStore, this._db);
 
-  Future init() async {
-    // Declare our store (records are mapd, ids are ints)
-    _socialStatusStore =
-        intMapStoreFactory.store(DBConstants.SOCIAL_STATUS_NAME);
-    // _socialStatusStore = store;
-    var factory = databaseFactoryWeb;
-
-    // Open the database
-    _db = await factory.openDatabase('test');
-  }
+  StoreRef<int, Map<String, Object?>>? _socialStatusStore;
+  late final Database? _db;
 
   @override
   Future<int> insert({required SocialStatusModel model}) async {
@@ -57,7 +30,7 @@ class SocialStatusLocalDataSource implements BaseLocalDataSource {
   }
 
   @override
-  Future<List<SocialStatusModel>> getAllSocialStatues() async {
+  Future<List<SocialStatusModel>> getCachedSocialStatues() async {
     List<SocialStatusModel>? socialStatuesList;
 
     final recordSnapshots = await _socialStatusStore!.find(
