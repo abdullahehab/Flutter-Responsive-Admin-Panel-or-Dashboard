@@ -55,20 +55,32 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
       await _localDataSource.deleteAll();
       return Right(unit);
     } catch (e) {
-      return Left(ServerFailure());
+      return Left(ServerFailure(mess: 'لم يتم الحذف الكلي بشكل صحيح'));
     }
   }
 
   @override
-  Future<Either<Failure, Unit>> update({required SocialStatus model}) {
+  Future<Either<Failure, Unit>> update({required SocialStatus model}) async {
     SocialStatusModel socialStatusModel =
         SocialStatusModel(id: model.id, title: model.title);
 
-    return _dataSource.update(model: socialStatusModel);
+    try {
+      await _dataSource.update(model: socialStatusModel);
+      _localDataSource.update(model: socialStatusModel);
+      return Right(unit);
+    } catch (e) {
+      return Left(ServerFailure(mess: 'لم يتم التعديل بشكل صحيح'));
+    }
   }
 
   @override
-  Future<Either<Failure, Unit>> deleteItem({required String id}) {
-    return _dataSource.deleteItem(id: id);
+  Future<Either<Failure, Unit>> deleteItem({required String id}) async {
+    try {
+      await _dataSource.deleteItem(id: id);
+      await _localDataSource.deleteItem(id: id);
+      return Right(unit);
+    } catch (e) {
+      return Left(ServerFailure(mess: 'لم يتم حذف الحاله بكشل صحيح'));
+    }
   }
 }
