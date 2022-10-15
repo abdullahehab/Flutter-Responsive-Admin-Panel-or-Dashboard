@@ -34,7 +34,15 @@ class WorkRepository implements BaseWorkRepository {
 
   @override
   Future<Either<Failure, Unit>> add({required String title}) async {
-    return await _dataSource.add(title: title);
+    try {
+      await _dataSource.add(title: title);
+      await _localDataSource.insert(
+          model: WorkModel(
+              id: DateTime.now().millisecondsSinceEpoch, title: title));
+      return Right(unit);
+    } catch (e) {
+      return Left(ServerFailure(mess: ''));
+    }
   }
 
   @override
