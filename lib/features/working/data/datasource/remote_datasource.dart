@@ -7,7 +7,7 @@ import '../../../../core/error/failures.dart';
 import '../../domain/entities/work.dart';
 
 abstract class WorkBaseRemoteDataSource {
-  Future<List<WorkModel>> getWorkStatues();
+  Future<List<WorkModel>> getWorks();
   Future<Either<Failure, Unit>> add({required String title});
   Future<Either<Failure, Unit>> update({required WorkModel model});
   Future<Either<Failure, Unit>> deleteAll();
@@ -18,7 +18,7 @@ class WorkRemoteDataSource implements WorkBaseRemoteDataSource {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
   @override
-  Future<List<WorkModel>> getWorkStatues() async {
+  Future<List<WorkModel>> getWorks() async {
     final DocumentSnapshot _mainCollection =
         await _fireStore.collection('constants').doc('occupation').get();
 
