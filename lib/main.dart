@@ -31,7 +31,7 @@ import 'features/social_status/domain/usecase/update_social_statues_usecase.dart
 import 'features/social_status/presentation/controller/controller.dart';
 import 'features/working/data/datasource/local_datasource.dart';
 import 'features/working/data/datasource/remote_datasource.dart';
-import 'features/working/data/repositories/social_status_repository.dart';
+import 'features/working/data/repositories/work_repository.dart';
 import 'features/working/domain/usecase/get_works_usecase.dart';
 import 'firebase_options.dart';
 
@@ -115,7 +115,8 @@ class Binding extends Bindings {
     );
 
     Get.lazyPut(() => WorkRemoteDataSource());
-    Get.lazyPut(() => WorkRepository(Get.find<WorkRemoteDataSource>()));
+    Get.lazyPut(() => WorkRepository(
+        Get.find<WorkRemoteDataSource>(), Get.find<WorkLocalDataSource>()));
     Get.lazyPut(() => GetWorksUseCase(Get.find<WorkRepository>()));
     Get.lazyPut(() => AddWorkUsecase(Get.find<WorkRepository>()));
     Get.lazyPut(() => UpdateWorkUsecase(Get.find<WorkRepository>()));
