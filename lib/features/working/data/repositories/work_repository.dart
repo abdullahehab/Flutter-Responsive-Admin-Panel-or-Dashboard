@@ -23,7 +23,7 @@ class WorkRepository implements BaseWorkRepository {
       var list = await _dataSource.getWorks();
       if (list.length > 0) {
         for (var value in list) {
-          _localDataSource.insert(model: value);
+          await _localDataSource.insert(model: value);
         }
       }
       return Right(list);
@@ -58,8 +58,7 @@ class WorkRepository implements BaseWorkRepository {
 
   @override
   Future<Either<Failure, Unit>> update({required Work model}) async {
-    WorkModel socialStatusModel =
-    WorkModel(id: model.id, title: model.title);
+    WorkModel socialStatusModel = WorkModel(id: model.id, title: model.title);
 
     try {
       await _dataSource.update(model: socialStatusModel);

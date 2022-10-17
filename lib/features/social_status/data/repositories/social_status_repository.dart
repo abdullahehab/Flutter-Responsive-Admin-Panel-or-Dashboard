@@ -26,7 +26,7 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
       var list = await _dataSource.getAllSocialStatues();
       if (list.length > 0) {
         for (var value in list) {
-          _localDataSource.insert(model: value);
+          await _localDataSource.insert(model: value);
         }
       }
       return Right(list);
