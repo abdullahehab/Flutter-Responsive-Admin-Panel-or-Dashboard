@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,13 +6,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../core/constants/constants.dart';
 
 Widget customRichText({
-  @required BuildContext context,
-  @required String firstText,
-  @required String secondText,
-  @required TextStyle firstTextStyle,
-  @required TextStyle secondTextStyle,
-  VoidCallback onFirstTextTapped,
-  VoidCallback onSecondTextTapped,
+  @required BuildContext? context,
+  @required String? firstText,
+  @required String? secondText,
+  @required TextStyle? firstTextStyle,
+  @required TextStyle? secondTextStyle,
+  VoidCallback? onFirstTextTapped,
+  VoidCallback? onSecondTextTapped,
 }) {
   return RichText(
     textAlign: TextAlign.center,
@@ -32,10 +31,10 @@ Widget customRichText({
 }
 
 void showToast(
-    {@required String message, Color backgroundColor = Colors.black}) {
+    {@required String? message, Color backgroundColor = Colors.black}) {
   HapticFeedback.lightImpact();
   Fluttertoast.showToast(
-      msg: message,
+      msg: message!,
       gravity: ToastGravity.BOTTOM,
       toastLength: Toast.LENGTH_LONG,
       timeInSecForIosWeb: 1,
@@ -44,12 +43,9 @@ void showToast(
       fontSize: 16.0);
 }
 
-
-
-InputBorder inputBorder({Color borderColor, double borderRadius}) =>
+InputBorder inputBorder({Color? borderColor, double? borderRadius}) =>
     OutlineInputBorder(
-      borderRadius:
-          BorderRadius.circular(borderRadius ?? APP_BORDER_RADIUS),
+      borderRadius: BorderRadius.circular(borderRadius ?? APP_BORDER_RADIUS),
       borderSide: BorderSide(
         color: borderColor ?? primaryColor,
         width: 1.0,
