@@ -3,52 +3,50 @@ import 'package:admin/models/side_menu_data.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import 'main_screen_controller.dart';
 
 class SideMenu extends GetView<MainScreenController> {
-  ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
   @override
   Widget build(BuildContext context) {
     var controller = Get.find<MainScreenController>();
     return Drawer(
-      child: ValueListenableBuilder(
-        valueListenable: _selectedIndexNotifier,
-        builder: (BuildContext context, int selectedIndex, _) => Container(
-          color: AppColor.bgSideMenu,
-          child: ListView(
-            children: [
-              DrawerHeader(
-                child: Center(
-                  child: Text(
-                    'جمعيه الديوان \nالنوبيه الخيريه',
-                    style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
+      child: Container(
+        color: AppColor.bgSideMenu,
+        child: ListView(
+          children: [
+            DrawerHeader(
+              child: Center(
+                child: Text(
+                  'جمعيه الديوان \nالنوبيه الخيريه',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
-                // child: Image.asset("assets/images/logo.png"),
               ),
-              ...items.map((e) {
-                int index = items.indexOf(e);
-                bool selected = index == selectedIndex;
-                return InkWell(
-                  onTap: Responsive.isMobile()
-                      ? e.onTap
-                      : () {
-                          controller.setSelectedMenuIndex = index;
-                          // controller.setSelectedKey = e.key!;
-                          if (Responsive.isMobile()) Navigator.pop(context);
-                        },
-                  child: DrawerListTile(
-                    title: e.title!,
-                    iconData: e.icon!,
-                    selected: selected,
-                  ),
-                );
-              }),
-            ],
-          ),
+              // child: Image.asset("assets/images/logo.png"),
+            ),
+            ...items.map((e) {
+              int index = items.indexOf(e);
+              bool selected = index == controller.selectedMenuIndex;
+              return InkWell(
+                onTap: Responsive.isMobile()
+                    ? e.onTap
+                    : () {
+                        controller.setSelectedMenuIndex = index;
+                        // controller.setSelectedKey = e.key!;
+                        if (Responsive.isMobile()) Navigator.pop(context);
+                      },
+                child: DrawerListTile(
+                  title: e.title!,
+                  iconData: e.icon!,
+                  selected: selected,
+                ),
+              );
+            }),
+          ],
         ),
       ),
     );
@@ -69,16 +67,24 @@ class DrawerListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      horizontalTitleGap: 0.0,
-      leading: Icon(
-        iconData,
-        size: 14,
-        color: Colors.white54,
-      ),
-      title: Text(
-        title!,
-        style: TextStyle(color: Colors.white54),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.fastOutSlowIn,
+      margin: EdgeInsets.only(bottom: 10),
+      color: selected ? AppColor.kMainBackgroundColor : Colors.transparent,
+      child: ListTile(
+        key: ValueKey(title),
+        horizontalTitleGap: 0.0,
+        leading: Icon(
+          iconData,
+          size: 14,
+          color: selected ? AppColor.bgSideMenu : Colors.white54,
+        ),
+        title: Text(
+          title!,
+          style:
+              TextStyle(color: selected ? AppColor.bgSideMenu : Colors.white54),
+        ),
       ),
     );
   }
