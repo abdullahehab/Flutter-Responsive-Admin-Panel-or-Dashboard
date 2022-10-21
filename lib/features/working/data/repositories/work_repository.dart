@@ -49,7 +49,6 @@ class WorkRepository implements BaseWorkRepository {
   Future<Either<Failure, Unit>> deleteAll() async {
     try {
       await _dataSource.deleteAll();
-      await _localDataSource.deleteAll();
       return Right(unit);
     } catch (e) {
       return Left(ServerFailure(mess: 'لم يتم الحذف الكلي بشكل صحيح'));
@@ -63,11 +62,6 @@ class WorkRepository implements BaseWorkRepository {
     try {
       await _dataSource.update(model: socialStatusModel);
 
-      await _localDataSource
-          .update(model: socialStatusModel)
-          .then((value) => print('work updated success local'))
-          .catchError((e) => print('updated local error => $e'));
-
       return Right(unit);
     } catch (e) {
       return Left(ServerFailure(mess: 'لم يتم التعديل بشكل صحيح'));
@@ -78,7 +72,6 @@ class WorkRepository implements BaseWorkRepository {
   Future<Either<Failure, Unit>> deleteItem({required String id}) async {
     try {
       await _dataSource.deleteItem(id: id);
-      await _localDataSource.deleteItem(id: id);
       return Right(unit);
     } catch (e) {
       return Left(ServerFailure(mess: 'لم يتم حذف الحاله بكشل صحيح'));
