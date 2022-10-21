@@ -13,13 +13,20 @@ class WorkRepository implements BaseWorkRepository {
   WorkBaseLocalDataSource _localDataSource;
 
   @override
-  Future<Either<Failure, List<Work>>> getAllWorks({required bool restoreData}) async {
+  Future<Either<Failure, List<Work>>> getAllWorks(
+      {required bool restoreData}) async {
+    if (restoreData) {
+      await _localDataSource.deleteAll();
+    }
+
     var cachedList = await _localDataSource.getCachedWorkList();
     if (cachedList.length > 0) {
+      print('get work => cash');
       return Right(cachedList);
     }
 
     try {
+      print('get work => api');
       var list = await _dataSource.getWorks();
       if (list.length > 0) {
         for (var value in list) {
@@ -36,9 +43,6 @@ class WorkRepository implements BaseWorkRepository {
   Future<Either<Failure, Unit>> add({required String title}) async {
     try {
       await _dataSource.add(title: title);
-      await _localDataSource.insert(
-          model: WorkModel(
-              id: DateTime.now().millisecondsSinceEpoch, title: title));
       return Right(unit);
     } catch (e) {
       return Left(ServerFailure(mess: ''));

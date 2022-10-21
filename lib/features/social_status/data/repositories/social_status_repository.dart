@@ -22,11 +22,14 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
     }
 
     var cachedList = await _localDataSource.getCachedSocialStatues();
+
     if (cachedList.length > 0) {
+      print('get social status => cash');
       return Right(cachedList);
     }
 
     try {
+      print('get social status => api');
       var list = await _dataSource.getAllSocialStatues();
       if (list.length > 0) {
         for (var value in list) {
