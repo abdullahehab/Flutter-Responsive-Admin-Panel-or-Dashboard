@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 import '../core/constants/constants.dart';
 import '../features/housing/presentation/screens/list.dart';
+import '../features/owning/presentation/screens/list.dart';
 import '../features/social_status/presentation/screens/list.dart';
 import '../screens/dashboard/dashboard_screen.dart';
 import '../screens/people_screen/people_screen.dart';
@@ -64,9 +65,10 @@ List<SideMenuData> items = [
           Navigator.pushNamed(Get.context!, PageRouteName.HOUSING_SCREEN),
       itemWidget: HousingList()),
   SideMenuData(
-      title: 'حيازه',
+      title: 'حيازة',
       key: '',
       icon: FontAwesomeIcons.userTag,
-      onTap: () {},
-      itemWidget: Center(child: Text('حيازه'))),
+      onTap: () =>
+          Navigator.pushNamed(Get.context!, PageRouteName.OWNING_SCREEN),
+      itemWidget: OwningList()),
 ];

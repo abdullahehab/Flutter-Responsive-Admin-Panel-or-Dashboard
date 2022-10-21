@@ -6,4 +6,5 @@ class PageRouteName {
   static const String SOCIAL_STATUES_SCREEN = '/socialStatuesScreen';
   static const String WORKS_SCREEN = '/worksScreen';
   static const String HOUSING_SCREEN = '/housingScreen';
+  static const String OWNING_SCREEN = '/owningScreen';
 }

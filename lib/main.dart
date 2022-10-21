@@ -34,6 +34,14 @@ import 'features/housing/domain/usecase/delete_housing_usecase.dart';
 import 'features/housing/domain/usecase/get_housings_usecase.dart';
 import 'features/housing/domain/usecase/update_housing_usecase.dart';
 import 'features/housing/presentation/controller/controller.dart';
+import 'features/owning/data/datasource/local_datasource.dart';
+import 'features/owning/data/datasource/remote_datasource.dart';
+import 'features/owning/data/repositories/work_repository.dart';
+import 'features/owning/domain/usecase/add_owning_usecase.dart';
+import 'features/owning/domain/usecase/delete_owning_usecase.dart';
+import 'features/owning/domain/usecase/get_housings_usecase.dart';
+import 'features/owning/domain/usecase/update_owning_usecase.dart';
+import 'features/owning/presentation/controller/controller.dart';
 import 'features/social_status/data/datasource/local_datasource.dart';
 import 'features/social_status/data/datasource/remote_datasource.dart';
 import 'features/social_status/domain/usecase/add_social_statues_usecase.dart';
@@ -54,6 +62,7 @@ void main() async {
   await Hive.openBox(DBConstants.SOCIAL_STATUS_NAME);
   await Hive.openBox(DBConstants.WORK_NAME);
   await Hive.openBox(DBConstants.HOUSING_NAME);
+  await Hive.openBox(DBConstants.OWNING_NAME);
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -83,6 +92,7 @@ class Binding extends Bindings {
     Get.put(SocialStatusLocalDataSource());
     Get.put(WorkLocalDataSource());
     Get.put(HousingLocalDataSource());
+    Get.put(OwningLocalDataSource());
     // end register local storage
 
     Get.lazyPut(() => UserRemoteDataSourceImp());
@@ -165,5 +175,23 @@ class Binding extends Bindings {
         ));
 
     //===================== end housing controllers =====================
+
+    //===================== owning controllers =====================
+    Get.lazyPut(() => OwningRemoteDataSource());
+    Get.lazyPut(() => OwningRepository(Get.find<OwningRemoteDataSource>(),
+        Get.find<OwningLocalDataSource>()));
+    Get.lazyPut(() => GetOwningUseCase(Get.find<OwningRepository>()));
+    Get.lazyPut(() => AddOwningUsecase(Get.find<OwningRepository>()));
+    Get.lazyPut(() => UpdateOwningUsecase(Get.find<OwningRepository>()));
+    Get.lazyPut(() => RemoveOwningUseCase(Get.find<OwningRepository>()));
+
+    Get.lazyPut(() => OwningController(
+          Get.find<GetOwningUseCase>(),
+          Get.find<AddOwningUsecase>(),
+          Get.find<UpdateOwningUsecase>(),
+          Get.find<RemoveOwningUseCase>(),
+        ));
+
+    //===================== end owning controllers =====================
   }
 }
