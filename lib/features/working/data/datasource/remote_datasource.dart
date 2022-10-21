@@ -1,5 +1,5 @@
 import 'package:admin/features/social_status/data/models/social_status_model.dart';
-import 'package:admin/features/working/data/models/social_status_model.dart';
+import 'package:admin/features/working/data/models/work_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 

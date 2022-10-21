@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
 import '../../../../core/constants/db_constants.dart';
-import '../models/social_status_model.dart';
+import '../models/work_model.dart';
 
 abstract class WorkBaseLocalDataSource {
   Future<List<WorkModel>> getCachedWorkList();

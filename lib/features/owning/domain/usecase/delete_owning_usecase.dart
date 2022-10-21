@@ -1,4 +1,4 @@
-import 'package:admin/features/housing/domain/repositories/base_work_repository.dart';
+import 'package:admin/features/housing/domain/repositories/base_housing_repository.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';

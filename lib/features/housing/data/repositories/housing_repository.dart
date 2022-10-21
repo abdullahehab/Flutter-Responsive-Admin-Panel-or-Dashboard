@@ -3,7 +3,7 @@ import 'package:admin/features/housing/data/models/housing_model.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../domain/entities/housing.dart';
-import '../../domain/repositories/base_work_repository.dart';
+import '../../domain/repositories/base_housing_repository.dart';
 import '../datasource/local_datasource.dart';
 import '../datasource/remote_datasource.dart';
 

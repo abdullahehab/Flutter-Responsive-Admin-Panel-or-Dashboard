@@ -2,7 +2,7 @@ import 'package:admin/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
 
 import '../entities/housing.dart';
-import '../repositories/base_work_repository.dart';
+import '../repositories/base_housing_repository.dart';
 
 class UpdateHousingUsecase {
   UpdateHousingUsecase(this.repository);

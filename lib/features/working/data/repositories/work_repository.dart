@@ -1,5 +1,5 @@
 import 'package:admin/core/error/failures.dart';
-import 'package:admin/features/working/data/models/social_status_model.dart';
+import 'package:admin/features/working/data/models/work_model.dart';
 import 'package:admin/features/working/domain/entities/work.dart';
 import 'package:dartz/dartz.dart';
 
