@@ -26,6 +26,14 @@ import 'package:sembast_web/sembast_web.dart';
 
 import 'core/constants/db_constants.dart';
 import 'features/add_new_user/presentation/controller/user_controller.dart';
+import 'features/housing/data/datasource/local_datasource.dart';
+import 'features/housing/data/datasource/remote_datasource.dart';
+import 'features/housing/data/repositories/work_repository.dart';
+import 'features/housing/domain/usecase/add_housing_usecase.dart';
+import 'features/housing/domain/usecase/delete_housing_usecase.dart';
+import 'features/housing/domain/usecase/get_housings_usecase.dart';
+import 'features/housing/domain/usecase/update_housing_usecase.dart';
+import 'features/housing/presentation/controller/controller.dart';
 import 'features/social_status/data/datasource/local_datasource.dart';
 import 'features/social_status/data/datasource/remote_datasource.dart';
 import 'features/social_status/domain/usecase/add_social_statues_usecase.dart';
@@ -38,8 +46,6 @@ import 'features/working/data/repositories/work_repository.dart';
 import 'features/working/domain/usecase/get_works_usecase.dart';
 import 'firebase_options.dart';
 
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocators();
@@ -47,6 +53,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox(DBConstants.SOCIAL_STATUS_NAME);
   await Hive.openBox(DBConstants.WORK_NAME);
+  await Hive.openBox(DBConstants.HOUSING_NAME);
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -75,6 +82,7 @@ class Binding extends Bindings {
 
     Get.put(SocialStatusLocalDataSource());
     Get.put(WorkLocalDataSource());
+    Get.put(HousingLocalDataSource());
     // end register local storage
 
     Get.lazyPut(() => UserRemoteDataSourceImp());
@@ -96,6 +104,7 @@ class Binding extends Bindings {
       fenix: true,
     );
 
+    //===================== work controllers =====================
     Get.lazyPut(() => WorkRemoteDataSource());
     Get.lazyPut(() => WorkRepository(
         Get.find<WorkRemoteDataSource>(), Get.find<WorkLocalDataSource>()));
@@ -113,6 +122,9 @@ class Binding extends Bindings {
         ),
         permanent: true);
 
+    //===================== end work controllers =====================
+
+    //===================== social status controllers =====================
     Get.lazyPut(() => SocialStatusRemoteDataSource());
     Get.lazyPut(() => SocialStatusRepository(
           Get.find<SocialStatusRemoteDataSource>(),
@@ -133,5 +145,25 @@ class Binding extends Bindings {
           Get.find<UpdateSocialStatusUsecase>(),
           Get.find<RemoveSocialStatuesUseCase>(),
         ));
+
+    //=====================end social status controllers =====================
+
+    //===================== housing controllers =====================
+    Get.lazyPut(() => HousingRemoteDataSource());
+    Get.lazyPut(() => HousingRepository(Get.find<HousingRemoteDataSource>(),
+        Get.find<HousingLocalDataSource>()));
+    Get.lazyPut(() => GetHousingsUseCase(Get.find<HousingRepository>()));
+    Get.lazyPut(() => AddHousingUsecase(Get.find<HousingRepository>()));
+    Get.lazyPut(() => UpdateHousingUsecase(Get.find<HousingRepository>()));
+    Get.lazyPut(() => RemoveHousingUseCase(Get.find<HousingRepository>()));
+
+    Get.lazyPut(() => HousingController(
+          Get.find<GetHousingsUseCase>(),
+          Get.find<AddHousingUsecase>(),
+          Get.find<UpdateHousingUsecase>(),
+          Get.find<RemoveHousingUseCase>(),
+        ));
+
+    //===================== end housing controllers =====================
   }
 }

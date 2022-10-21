@@ -1,3 +1,4 @@
+import 'package:admin/features/housing/presentation/screens/list.dart';
 import 'package:admin/features/social_status/presentation/screens/list.dart';
 import 'package:admin/features/working/presentation/screens/list.dart';
 import 'package:admin/screens/dashboard/dashboard_screen.dart';
@@ -35,6 +36,10 @@ class Routes {
       case PageRouteName.WORKS_SCREEN:
         return MaterialPageRoute<dynamic>(
             builder: (_) => WorksList(), settings: settings);
+
+      case PageRouteName.HOUSING_SCREEN:
+        return MaterialPageRoute<dynamic>(
+            builder: (_) => HousingList(), settings: settings);
 
       default:
         return MaterialPageRoute<dynamic>(

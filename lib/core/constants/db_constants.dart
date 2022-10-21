@@ -4,4 +4,5 @@ class DBConstants {
   // Store Name
   static const String SOCIAL_STATUS_NAME = 'socialStatusBox';
   static const String WORK_NAME = 'work';
+  static const String HOUSING_NAME = 'housing';
 }
