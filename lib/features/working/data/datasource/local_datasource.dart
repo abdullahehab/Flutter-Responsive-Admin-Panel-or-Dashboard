@@ -6,6 +6,7 @@ import '../models/social_status_model.dart';
 abstract class WorkBaseLocalDataSource {
   Future<List<WorkModel>> getCachedWorkList();
   Future<int> insert({required WorkModel model});
+  Future deleteAll();
 }
 
 class WorkLocalDataSource implements WorkBaseLocalDataSource {
@@ -31,5 +32,10 @@ class WorkLocalDataSource implements WorkBaseLocalDataSource {
 
     if (workList.isEmpty) return [];
     return workList;
+  }
+
+  @override
+  Future deleteAll() async {
+    return await _socialBox.deleteAll(_socialBox.keys);
   }
 }

@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
-import 'package:sembast/sembast.dart';
 
 import '../../../../core/constants/db_constants.dart';
 import '../models/social_status_model.dart';
@@ -8,9 +7,7 @@ import '../models/social_status_model.dart';
 abstract class BaseLocalDataSource {
   Future<List<SocialStatusModel>> getCachedSocialStatues();
   Future<int> insert({required SocialStatusModel model});
-  Future<void> update({required SocialStatusModel model});
   Future deleteAll();
-  Future<void> deleteItem({required String id});
 }
 
 class SocialStatusLocalDataSource implements BaseLocalDataSource {
@@ -43,19 +40,6 @@ class SocialStatusLocalDataSource implements BaseLocalDataSource {
 
     if (socialStatuesList.isEmpty) return [];
     return socialStatuesList;
-  }
-
-  @override
-  Future<void> deleteItem({required String id}) async {
-    await _socialBox
-        .delete(id)
-        .whenComplete(() => print('delete local done'))
-        .catchError((error) => print('error delete local => $error'));
-  }
-
-  @override
-  Future<void> update({required SocialStatusModel model}) async {
-    return await _socialBox.put(model.id.toString(), model.toJson());
   }
 
   @override

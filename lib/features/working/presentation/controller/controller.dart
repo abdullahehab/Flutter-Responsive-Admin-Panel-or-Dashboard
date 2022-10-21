@@ -1,4 +1,5 @@
 import 'package:admin/features/working/domain/usecase/add_work_usecase.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
@@ -19,13 +20,13 @@ class WorkController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
-    await getWorks();
+    await getWorks(restoreData: false);
     return super.onInit();
   }
 
-  getWorks() async {
+  getWorks({required bool restoreData}) async {
     change(null, status: RxStatus.loading());
-    var data = await _getWorksUseCase.execute();
+    var data = await _getWorksUseCase.execute(restoreData: restoreData);
     data.fold(
       (failure) {
         showToast(message: failure.mess);
@@ -50,7 +51,7 @@ class WorkController extends GetxController with StateMixin {
       },
       (done) async {
         showToast(message: 'تم الاضافه بنجاح');
-        await getWorks();
+        await getWorks(restoreData: true);
       },
     );
   }
@@ -65,7 +66,7 @@ class WorkController extends GetxController with StateMixin {
       },
       (done) async {
         showToast(message: 'تم التعديل بنجاح');
-        await getWorks();
+        await getWorks(restoreData: true);
       },
     );
   }
@@ -80,7 +81,7 @@ class WorkController extends GetxController with StateMixin {
       },
       (done) async {
         showToast(message: 'تم الحذف بنجاح');
-        await getWorks();
+        await getWorks(restoreData: true);
       },
     );
   }

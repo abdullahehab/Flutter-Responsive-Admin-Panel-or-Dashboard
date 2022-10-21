@@ -8,7 +8,7 @@ class GetWorksUseCase {
   GetWorksUseCase(this.repository);
   BaseWorkRepository repository;
 
-  Future<Either<Failure, List<Work>>> execute() async {
-    return await repository.getAllWorks();
+  Future<Either<Failure, List<Work>>> execute({required bool restoreData}) async {
+    return await repository.getAllWorks(restoreData: restoreData);
   }
 }

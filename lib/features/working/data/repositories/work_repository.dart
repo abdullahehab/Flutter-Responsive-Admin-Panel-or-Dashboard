@@ -13,7 +13,7 @@ class WorkRepository implements BaseWorkRepository {
   WorkBaseLocalDataSource _localDataSource;
 
   @override
-  Future<Either<Failure, List<Work>>> getAllWorks() async {
+  Future<Either<Failure, List<Work>>> getAllWorks({required bool restoreData}) async {
     var cachedList = await _localDataSource.getCachedWorkList();
     if (cachedList.length > 0) {
       return Right(cachedList);

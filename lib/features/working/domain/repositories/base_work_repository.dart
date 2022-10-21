@@ -5,7 +5,7 @@ import '../../../../core/error/failures.dart';
 import '../entities/work.dart';
 
 abstract class BaseWorkRepository {
-  Future<Either<Failure, List<Work>>> getAllWorks();
+  Future<Either<Failure, List<Work>>> getAllWorks({required bool restoreData});
   Future<Either<Failure, Unit>> add({required String title});
   Future<Either<Failure, Unit>> update({required Work model});
   Future<Either<Failure, Unit>> deleteAll();
