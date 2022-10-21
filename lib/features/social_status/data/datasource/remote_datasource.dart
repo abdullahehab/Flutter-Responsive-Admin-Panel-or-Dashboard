@@ -7,6 +7,7 @@ import '../../domain/entities/social_status.dart';
 
 abstract class BaseRemoteDataSource {
   Future<List<SocialStatusModel>> getAllSocialStatues();
+  // Future<Unit> initOfflineStore();
   Future<Either<Failure, Unit>> add({required String title});
   Future<Either<Failure, Unit>> update({required SocialStatusModel model});
   Future<Either<Failure, Unit>> deleteAll();

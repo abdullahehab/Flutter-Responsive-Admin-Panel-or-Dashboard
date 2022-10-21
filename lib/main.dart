@@ -12,12 +12,15 @@ import 'package:admin/screens/main/components/main_screen_controller.dart';
 import 'package:admin/services/service_locator.dart';
 import 'package:admin/utils/app_pages.dart';
 import 'package:admin/utils/page_route_name.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil_init.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast_web/sembast_web.dart';
 
@@ -35,40 +38,19 @@ import 'features/working/data/repositories/work_repository.dart';
 import 'features/working/domain/usecase/get_works_usecase.dart';
 import 'firebase_options.dart';
 
-StoreRef<int, Map<String, Object?>>? _socialStatusStore;
-StoreRef<int, Map<String, Object?>>? _workStore;
 
-late final Database? _db;
-
-Future initLocalStorage() async {
-  _socialStatusStore = intMapStoreFactory.store(DBConstants.SOCIAL_STATUS_NAME);
-  _workStore = intMapStoreFactory.store(DBConstants.WORK_NAME);
-  var factory = databaseFactoryWeb;
-
-  // Open the database
-  _db = await factory.openDatabase('dewan_project');
-}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocators();
 
-  await initLocalStorage();
+  await Hive.initFlutter();
+  await Hive.openBox(DBConstants.SOCIAL_STATUS_NAME);
+  await Hive.openBox(DBConstants.WORK_NAME);
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  // if (kIsWeb) {
-  //   _socialStatusStore = intMapStoreFactory.store();
-  //   var factory = databaseFactoryWeb;
-  //   db = await factory.openDatabase('test');
-  // } else {
-  //   _socialStatusStore =
-  //       intMapStoreFactory.store(DBConstants.SOCIAL_STATUS_NAME);
-  //   db = await databaseFactoryIo.openDatabase(
-  //       join('.dart_tool', 'sembast', 'example', 'record_demo.db'));
-  // }
 
   runApp(ScreenUtilInit(
     designSize: const Size(414, 896),
@@ -91,8 +73,8 @@ class Binding extends Bindings {
   void dependencies() async {
     // register local storage
 
-    Get.put(SocialStatusLocalDataSource(_socialStatusStore, _db));
-    Get.put(WorkLocalDataSource(_workStore, _db));
+    Get.put(SocialStatusLocalDataSource());
+    Get.put(WorkLocalDataSource());
     // end register local storage
 
     Get.lazyPut(() => UserRemoteDataSourceImp());

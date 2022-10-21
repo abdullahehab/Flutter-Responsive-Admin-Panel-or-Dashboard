@@ -8,7 +8,8 @@ class GetSocialStatuesUseCase {
   GetSocialStatuesUseCase(this.repository);
   BaseSocialStatusRepository repository;
 
-  Future<Either<Failure, List<SocialStatus>>> execute() async {
-    return await repository.getAllSocialStatues();
+  Future<Either<Failure, List<SocialStatus>>> execute(
+      {required bool restoreData}) async {
+    return await repository.getAllSocialStatues(restoreData: restoreData);
   }
 }

@@ -6,7 +6,6 @@ import 'package:admin/features/social_status/data/models/social_status_model.dar
 import 'package:admin/features/social_status/domain/entities/social_status.dart';
 
 import 'package:dartz/dartz.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 import '../../domain/repositories/base_social_status_repository.dart';
 
@@ -16,7 +15,12 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
   BaseLocalDataSource _localDataSource;
 
   @override
-  Future<Either<Failure, List<SocialStatus>>> getAllSocialStatues() async {
+  Future<Either<Failure, List<SocialStatus>>> getAllSocialStatues(
+      {required bool restoreData}) async {
+    if (restoreData) {
+      await _localDataSource.deleteAll();
+    }
+
     var cachedList = await _localDataSource.getCachedSocialStatues();
     if (cachedList.length > 0) {
       return Right(cachedList);
@@ -39,9 +43,6 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
   Future<Either<Failure, Unit>> add({required String title}) async {
     try {
       await _dataSource.add(title: title);
-      await _localDataSource.insert(
-          model: SocialStatusModel(
-              id: DateTime.now().millisecondsSinceEpoch, title: title));
       return Right(unit);
     } catch (e) {
       return Left(ServerFailure(mess: ''));
@@ -52,7 +53,6 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
   Future<Either<Failure, Unit>> deleteAll() async {
     try {
       await _dataSource.deleteAll();
-      await _localDataSource.deleteAll();
       return Right(unit);
     } catch (e) {
       return Left(ServerFailure(mess: 'لم يتم الحذف الكلي بشكل صحيح'));
@@ -67,11 +67,6 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
     try {
       await _dataSource.update(model: socialStatusModel);
 
-      await _localDataSource
-          .update(model: socialStatusModel)
-          .then((value) => print('social status updated success local'))
-          .catchError((e) => print('updated local error => $e'));
-
       return Right(unit);
     } catch (e) {
       return Left(ServerFailure(mess: 'لم يتم التعديل بشكل صحيح'));
@@ -82,7 +77,6 @@ class SocialStatusRepository implements BaseSocialStatusRepository {
   Future<Either<Failure, Unit>> deleteItem({required String id}) async {
     try {
       await _dataSource.deleteItem(id: id);
-      await _localDataSource.deleteItem(id: id);
       return Right(unit);
     } catch (e) {
       return Left(ServerFailure(mess: 'لم يتم حذف الحاله بكشل صحيح'));

@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../../../widget/components.dart';
-import '../../domain/usecase/delete_all_social_statues_usecase.dart';
 import '../../domain/usecase/delete_social_status_usecase.dart';
 import '../../domain/usecase/update_social_statues_usecase.dart';
 
@@ -23,13 +22,13 @@ class SocialStatusController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
-    await getSocialStatutes();
+    await getSocialStatutes(restoreData: false);
     return super.onInit();
   }
 
-  getSocialStatutes() async {
+  getSocialStatutes({required bool restoreData}) async {
     change(null, status: RxStatus.loading());
-    var data = await _getSocialStatuesUseCase.execute();
+    var data = await _getSocialStatuesUseCase.execute(restoreData: restoreData);
     data.fold(
       (failure) {
         showToast(message: failure.mess);
@@ -54,7 +53,7 @@ class SocialStatusController extends GetxController with StateMixin {
       },
       (done) async {
         showToast(message: 'تم الاضافه بنجاح');
-        await getSocialStatutes();
+        await getSocialStatutes(restoreData: true);
       },
     );
   }
@@ -69,7 +68,7 @@ class SocialStatusController extends GetxController with StateMixin {
       },
       (done) async {
         showToast(message: 'تم التعديل بنجاح');
-        await getSocialStatutes();
+        await getSocialStatutes(restoreData: true);
       },
     );
   }
@@ -84,7 +83,7 @@ class SocialStatusController extends GetxController with StateMixin {
       },
       (done) async {
         showToast(message: 'تم الحذف بنجاح');
-        await getSocialStatutes();
+        await getSocialStatutes(restoreData: true);
       },
     );
   }
