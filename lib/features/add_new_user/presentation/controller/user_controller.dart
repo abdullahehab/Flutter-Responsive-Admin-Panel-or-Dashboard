@@ -1,3 +1,4 @@
+import 'package:admin/features/add_new_user/domain/entities/user_entity.dart';
 import 'package:admin/features/add_new_user/domain/usecase/add_user_usecase.dart';
 import 'package:admin/features/add_new_user/domain/usecase/get_users_usercase.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,7 @@ import '../../../../models/user_model.dart';
 import '../../../../widget/components.dart';
 import '../../domain/usecase/update_user_usecase.dart';
 
-class UserController extends GetxController with StateMixin {
+class UserController extends GetxController with StateMixin<List<UserEntity>> {
   UserController(
       this._addUserUsecase, this._updateUserUsecase, this._getUsersUsecase);
   AddUserUsecase _addUserUsecase;
@@ -35,6 +36,7 @@ class UserController extends GetxController with StateMixin {
   }
 
   getUsers() async {
+    change(null, status: RxStatus.loading());
     var data = await _getUsersUsecase.call();
 
     data.fold(
@@ -42,8 +44,11 @@ class UserController extends GetxController with StateMixin {
         showToast(message: failure.mess);
       },
       (userList) {
-        print('users length => ${userList.length}');
-        showToast(message: 'تم جلب المستخدمين بنجاح');
+        if (userList.isEmpty) {
+          change(null, status: RxStatus.empty());
+        } else {
+          change(userList, status: RxStatus.success());
+        }
       },
     );
   }
