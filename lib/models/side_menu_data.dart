@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../core/constants/constants.dart';
+import '../features/add_new_user/presentation/pages/list.dart';
 import '../features/housing/presentation/screens/list.dart';
 import '../features/owning/presentation/screens/list.dart';
 import '../features/social_status/presentation/screens/list.dart';
@@ -42,7 +43,9 @@ List<SideMenuData> items = [
       icon: FontAwesomeIcons.users,
       onTap: () =>
           Navigator.pushNamed(Get.context!, PageRouteName.PEOPLE_SCREEN),
-      itemWidget: PeopleScreen()),
+      itemWidget: UsersList()
+      // itemWidget: PeopleScreen()
+  ),
   SideMenuData(
       title: 'الحالة الاجتماعية',
       key: '',
