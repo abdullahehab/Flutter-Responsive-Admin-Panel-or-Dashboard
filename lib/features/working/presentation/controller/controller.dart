@@ -88,10 +88,8 @@ class WorkController extends GetxController with StateMixin {
     );
   }
 
-  String? getById(String id) {
+  Work? getById(String id) {
     return workList
-            .firstWhereOrNull((element) => element.id.toString() == id)
-            ?.title ??
-        '';
+            .firstWhereOrNull((element) => element.id.toString() == id);
   }
 }

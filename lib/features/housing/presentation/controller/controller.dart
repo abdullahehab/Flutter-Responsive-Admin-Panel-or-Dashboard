@@ -88,10 +88,8 @@ class HousingController extends GetxController with StateMixin {
     );
   }
 
-  String? getById(String id) {
+  Housing? getById(String id) {
     return housingList
-            .firstWhereOrNull((element) => element.id.toString() == id)
-            ?.title ??
-        '';
+        .firstWhereOrNull((element) => element.id.toString() == id);
   }
 }
