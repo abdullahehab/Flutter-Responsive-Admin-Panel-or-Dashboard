@@ -39,7 +39,24 @@ class AddPeople extends GetView<UserController> {
     UserModel userModel;
     print('Get.arguments => ${Get.arguments}');
     if (Get.arguments == null) {
-      userModel = UserModel();
+      userModel = UserModel(
+        nationalId: '',
+        name: '',
+        address: '',
+        husbandId: '',
+        socialStatus: 'اعزب',
+        birthDate: null,
+        phone: '',
+        working: '',
+        healthStatus: 'غير مريض',
+        type: 'سليم',
+        childrenNumber: null,
+        parentId: '',
+        housing: '',
+        gender: '',
+        owning: '',
+
+      );
     } else {
       isEdit = true;
       userModel = Get.arguments as UserModel;
@@ -192,12 +209,20 @@ class AddPeople extends GetView<UserController> {
                   onSaved: (value) => userModel.birthDate = value,
                 ),
                 SizedBox(height: 10),
-                DropDownWidgetX(
+                DropDownWidgetX<String>(
                   maxHeight: 100,
                   labelText: 'الحالة الصحية',
                   items: healthKeys,
-                  selectedItem: healthKeys.first,
-                  onChanged: (value) => userModel.healthStatus = 1,
+                  selectedItem: healthKeys.last,
+                  onChanged: (value) => userModel.healthStatus = value,
+                ),
+                SizedBox(height: 10),
+                DropDownWidgetX<String>(
+                  maxHeight: 100,
+                  labelText: 'تمميز الحاله',
+                  items: typeKeys,
+                  selectedItem: typeKeys.last,
+                  onChanged: (value) => userModel.type = value,
                 ),
                 SizedBox(
                   height: 10,

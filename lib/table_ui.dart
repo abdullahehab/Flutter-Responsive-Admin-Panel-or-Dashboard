@@ -62,7 +62,6 @@ class TableRow extends DataTableSource {
     return DataRow.byIndex(index: index, cells: [
       DataCell(Text("${item.nationalId}", style: tableDataStyle)),
       DataCell(Text("${item.address}", style: tableDataStyle)),
-      DataCell(Text("${item.personalStatus}", style: tableDataStyle)),
       DataCell(Text("${item.husbandId}", style: tableDataStyle)),
       DataCell(Text("${item.socialStatus}", style: tableDataStyle)),
       DataCell(Text("${item.birthDate}", style: tableDataStyle)),

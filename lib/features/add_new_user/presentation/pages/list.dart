@@ -36,7 +36,7 @@ class UsersList extends GetView<UserController> {
             child: CupertinoActivityIndicator(),
           ),
         ),
-        onEmpty: appEmpty(onPressed: () => addEditUserForm(context: context)));
+        onEmpty: appEmpty(onPressed: () => Get.toNamed(PageRouteName.ADD_NEW)));
   }
 
   Scaffold buildBody(List<UserEntity>? users, BuildContext context) {
@@ -242,7 +242,7 @@ class UsersList extends GetView<UserController> {
                     labelText: 'الحالة الصحية',
                     items: healthKeys,
                     selectedItem: healthKeys.first,
-                    onChanged: (value) => userModel.healthStatus = 1,
+                    onChanged: (value) => userModel.healthStatus = value.toString(),
                   ),
                   SizedBox(
                     height: 10,

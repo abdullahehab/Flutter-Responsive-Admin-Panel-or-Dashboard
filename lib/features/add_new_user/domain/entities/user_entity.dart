@@ -6,7 +6,7 @@ class UserEntity {
     this.birthDate,
     this.childrenNumber,
     this.gender = 'ذكر',
-    this.healthStatus = 1,
+    this.healthStatus = 'غير مريض',
     this.housing,
     this.husbandId,
     this.nationalId,
@@ -14,6 +14,7 @@ class UserEntity {
     this.parentId,
     this.phone,
     this.socialStatus = 'اعزب',
+    this.type = 'سليم',
     this.name,
     this.working,
   });
@@ -28,7 +29,8 @@ class UserEntity {
   int? birthDate;
   String? phone;
   String? working;
-  int? healthStatus;
+  String? healthStatus;
+  String? type;
   int? childrenNumber;
   String? housing;
   String? owning;

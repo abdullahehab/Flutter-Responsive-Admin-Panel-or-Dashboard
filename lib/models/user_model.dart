@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:admin/features/add_new_user/domain/entities/user_entity.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../core/constants/constants.dart';
 
@@ -11,16 +12,16 @@ class UserModel extends UserEntity {
     this.address,
     this.husbandId,
     this.socialStatus = 'اعزب',
-    this.personalStatus,
     this.birthDate,
     this.phone,
     this.working,
-    this.healthStatus= 1,
+    this.healthStatus = 'غير مريض',
+    this.type = 'سليم',
     this.childrenNumber,
     this.housing,
     this.parentId,
     this.owning,
-    this.gender  = 'ذكر',
+    this.gender = 'ذكر',
   }) : super(
             nationalId: nationalId,
             address: address,
@@ -44,11 +45,11 @@ class UserModel extends UserEntity {
   String? husbandId;
   String? parentId;
   String? socialStatus;
-  int? personalStatus;
   int? birthDate;
   String? phone;
   String? working;
-  int? healthStatus;
+  String? healthStatus;
+  String? type;
   int? childrenNumber;
   String? housing;
   String? owning;
@@ -59,21 +60,20 @@ class UserModel extends UserEntity {
   String toRawJson() => json.encode(toJson());
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        nationalId: json["nationalId"],
-        address: json["address"],
-        parentId: json["parentId"],
-        husbandId: json["husbandId"],
-        socialStatus: json["socialStatus"],
-        personalStatus: json["personalStatus"],
-        birthDate: json["birthDate"],
-        phone: json["phone"],
-        working: json["working"],
-        healthStatus: json["healthStatus"],
-        childrenNumber: json["childrenNumber"],
-        housing: json["housing"],
-        owning: json["owning"],
-        name: json["name"],
-      );
+      nationalId: json["nationalId"],
+      address: json["address"],
+      parentId: json["parentId"],
+      husbandId: json["husbandId"],
+      socialStatus: json["socialStatus"],
+      birthDate: json["birthDate"],
+      phone: json["phone"],
+      working: json["working"],
+      healthStatus: json["healthStatus"],
+      childrenNumber: json["childrenNumber"],
+      housing: json["housing"],
+      owning: json["owning"],
+      name: json["name"],
+      type: json['type']);
 
   Map<String, dynamic> toJson() => {
         "nationalId": nationalId,
@@ -82,7 +82,6 @@ class UserModel extends UserEntity {
         "parentId": parentId,
         "husbandId": husbandId,
         "socialStatus": socialStatus,
-        "personalStatus": personalStatus,
         "birthDate": birthDate,
         "phone": phone,
         "working": working,
@@ -90,10 +89,11 @@ class UserModel extends UserEntity {
         "childrenNumber": childrenNumber,
         "housing": housing,
         "owning": owning,
+        "type": type
       };
 
   @override
   String toString() {
-    return '{nationalId: $nationalId, address: $address, name: $name, gender: $gender, husbandId: $husbandId, parentId: $parentId, socialStatus: $socialStatus, personalStatus: $personalStatus, birthDate: $birthDate, phone: $phone, working: $working, healthStatus: $healthStatus, childrenNumber: $childrenNumber, housing: $housing, owning: $owning}';
+    return '{nationalId: $nationalId, address: $address, name: $name, gender: $gender, husbandId: $husbandId, parentId: $parentId, socialStatus: $socialStatus, birthDate: $birthDate, phone: $phone, working: $working, healthStatus: $healthStatus, childrenNumber: $childrenNumber, housing: $housing, owning: $owning}';
   }
 }
