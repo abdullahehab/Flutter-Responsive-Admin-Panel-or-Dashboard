@@ -68,14 +68,9 @@ class UsersList extends GetView<UserController> {
                         dataCellItem(data: item.housing!),
                         dataCellItem(data: item.healthStatus.toString()),
                         dataController(
-                          onEditPressed: () {
-                            // var model = Housing(id: item.id, title: item.title);
-                            // addNewHousing(model: model);
-                          },
-                          onRemovePressed: () {
-
-                          },
-                        )
+                            onEditPressed: () {},
+                            onRemovePressed: () {},
+                            onViewPressed: () {})
                       ],
                     );
                   }),
@@ -87,5 +82,4 @@ class UsersList extends GetView<UserController> {
       ),
     );
   }
-
 }
