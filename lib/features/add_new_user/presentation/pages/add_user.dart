@@ -37,7 +37,6 @@ class AddPeople extends GetView<UserController> {
     var workController = Get.find<WorkController>();
     bool isEdit = false;
     UserModel userModel;
-    print('Get.arguments => ${Get.arguments}');
     if (Get.arguments == null) {
       userModel = UserModel(
         nationalId: '',
@@ -55,10 +54,11 @@ class AddPeople extends GetView<UserController> {
         housing: '',
         gender: '',
         owning: '',
-
       );
     } else {
       isEdit = true;
+
+      print('Get.arguments => ${Get.arguments}');
       userModel = Get.arguments as UserModel;
     }
 
@@ -108,6 +108,7 @@ class AddPeople extends GetView<UserController> {
                   prefixIcon: Icon(FontAwesomeIcons.user, size: APP_ICON_SIZE),
                   contentPadding: EdgeInsets.only(right: 10),
                   onChangedText: (String text) => userModel.name = text,
+                  initialValue: userModel.name,
                   hint: 'الاسم',
                   outLineText: 'الاسم',
                   iconPathWidth: 17,
@@ -122,6 +123,7 @@ class AddPeople extends GetView<UserController> {
                       Icon(FontAwesomeIcons.addressBook, size: APP_ICON_SIZE),
                   onChangedText: (String text) => userModel.address = text,
                   hint: 'العنوان',
+                  initialValue: userModel.address,
                   outLineText: 'العنوان',
                   iconPathWidth: 17,
                   textInputType: TextInputType.text,
@@ -134,6 +136,7 @@ class AddPeople extends GetView<UserController> {
                   prefixIcon:
                       Icon(FontAwesomeIcons.addressBook, size: APP_ICON_SIZE),
                   onChangedText: (String text) => userModel.phone = text,
+                  initialValue: userModel.phone,
                   hint: 'رقم الهاتف',
                   outLineText: 'رقم الهاتف',
                   iconPathWidth: 17,
@@ -147,6 +150,7 @@ class AddPeople extends GetView<UserController> {
                   prefixIcon:
                       Icon(FontAwesomeIcons.idCard, size: APP_ICON_SIZE),
                   onChangedText: (String text) => userModel.nationalId = text,
+                  initialValue: userModel.nationalId,
                   hint: 'الرقم القومي',
                   outLineText: 'الرقم القومي',
                   iconPathWidth: 17,
@@ -157,6 +161,7 @@ class AddPeople extends GetView<UserController> {
                 DropDownWidgetX<Owning>(
                   requiredFiled: true,
                   labelText: 'الحيازة',
+                  selectedItem: owningController.getById(userModel.owning!),
                   itemAsString: (Owning? u) => u!.title!,
                   maxHeight: 100,
                   items: owningController.owningList,
@@ -169,6 +174,7 @@ class AddPeople extends GetView<UserController> {
                 DropDownWidgetX<Housing>(
                   requiredFiled: true,
                   labelText: 'السكن',
+                  selectedItem: housingController.getById(userModel.housing!),
                   itemAsString: (Housing? u) => u!.title!,
                   maxHeight: 100,
                   items: housingController.housingList,
@@ -181,6 +187,8 @@ class AddPeople extends GetView<UserController> {
                 DropDownWidgetX<SocialStatus>(
                   requiredFiled: true,
                   labelText: 'الحالة الاجتماعية',
+                  selectedItem:
+                      socialStatusController.getById(userModel.socialStatus!),
                   itemAsString: (SocialStatus? u) => u!.title!,
                   maxHeight: 100,
                   items: socialStatusController.socialStatusList,
@@ -193,6 +201,7 @@ class AddPeople extends GetView<UserController> {
                 DropDownWidgetX<Work>(
                   requiredFiled: true,
                   labelText: 'الوظيفة',
+                  selectedItem: workController.getById(userModel.working!),
                   itemAsString: (Work? u) => u!.title!,
                   maxHeight: 100,
                   items: workController.workList,
@@ -204,7 +213,7 @@ class AddPeople extends GetView<UserController> {
                 SizedBox(height: 10),
                 buildDateTimePickerField(
                   labelText: 'تاريخ الميلاد',
-                  // initialValue: customerModels.value.idExpireDate,
+                  initialValue: userModel.birthDate,
                   firstDate: DateTime.now().year,
                   onSaved: (value) => userModel.birthDate = value,
                 ),
@@ -213,7 +222,7 @@ class AddPeople extends GetView<UserController> {
                   maxHeight: 100,
                   labelText: 'الحالة الصحية',
                   items: healthKeys,
-                  selectedItem: healthKeys.last,
+                  selectedItem: userModel.healthStatus ?? healthKeys.last,
                   onChanged: (value) => userModel.healthStatus = value,
                 ),
                 SizedBox(height: 10),
@@ -221,7 +230,7 @@ class AddPeople extends GetView<UserController> {
                   maxHeight: 100,
                   labelText: 'تمميز الحالة',
                   items: typeKeys,
-                  selectedItem: typeKeys.last,
+                  selectedItem: userModel.type ?? typeKeys.last,
                   onChanged: (value) => userModel.type = value,
                 ),
                 SizedBox(
@@ -229,6 +238,7 @@ class AddPeople extends GetView<UserController> {
                 ),
                 GenderSelector(
                   outLineText: 'النوع',
+                  initValue: userModel.gender,
                   onChanged: (newValue) => userModel.gender = newValue,
                 ),
               ],
