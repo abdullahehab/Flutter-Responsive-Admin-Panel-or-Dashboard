@@ -18,7 +18,7 @@ class TextFieldValidators {
 
   static String? isPhone(String? phone) {
     if (Validator.isPhone(phone!)) return null;
-    return 'برجاء إدخال رقم الةاتف';
+    return 'برجاء إدخال رقم الهاتف';
   }
 
   static String? isVerificationCode(String code, {String? message}) {

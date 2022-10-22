@@ -134,8 +134,8 @@ class AddPeople extends GetView<UserController> {
                   prefixIcon:
                       Icon(FontAwesomeIcons.addressBook, size: APP_ICON_SIZE),
                   onChangedText: (String text) => userModel.phone = text,
-                  hint: 'رقم الةاتف',
-                  outLineText: 'رقم الةاتف',
+                  hint: 'رقم الهاتف',
+                  outLineText: 'رقم الهاتف',
                   iconPathWidth: 17,
                   textInputType: TextInputType.phone,
                   textInputAction: TextInputAction.next,
