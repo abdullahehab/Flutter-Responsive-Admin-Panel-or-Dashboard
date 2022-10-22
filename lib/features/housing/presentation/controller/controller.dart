@@ -1,3 +1,4 @@
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
@@ -23,6 +24,7 @@ class HousingController extends GetxController with StateMixin {
     return super.onInit();
   }
 
+  List<Housing> housingList = [];
   getHousings({required bool restoreData}) async {
     change(null, status: RxStatus.loading());
     var data = await _getHousingsUseCase.execute(restoreData: restoreData);
@@ -34,6 +36,7 @@ class HousingController extends GetxController with StateMixin {
         if (dataList.isEmpty) {
           change(null, status: RxStatus.empty());
         } else {
+          housingList = dataList;
           change(dataList, status: RxStatus.success());
         }
       },

@@ -1,5 +1,6 @@
 import 'package:admin/extensions/extension.dart';
 import 'package:admin/features/add_new_user/presentation/controller/user_controller.dart';
+import 'package:admin/features/housing/presentation/controller/controller.dart';
 import 'package:admin/features/owning/data/models/owning_model.dart';
 import 'package:admin/features/owning/presentation/controller/controller.dart';
 import 'package:admin/utils/colors.dart';
@@ -17,6 +18,7 @@ import '../../../../core/shared_components/drop_down_widget.dart';
 import '../../../../models/user_model.dart';
 import '../../../../screens/main/components/main_screen_controller.dart';
 import '../../../../utils/text_field_validator.dart';
+import '../../../housing/domain/entities/housing.dart';
 import '../../../owning/domain/entities/owning.dart';
 
 class AddPeople extends GetView<UserController> {
@@ -26,6 +28,7 @@ class AddPeople extends GetView<UserController> {
   Widget build(BuildContext context) {
     var mainScreenController = Get.find<MainScreenController>();
     var owningController = Get.find<OwningController>();
+    var housingController = Get.find<HousingController>();
     bool isEdit = false;
     UserModel userModel;
     print('Get.arguments => ${Get.arguments}');
@@ -140,16 +143,16 @@ class AddPeople extends GetView<UserController> {
                   },
                 ),
                 SizedBox(height: 10),
-                CustomTextField(
-                  contentPadding: EdgeInsets.only(right: 10),
-                  prefixIcon: Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
-                  // borderColor: AppColor.BORDER_COLOR,
-                  onChangedText: (String text) => userModel.housing = text,
-                  hint: 'السكن',
-                  outLineText: 'السكن',
-                  iconPathWidth: 17,
-                  textInputType: TextInputType.phone,
-                  textInputAction: TextInputAction.next,
+                DropDownWidgetX<Housing>(
+                  requiredFiled: true,
+                  labelText: 'السكن',
+                  itemAsString: (Housing? u) => u!.title!,
+                  maxHeight: 100,
+                  items: housingController.housingList,
+                  onChanged: (value) {
+                    var selected = value as Housing;
+                    userModel.owning = selected.id.toString();
+                  },
                 ),
                 SizedBox(height: 10),
                 DropDownWidgetX(
