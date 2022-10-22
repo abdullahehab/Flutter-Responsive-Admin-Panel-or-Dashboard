@@ -3,6 +3,8 @@ import 'package:admin/features/add_new_user/presentation/controller/user_control
 import 'package:admin/features/housing/presentation/controller/controller.dart';
 import 'package:admin/features/owning/data/models/owning_model.dart';
 import 'package:admin/features/owning/presentation/controller/controller.dart';
+import 'package:admin/features/social_status/domain/entities/social_status.dart';
+import 'package:admin/features/social_status/presentation/controller/controller.dart';
 import 'package:admin/utils/colors.dart';
 import 'package:admin/widget/custom_text_field.dart';
 import 'package:admin/widget/gender_selector.dart';
@@ -29,6 +31,7 @@ class AddPeople extends GetView<UserController> {
     var mainScreenController = Get.find<MainScreenController>();
     var owningController = Get.find<OwningController>();
     var housingController = Get.find<HousingController>();
+    var socialStatusController = Get.find<SocialStatusController>();
     bool isEdit = false;
     UserModel userModel;
     print('Get.arguments => ${Get.arguments}');
@@ -151,17 +154,20 @@ class AddPeople extends GetView<UserController> {
                   items: housingController.housingList,
                   onChanged: (value) {
                     var selected = value as Housing;
-                    userModel.owning = selected.id.toString();
+                    userModel.housing = selected.id.toString();
                   },
                 ),
                 SizedBox(height: 10),
-                DropDownWidgetX(
+                DropDownWidgetX<SocialStatus>(
+                  requiredFiled: true,
                   labelText: 'الحاله الاجتماعيه',
+                  itemAsString: (SocialStatus? u) => u!.title!,
                   maxHeight: 100,
-                  items: statusKeys,
-                  selectedItem: statusKeys.first,
-                  onChanged: (value) =>
-                      userModel.socialStatus = value as String,
+                  items: socialStatusController.socialStatusList,
+                  onChanged: (value) {
+                    var selected = value as SocialStatus;
+                    userModel.socialStatus = selected.id.toString();
+                  },
                 ),
                 SizedBox(height: 10),
                 CustomTextField(

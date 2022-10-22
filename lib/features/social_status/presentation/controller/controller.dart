@@ -26,6 +26,7 @@ class SocialStatusController extends GetxController with StateMixin {
     return super.onInit();
   }
 
+  List<SocialStatus> socialStatusList = [];
   getSocialStatutes({required bool restoreData}) async {
     change(null, status: RxStatus.loading());
     var data = await _getSocialStatuesUseCase.execute(restoreData: restoreData);
@@ -37,6 +38,7 @@ class SocialStatusController extends GetxController with StateMixin {
         if (dataList.isEmpty) {
           change(null, status: RxStatus.empty());
         } else {
+          socialStatusList = dataList;
           change(dataList, status: RxStatus.success());
         }
       },
