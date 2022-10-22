@@ -19,7 +19,7 @@ class SideMenu extends GetView<MainScreenController> {
             DrawerHeader(
               child: Center(
                 child: Text(
-                  'جمعيه الديوان \nالنوبيه الخيريه',
+                  'جمعية الديوان \nالنوبية الخيرية',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,

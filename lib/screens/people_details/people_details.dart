@@ -40,7 +40,7 @@ class PeopleDetails extends StatelessWidget {
           ),
           ListTile(
             title: Text('الاسم'),
-            subtitle: Text('عبد الله ايهاب سعد'),
+            subtitle: Text('عبد اللة ايةاب سعد'),
           ),
           ListTile(
             title: Text('عدد الابناء'),
@@ -92,11 +92,11 @@ class PeopleDetails extends StatelessWidget {
                   children: [
                     ListTile(
                       title: Text('العنوان'),
-                      subtitle: Text('العاشر من رمضان الشرقيه'),
+                      subtitle: Text('العاشر من رمضان الشرقية'),
                     ),
                     ListTile(
                       title: Text('الاسم'),
-                      subtitle: Text('عبد الله ايهاب سعد'),
+                      subtitle: Text('عبد اللة ايةاب سعد'),
                     ),
                     ListTile(
                       title: Text('الشخص'),
@@ -121,7 +121,7 @@ class PeopleDetails extends StatelessWidget {
                       subtitle: Text('8/3/1997'),
                     ),
                     ListTile(
-                      title: Text('الوظيفه'),
+                      title: Text('الوظيفة'),
                       subtitle: Text('رئيس قسم المنتجا في المطار'),
                     ),
                     ListTile(
@@ -133,8 +133,8 @@ class PeopleDetails extends StatelessWidget {
                       subtitle: Text('منزل'),
                     ),
                     ListTile(
-                      title: Text('حيازه'),
-                      subtitle: Text('ارض زراعيه'),
+                      title: Text('حيازة'),
+                      subtitle: Text('ارض زراعية'),
                     ),
                   ],
                 ),
@@ -155,11 +155,11 @@ class PeopleDetails extends StatelessWidget {
                   children: [
                     ListTile(
                       title: Text('العنوان'),
-                      subtitle: Text('العاشر من رمضان الشرقيه'),
+                      subtitle: Text('العاشر من رمضان الشرقية'),
                     ),
                     ListTile(
                       title: Text('الاسم'),
-                      subtitle: Text('عبد الله ايهاب سعد'),
+                      subtitle: Text('عبد اللة ايةاب سعد'),
                     ),
                     ListTile(
                       title: Text('الشخص'),
@@ -184,7 +184,7 @@ class PeopleDetails extends StatelessWidget {
                       subtitle: Text('8/3/1997'),
                     ),
                     ListTile(
-                      title: Text('الوظيفه'),
+                      title: Text('الوظيفة'),
                       subtitle: Text('رئيس قسم المنتجا في المطار'),
                     ),
                     ListTile(
@@ -196,8 +196,8 @@ class PeopleDetails extends StatelessWidget {
                       subtitle: Text('منزل'),
                     ),
                     ListTile(
-                      title: Text('حيازه'),
-                      subtitle: Text('ارض زراعيه'),
+                      title: Text('حيازة'),
+                      subtitle: Text('ارض زراعية'),
                     ),
                   ],
                 ),
@@ -279,11 +279,11 @@ class PeopleDetails extends StatelessWidget {
                           children: [
                             ListTile(
                               title: Text('العنوان'),
-                              subtitle: Text('العاشر من رمضان الشرقيه'),
+                              subtitle: Text('العاشر من رمضان الشرقية'),
                             ),
                             ListTile(
                               title: Text('الاسم'),
-                              subtitle: Text('عبد الله ايهاب سعد'),
+                              subtitle: Text('عبد اللة ايةاب سعد'),
                             ),
                             ListTile(
                               title: Text('الشخص'),
@@ -308,7 +308,7 @@ class PeopleDetails extends StatelessWidget {
                               subtitle: Text('8/3/1997'),
                             ),
                             ListTile(
-                              title: Text('الوظيفه'),
+                              title: Text('الوظيفة'),
                               subtitle: Text('رئيس قسم المنتجا في المطار'),
                             ),
                             ListTile(
@@ -320,8 +320,8 @@ class PeopleDetails extends StatelessWidget {
                               subtitle: Text('منزل'),
                             ),
                             ListTile(
-                              title: Text('حيازه'),
-                              subtitle: Text('ارض زراعيه'),
+                              title: Text('حيازة'),
+                              subtitle: Text('ارض زراعية'),
                             ),
                           ],
                         ),
@@ -374,11 +374,11 @@ class PeopleDetails extends StatelessWidget {
                           children: [
                             ListTile(
                               title: Text('الاسم'),
-                              subtitle: Text('جهاد عبد العزيز حلمي'),
+                              subtitle: Text('جةاد عبد العزيز حلمي'),
                             ),
                             ListTile(
                               title: Text('العنوان'),
-                              subtitle: Text('العاشر من رمضان الشرقيه'),
+                              subtitle: Text('العاشر من رمضان الشرقية'),
                             ),
                             ListTile(
                               title: Text('الشخص'),
@@ -399,7 +399,7 @@ class PeopleDetails extends StatelessWidget {
                               subtitle: Text('8/3/1997'),
                             ),
                             ListTile(
-                              title: Text('الوظيفه'),
+                              title: Text('الوظيفة'),
                               subtitle: Text('رئيس قسم المنتجا في المطار'),
                             ),
                             ListTile(

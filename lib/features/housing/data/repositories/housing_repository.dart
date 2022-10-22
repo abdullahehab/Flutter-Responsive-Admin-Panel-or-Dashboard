@@ -78,7 +78,7 @@ class HousingRepository implements BaseHousingRepository {
       await _dataSource.deleteItem(id: id);
       return Right(unit);
     } catch (e) {
-      return Left(ServerFailure(mess: 'لم يتم حذف الحاله بكشل صحيح'));
+      return Left(ServerFailure(mess: 'لم يتم حذف الحالة بكشل صحيح'));
     }
   }
 }

@@ -70,7 +70,7 @@ class UserRemoteDataSourceImp implements UserDataSource {
 
       return Right(allUsers);
     } catch (e) {
-      return Left(ServerFailure(mess: 'هنا خطا ما في جلب المستخدمين'));
+      return Left(ServerFailure(mess: 'ةنا خطا ما في جلب المستخدمين'));
     }
   }
 }

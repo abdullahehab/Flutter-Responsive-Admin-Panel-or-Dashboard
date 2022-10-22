@@ -102,7 +102,7 @@ class PeopleScreen extends StatelessWidget {
           ),
           ListTile(
             title: Text('الاسم'),
-            subtitle: Text('عبد الله ايهاب سعد'),
+            subtitle: Text('عبد اللة ايةاب سعد'),
           ),
           ListTile(
             title: Text('عدد الابناء'),

@@ -28,11 +28,11 @@
 // children: [
 // ListTile(
 // title: Text('العنوان'),
-// subtitle: Text('العاشر من رمضان الشرقيه'),
+// subtitle: Text('العاشر من رمضان الشرقية'),
 // ),
 // ListTile(
 // title: Text('الاسم'),
-// subtitle: Text('عبد الله ايهاب سعد'),
+// subtitle: Text('عبد اللة ايةاب سعد'),
 // ),
 // ListTile(
 // title: Text('الشخص'),
@@ -57,7 +57,7 @@
 // subtitle: Text('8/3/1997'),
 // ),
 // ListTile(
-// title: Text('الوظيفه'),
+// title: Text('الوظيفة'),
 // subtitle: Text('رئيس قسم المنتجا في المطار'),
 // ),
 // ListTile(
@@ -69,8 +69,8 @@
 // subtitle: Text('منزل'),
 // ),
 // ListTile(
-// title: Text('حيازه'),
-// subtitle: Text('ارض زراعيه'),
+// title: Text('حيازة'),
+// subtitle: Text('ارض زراعية'),
 // ),
 // ],
 // ),
@@ -110,7 +110,7 @@
 // child: Column(
 // crossAxisAlignment: CrossAxisAlignment.start,
 // children: [
-// Text('ببانات الزوجه').addPaddingOnly(top: 10, right: 12),
+// Text('ببانات الزوجة').addPaddingOnly(top: 10, right: 12),
 // Row(
 // children: [
 // SizedBox(
@@ -121,11 +121,11 @@
 // children: [
 // ListTile(
 // title: Text('العنوان'),
-// subtitle: Text('العاشر من رمضان الشرقيه'),
+// subtitle: Text('العاشر من رمضان الشرقية'),
 // ),
 // ListTile(
 // title: Text('الاسم'),
-// subtitle: Text('عبد الله ايهاب سعد'),
+// subtitle: Text('عبد اللة ايةاب سعد'),
 // ),
 // ListTile(
 // title: Text('الشخص'),
@@ -150,7 +150,7 @@
 // subtitle: Text('8/3/1997'),
 // ),
 // ListTile(
-// title: Text('الوظيفه'),
+// title: Text('الوظيفة'),
 // subtitle: Text('رئيس قسم المنتجا في المطار'),
 // ),
 // ListTile(
@@ -162,8 +162,8 @@
 // subtitle: Text('منزل'),
 // ),
 // ListTile(
-// title: Text('حيازه'),
-// subtitle: Text('ارض زراعيه'),
+// title: Text('حيازة'),
+// subtitle: Text('ارض زراعية'),
 // ),
 // ],
 // ),

@@ -54,7 +54,7 @@ List<SideMenuData> items = [
           Get.context!, PageRouteName.SOCIAL_STATUES_SCREEN),
       itemWidget: SocialStatuesList()),
   SideMenuData(
-      title: 'الوظيفه',
+      title: 'الوظيفة',
       key: '',
       icon: FontAwesomeIcons.briefcase,
       onTap: () =>

@@ -20,7 +20,7 @@ const double APP_ICON_SIZE = 15;
 const List<String> genderKeys = <String>['ذكر', 'انثي'];
 const List<String> statusKeys = <String>['اعزب', 'متزوج'];
 const List<String> healthKeys = <String>['مريض', 'غير مريض'];
-const List<String> typeKeys = <String>['ذوي الاحتياجات الخاصه', 'سليم'];
+const List<String> typeKeys = <String>['ذوي الاحتياجات الخاصة', 'سليم'];
 
 const String HOME_KEY = "home";
 const String USERS_KEY = "users";

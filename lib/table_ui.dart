@@ -25,7 +25,7 @@ class _TableUIState extends State<TableUI> {
           cardColor: Colors.white,
           textTheme: TextTheme(caption: TextStyle(color: Colors.black54))),
       child: PaginatedDataTable(
-        header: Text("البيانات الجديده",
+        header: Text("البيانات الجديدة",
             style: Theme.of(context)
                 .textTheme
                 .subtitle1!

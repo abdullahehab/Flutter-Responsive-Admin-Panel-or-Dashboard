@@ -52,7 +52,7 @@ class HousingController extends GetxController with StateMixin {
         showToast(message: failure.mess);
       },
       (done) async {
-        showToast(message: 'تم الاضافه بنجاح');
+        showToast(message: 'تم الاضافة بنجاح');
         await getHousings(restoreData: true);
       },
     );

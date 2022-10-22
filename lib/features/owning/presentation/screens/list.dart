@@ -103,7 +103,7 @@ class OwningList extends GetView<OwningController> {
           child: Column(
             children: [
               SizedBox(height: 30),
-              Header(text: isEdit ? 'تعديل حيازة' : 'اضافة حيازة جديده'),
+              Header(text: isEdit ? 'تعديل حيازة' : 'اضافة حيازة جديدة'),
               Divider(),
               SizedBox(height: 20),
               CustomTextField(

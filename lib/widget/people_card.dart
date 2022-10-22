@@ -51,7 +51,7 @@ GestureDetector buildSingleCard(BuildContext context, {double? width}) {
                     height: 40,
                   ),
                 ),
-                Text("عبد الله ايهاب سعد"),
+                Text("عبد اللة ايةاب سعد"),
                 Text("28756475866423"),
               ],
             ).addPaddingHorizontalVertical(vertical: 20),

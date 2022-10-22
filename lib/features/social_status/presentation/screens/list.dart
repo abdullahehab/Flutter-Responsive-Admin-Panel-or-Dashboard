@@ -48,7 +48,7 @@ class SocialStatuesList extends GetView<SocialStatusController> {
               leadingWidget: CustomButton(
                   width: 200,
                   height: 50,
-                  text: 'اضافة حالة اجتماعية جديده',
+                  text: 'اضافة حالة اجتماعية جديدة',
                   onPressed: () => addNewSocialStatues()),
               children: [
                 dataTable(

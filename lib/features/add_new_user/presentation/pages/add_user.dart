@@ -134,8 +134,8 @@ class AddPeople extends GetView<UserController> {
                   prefixIcon:
                       Icon(FontAwesomeIcons.addressBook, size: APP_ICON_SIZE),
                   onChangedText: (String text) => userModel.phone = text,
-                  hint: 'رقم الهاتف',
-                  outLineText: 'رقم الهاتف',
+                  hint: 'رقم الةاتف',
+                  outLineText: 'رقم الةاتف',
                   iconPathWidth: 17,
                   textInputType: TextInputType.phone,
                   textInputAction: TextInputAction.next,
@@ -180,7 +180,7 @@ class AddPeople extends GetView<UserController> {
                 SizedBox(height: 10),
                 DropDownWidgetX<SocialStatus>(
                   requiredFiled: true,
-                  labelText: 'الحاله الاجتماعيه',
+                  labelText: 'الحالة الاجتماعية',
                   itemAsString: (SocialStatus? u) => u!.title!,
                   maxHeight: 100,
                   items: socialStatusController.socialStatusList,
@@ -192,7 +192,7 @@ class AddPeople extends GetView<UserController> {
                 SizedBox(height: 10),
                 DropDownWidgetX<Work>(
                   requiredFiled: true,
-                  labelText: 'الوظيفه',
+                  labelText: 'الوظيفة',
                   itemAsString: (Work? u) => u!.title!,
                   maxHeight: 100,
                   items: workController.workList,
@@ -219,7 +219,7 @@ class AddPeople extends GetView<UserController> {
                 SizedBox(height: 10),
                 DropDownWidgetX<String>(
                   maxHeight: 100,
-                  labelText: 'تمميز الحاله',
+                  labelText: 'تمميز الحالة',
                   items: typeKeys,
                   selectedItem: typeKeys.last,
                   onChanged: (value) => userModel.type = value,
