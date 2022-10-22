@@ -22,6 +22,8 @@ import '../../../../screens/main/components/main_screen_controller.dart';
 import '../../../../utils/text_field_validator.dart';
 import '../../../housing/domain/entities/housing.dart';
 import '../../../owning/domain/entities/owning.dart';
+import '../../../working/domain/entities/work.dart';
+import '../../../working/presentation/controller/controller.dart';
 
 class AddPeople extends GetView<UserController> {
   final _formKey = GlobalKey<FormState>();
@@ -32,6 +34,7 @@ class AddPeople extends GetView<UserController> {
     var owningController = Get.find<OwningController>();
     var housingController = Get.find<HousingController>();
     var socialStatusController = Get.find<SocialStatusController>();
+    var workController = Get.find<WorkController>();
     bool isEdit = false;
     UserModel userModel;
     print('Get.arguments => ${Get.arguments}');
@@ -170,16 +173,16 @@ class AddPeople extends GetView<UserController> {
                   },
                 ),
                 SizedBox(height: 10),
-                CustomTextField(
-                  validator: TextFieldValidators.isNotEmpty,
-                  contentPadding: EdgeInsets.only(right: 10),
-                  prefixIcon: Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
-                  onChangedText: (String text) => userModel.working = text,
-                  hint: 'الوظيفه',
-                  outLineText: 'الوظيفه',
-                  iconPathWidth: 17,
-                  textInputType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
+                DropDownWidgetX<Work>(
+                  requiredFiled: true,
+                  labelText: 'الوظيفه',
+                  itemAsString: (Work? u) => u!.title!,
+                  maxHeight: 100,
+                  items: workController.workList,
+                  onChanged: (value) {
+                    var selected = value as Work;
+                    userModel.working = selected.id.toString();
+                  },
                 ),
                 SizedBox(height: 10),
                 buildDateTimePickerField(
