@@ -23,6 +23,7 @@ class OwningController extends GetxController with StateMixin {
     return super.onInit();
   }
 
+  List<Owning> owningList = [];
   getOwning({required bool restoreData}) async {
     change(null, status: RxStatus.loading());
     var data = await _getOwningUseCase.execute(restoreData: restoreData);
@@ -34,6 +35,7 @@ class OwningController extends GetxController with StateMixin {
         if (dataList.isEmpty) {
           change(null, status: RxStatus.empty());
         } else {
+          owningList = dataList;
           change(dataList, status: RxStatus.success());
         }
       },

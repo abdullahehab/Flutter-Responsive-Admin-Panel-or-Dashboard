@@ -1,5 +1,7 @@
 import 'package:admin/extensions/extension.dart';
 import 'package:admin/features/add_new_user/presentation/controller/user_controller.dart';
+import 'package:admin/features/owning/data/models/owning_model.dart';
+import 'package:admin/features/owning/presentation/controller/controller.dart';
 import 'package:admin/utils/colors.dart';
 import 'package:admin/widget/custom_text_field.dart';
 import 'package:admin/widget/gender_selector.dart';
@@ -15,7 +17,7 @@ import '../../../../core/shared_components/drop_down_widget.dart';
 import '../../../../models/user_model.dart';
 import '../../../../screens/main/components/main_screen_controller.dart';
 import '../../../../utils/text_field_validator.dart';
-import '../../../../widget/date_selector.dart';
+import '../../../owning/domain/entities/owning.dart';
 
 class AddPeople extends GetView<UserController> {
   final _formKey = GlobalKey<FormState>();
@@ -23,6 +25,7 @@ class AddPeople extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     var mainScreenController = Get.find<MainScreenController>();
+    var owningController = Get.find<OwningController>();
     bool isEdit = false;
     UserModel userModel;
     print('Get.arguments => ${Get.arguments}');
@@ -64,8 +67,7 @@ class AddPeople extends GetView<UserController> {
                 text: "رجوع",
                 withoutPadding: true,
                 onPressed: () {
-
-                  mainScreenController.setSelectedKey = USERS_KEY;
+                  Get.back();
                 }).addPaddingOnly(left: 10, top: 10, bottom: 10)
           ],
         ),
@@ -126,16 +128,16 @@ class AddPeople extends GetView<UserController> {
                   textInputAction: TextInputAction.next,
                 ),
                 SizedBox(height: 10),
-                CustomTextField(
-                  contentPadding: EdgeInsets.only(right: 10),
-                  prefixIcon: Icon(FontAwesomeIcons.phone, size: APP_ICON_SIZE),
-                  // borderColor: AppColor.BORDER_COLOR,
-                  onChangedText: (String text) => userModel.owning = text,
-                  hint: 'حيازه',
-                  outLineText: 'حيازه',
-                  iconPathWidth: 17,
-                  textInputType: TextInputType.phone,
-                  textInputAction: TextInputAction.next,
+                DropDownWidgetX<Owning>(
+                  requiredFiled: true,
+                  labelText: 'الحيازة',
+                  itemAsString: (Owning? u) => u!.title!,
+                  maxHeight: 100,
+                  items: owningController.owningList,
+                  onChanged: (value) {
+                    var selected = value as Owning;
+                    userModel.owning = selected.id.toString();
+                  },
                 ),
                 SizedBox(height: 10),
                 CustomTextField(
@@ -155,7 +157,8 @@ class AddPeople extends GetView<UserController> {
                   maxHeight: 100,
                   items: statusKeys,
                   selectedItem: statusKeys.first,
-                  onChanged: (value) => userModel.socialStatus = value as String,
+                  onChanged: (value) =>
+                      userModel.socialStatus = value as String,
                 ),
                 SizedBox(height: 10),
                 CustomTextField(

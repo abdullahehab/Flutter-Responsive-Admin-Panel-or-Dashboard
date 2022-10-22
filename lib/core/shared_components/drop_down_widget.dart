@@ -1,6 +1,11 @@
+import 'package:admin/features/housing/domain/entities/housing.dart';
+import 'package:admin/features/owning/domain/entities/owning.dart';
+import 'package:admin/features/social_status/domain/entities/social_status.dart';
+import 'package:admin/features/working/domain/entities/work.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../features/owning/data/models/owning_model.dart';
 import '../constants/constants.dart';
 import '../../utils/colors.dart';
 
@@ -70,7 +75,7 @@ class _DropDownWidgetXState<T> extends State<DropDownWidgetX<T>> {
           ),
         SizedBox(height: 5.h),
         Container(
-          height: widget.fieldHeight ?? 43.h,
+          // height: widget.fieldHeight ?? 43.h,
           width: widget.fieldWidth,
           color: Colors.transparent,
           child: DropdownSearch<T>(
@@ -82,6 +87,14 @@ class _DropDownWidgetXState<T> extends State<DropDownWidgetX<T>> {
             items: widget.items!,
             selectedItem: widget.selectedItem,
             itemAsString: widget.itemAsString,
+            validator: (value) {
+              if (widget.requiredFiled) {
+                if (value == null || value == '') {
+                  return 'برجاء اختيار ${widget.labelText}';
+                }
+              }
+              return null;
+            },
             dropdownSearchDecoration: InputDecoration(
                 fillColor: Colors.transparent,
                 contentPadding: EdgeInsets.symmetric(horizontal: 10),
