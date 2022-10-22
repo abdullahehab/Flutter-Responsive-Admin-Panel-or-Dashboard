@@ -1,34 +1,22 @@
-import 'dart:js';
-
 import 'package:admin/features/add_new_user/domain/entities/user_entity.dart';
 import 'package:admin/features/housing/presentation/controller/controller.dart';
 import 'package:admin/features/owning/presentation/controller/controller.dart';
 import 'package:admin/features/social_status/presentation/controller/controller.dart';
 import 'package:admin/features/working/presentation/controller/controller.dart';
 import 'package:admin/utils/page_route_name.dart';
-import 'package:admin/utils/routes.dart';
 import 'package:admin/widget/main_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:admin/extensions/extension.dart';
-import '../../../../core/constants/constants.dart';
-import '../../../../core/shared_components/build_date_time_picker_field.dart';
-import '../../../../core/shared_components/build_dialog.dart';
-import '../../../../core/shared_components/drop_down_widget.dart';
+
 import '../../../../core/shared_components/styled_content_widget.dart';
 import '../../../../core/shared_page/app_empty.dart';
-import '../../../../models/user_model.dart';
-import '../../../../utils/text_field_validator.dart';
-import '../../../../widget/custom_text_field.dart';
 import '../../../../widget/data_cell_item.dart';
 import '../../../../widget/data_column_Item.dart';
 import '../../../../widget/data_controller.dart';
 import '../../../../widget/data_table.dart';
-import '../../../../widget/gender_selector.dart';
 import '../controller/user_controller.dart';
 
 class UsersList extends GetView<UserController> {
