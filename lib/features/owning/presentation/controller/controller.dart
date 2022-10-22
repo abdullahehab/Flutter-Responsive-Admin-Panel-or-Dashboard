@@ -86,4 +86,11 @@ class OwningController extends GetxController with StateMixin {
       },
     );
   }
+
+  String? getById(String id) {
+    return owningList
+        .firstWhereOrNull((element) => element.id.toString() == id)
+        ?.title ??
+        '';
+  }
 }

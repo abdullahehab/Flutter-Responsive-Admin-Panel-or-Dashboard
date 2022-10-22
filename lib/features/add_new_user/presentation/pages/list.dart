@@ -1,6 +1,10 @@
 import 'dart:js';
 
 import 'package:admin/features/add_new_user/domain/entities/user_entity.dart';
+import 'package:admin/features/housing/presentation/controller/controller.dart';
+import 'package:admin/features/owning/presentation/controller/controller.dart';
+import 'package:admin/features/social_status/presentation/controller/controller.dart';
+import 'package:admin/features/working/presentation/controller/controller.dart';
 import 'package:admin/utils/page_route_name.dart';
 import 'package:admin/utils/routes.dart';
 import 'package:admin/widget/main_button.dart';
@@ -39,6 +43,10 @@ class UsersList extends GetView<UserController> {
         onEmpty: appEmpty(onPressed: () => Get.toNamed(PageRouteName.ADD_NEW)));
   }
 
+  var socialStatusController = Get.find<SocialStatusController>();
+  var workController = Get.find<WorkController>();
+  var owningController = Get.find<OwningController>();
+  var housingController = Get.find<HousingController>();
   Scaffold buildBody(List<UserEntity>? users, BuildContext context) {
     return Scaffold(
       body: Padding(
@@ -65,6 +73,7 @@ class UsersList extends GetView<UserController> {
                     dataColumnItem(title: 'الحيازه'),
                     dataColumnItem(title: 'السكن'),
                     dataColumnItem(title: 'الحاله الصحيه'),
+                    dataColumnItem(title: 'التمييز'),
                     dataColumnItem(title: 'الاجرائات'),
                   ],
                   rows: List.generate(users!.length, (index) {
@@ -73,16 +82,20 @@ class UsersList extends GetView<UserController> {
                       cells: [
                         dataCellItem(data: item.nationalId.toString()),
                         dataCellItem(data: item.name!),
-                        dataCellItem(data: item.socialStatus!),
-                        dataCellItem(data: item.working!),
+                        dataCellItem(
+                            data: socialStatusController
+                                .getById(item.socialStatus!)!),
+                        dataCellItem(
+                            data: workController.getById(item.working!)!),
                         dataCellItem(data: item.address!),
                         dataCellItem(data: item.phone!),
-                        dataCellItem(data: item.owning!),
-                        dataCellItem(data: item.housing!),
+                        dataCellItem(data: owningController.getById(item.owning!)!),
+                        dataCellItem(data: housingController.getById(item.housing!)!),
                         dataCellItem(data: item.healthStatus.toString()),
+                        dataCellItem(data: item.type.toString()),
                         dataController(
                             onEditPressed: () =>
-                                addEditUserForm(model: item, context: context!),
+                                addEditUserForm(model: item, context: context),
                             onRemovePressed: () {},
                             onViewPressed: () {})
                       ],
@@ -242,7 +255,8 @@ class UsersList extends GetView<UserController> {
                     labelText: 'الحالة الصحية',
                     items: healthKeys,
                     selectedItem: healthKeys.first,
-                    onChanged: (value) => userModel.healthStatus = value.toString(),
+                    onChanged: (value) =>
+                        userModel.healthStatus = value.toString(),
                   ),
                   SizedBox(
                     height: 10,

@@ -7,6 +7,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import '../../../../widget/components.dart';
 import '../../domain/usecase/delete_social_status_usecase.dart';
 import '../../domain/usecase/update_social_statues_usecase.dart';
+import 'package:collection/collection.dart';
 
 class SocialStatusController extends GetxController with StateMixin {
   SocialStatusController(
@@ -88,5 +89,12 @@ class SocialStatusController extends GetxController with StateMixin {
         await getSocialStatutes(restoreData: true);
       },
     );
+  }
+
+  String? getById(String id) {
+    return socialStatusList
+            .firstWhereOrNull((element) => element.id.toString() == id)
+            ?.title ??
+        '';
   }
 }
