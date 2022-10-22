@@ -90,14 +90,17 @@ class UsersList extends GetView<UserController> {
                             data: workController.getById(item.working!)!),
                         dataCellItem(data: item.address!),
                         dataCellItem(data: item.phone!),
-                        dataCellItem(data: owningController.getById(item.owning!)!),
-                        dataCellItem(data: housingController.getById(item.housing!)!),
+                        dataCellItem(
+                            data: owningController.getById(item.owning!)!.title!),
+                        dataCellItem(
+                            data: housingController.getById(item.housing!)!),
                         dataCellItem(data: item.healthStatus.toString()),
                         dataCellItem(data: item.type.toString()),
                         dataCellItem(data: item.childrenNumber.toString()),
                         dataController(
-                            onEditPressed: () =>
-                                addEditUserForm(model: item, context: context),
+                            onEditPressed: () => Get.toNamed(
+                                PageRouteName.ADD_NEW,
+                                arguments: item),
                             onRemovePressed: () {},
                             onViewPressed: () {})
                       ],
