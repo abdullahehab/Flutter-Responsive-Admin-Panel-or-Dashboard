@@ -1,34 +1,38 @@
 import 'dart:developer';
 
-import 'package:admin/utils/colors.dart';
+import 'package:admin/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:admin/extensions/extension.dart';
 
+import '../../utils/colors.dart';
 import '../constants/constants.dart';
 
-
-Widget buildDateTimePickerField({
-  String? labelText,
-  String? hintText,
-  required void Function(int?)? onSaved,
-  int? initialValue,
-  TextInputType? keyboardType,
-  double? fieldHeight ,
-  TextEditingController? controller,
-  String? Function(String?)? validator,
-  List<TextInputFormatter>? inputFormatters,
-  bool requiredFiled = false,
-  void Function(String)? onFieldSubmitted,
-  int? firstDate,
-  int? lastDate,
-}) {
+Widget buildDateTimePickerField(
+    {String? labelText,
+    String? hintText,
+    required void Function(int?)? onSaved,
+    int? initialValue,
+    TextInputType? keyboardType,
+    double? fieldHeight = 40,
+    TextEditingController? controller,
+    String? Function(String?)? validator,
+    List<TextInputFormatter>? inputFormatters,
+    bool requiredFiled = false,
+    void Function(String)? onFieldSubmitted,
+    int? firstDate,
+    int? lastDate,
+    bool readOnly = false}) {
   var date = initialValue.obs;
 
   if (date.value == null) {
     date = DateTime.now().millisecondsSinceEpoch.obs;
+  } else {
+    var initDate = DateTime.fromMillisecondsSinceEpoch(date.value!)
+        .toString()
+        .substring(0, readOnly ? 16 : 10);
+    controller = TextEditingController(text: initDate);
   }
 
   return Obx(() {
@@ -82,7 +86,7 @@ Widget buildDateTimePickerField({
             );
           },
           child: Container(
-            height: fieldHeight ?? 43.h,
+            // height: fieldHeight,
             child: TextFormField(
               enabled: false,
               keyboardType: keyboardType,
@@ -115,6 +119,5 @@ Widget buildDateTimePickerField({
 }
 
 InputBorder? border = OutlineInputBorder(
-    borderSide:
-        BorderSide(color: AppColor.kPrimaryDarkColor),
+    borderSide: BorderSide(color: AppColor.kPrimaryDarkColor),
     borderRadius: BorderRadius.circular(APP_BORDER_RADIUS));
