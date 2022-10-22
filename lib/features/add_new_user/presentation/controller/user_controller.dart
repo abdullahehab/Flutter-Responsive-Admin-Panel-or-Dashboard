@@ -1,4 +1,5 @@
 import 'package:admin/features/add_new_user/domain/usecase/add_user_usecase.dart';
+import 'package:admin/features/add_new_user/domain/usecase/get_users_usercase.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
@@ -7,10 +8,18 @@ import '../../../../widget/components.dart';
 import '../../domain/usecase/update_user_usecase.dart';
 
 class UserController extends GetxController with StateMixin {
-  UserController(this._addUserUsecase, this._updateUserUsecase);
+  UserController(
+      this._addUserUsecase, this._updateUserUsecase, this._getUsersUsecase);
   AddUserUsecase _addUserUsecase;
+  GetUsersUsecase _getUsersUsecase;
   UpdateUserUsecase _updateUserUsecase;
   var isLoading = false.obs;
+
+  @override
+  void onInit() async {
+    await getUsers();
+    return super.onInit();
+  }
 
   addUser(UserModel user) async {
     var data = await _addUserUsecase.call(user);
@@ -21,6 +30,20 @@ class UserController extends GetxController with StateMixin {
       },
       (done) {
         showToast(message: 'تم الاضافه بنجاح');
+      },
+    );
+  }
+
+  getUsers() async {
+    var data = await _getUsersUsecase.call();
+
+    data.fold(
+      (failure) {
+        showToast(message: failure.mess);
+      },
+      (userList) {
+        print('users length => ${userList.length}');
+        showToast(message: 'تم جلب المستخدمين بنجاح');
       },
     );
   }

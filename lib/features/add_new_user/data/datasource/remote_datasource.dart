@@ -3,8 +3,10 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../../../models/user_model.dart';
+import '../../domain/entities/user_entity.dart';
 
 abstract class UserDataSource {
+  Future<Either<Failure, List<UserEntity>>> getAllUsers();
   Future<Either<Failure, Unit>> addUser(UserModel user);
   Future<Either<Failure, Unit>> updateUser(UserModel user);
 }
@@ -54,5 +56,21 @@ class UserRemoteDataSourceImp implements UserDataSource {
     DocumentSnapshot snap = await dr.get();
 
     return snap.exists;
+  }
+
+  @override
+  Future<Either<Failure, List<UserModel>>> getAllUsers() async {
+    try {
+      final QuerySnapshot _mainCollection =
+          await _fireStore.collection('users').get();
+
+      final allUsers = _mainCollection.docs
+          .map((doc) => UserModel.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
+
+      return Right(allUsers);
+    } catch (e) {
+      return Left(ServerFailure(mess: 'هنا خطا ما في جلب المستخدمين'));
+    }
   }
 }

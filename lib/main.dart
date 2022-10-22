@@ -25,6 +25,7 @@ import 'package:sembast/sembast.dart';
 import 'package:sembast_web/sembast_web.dart';
 
 import 'core/constants/db_constants.dart';
+import 'features/add_new_user/domain/usecase/get_users_usercase.dart';
 import 'features/add_new_user/presentation/controller/user_controller.dart';
 import 'features/housing/data/datasource/local_datasource.dart';
 import 'features/housing/data/datasource/remote_datasource.dart';
@@ -98,11 +99,12 @@ class Binding extends Bindings {
     Get.lazyPut(() => UserRemoteDataSourceImp());
     Get.lazyPut(() => UserRepositoryImp(Get.find<UserRemoteDataSourceImp>()));
     Get.lazyPut(() => AddUserUsecase(Get.find<UserRepositoryImp>()));
+    Get.lazyPut(() => GetUsersUsecase(Get.find<UserRepositoryImp>()));
     Get.lazyPut(() => UpdateUserUsecase(Get.find<UserRepositoryImp>()));
 
     Get.put(
-        UserController(
-            Get.find<AddUserUsecase>(), Get.find<UpdateUserUsecase>()),
+        UserController(Get.find<AddUserUsecase>(),
+            Get.find<UpdateUserUsecase>(), Get.find<GetUsersUsecase>()),
         permanent: true);
 
     Get.lazyPut<MainScreenController>(
@@ -178,8 +180,8 @@ class Binding extends Bindings {
 
     //===================== owning controllers =====================
     Get.lazyPut(() => OwningRemoteDataSource());
-    Get.lazyPut(() => OwningRepository(Get.find<OwningRemoteDataSource>(),
-        Get.find<OwningLocalDataSource>()));
+    Get.lazyPut(() => OwningRepository(
+        Get.find<OwningRemoteDataSource>(), Get.find<OwningLocalDataSource>()));
     Get.lazyPut(() => GetOwningUseCase(Get.find<OwningRepository>()));
     Get.lazyPut(() => AddOwningUsecase(Get.find<OwningRepository>()));
     Get.lazyPut(() => UpdateOwningUsecase(Get.find<OwningRepository>()));
