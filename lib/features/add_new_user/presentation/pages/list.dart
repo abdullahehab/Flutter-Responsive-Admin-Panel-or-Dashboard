@@ -55,7 +55,7 @@ class UsersList extends GetView<UserController> {
           children: [
             SizedBox(height: 20),
             StyledContent(
-              subTitle: 'السكن',
+              subTitle: 'الاشخاص',
               leadingWidget: CustomButton(
                   width: 200,
                   height: 50,
@@ -74,6 +74,7 @@ class UsersList extends GetView<UserController> {
                     dataColumnItem(title: 'السكن'),
                     dataColumnItem(title: 'الحالة الصحية'),
                     dataColumnItem(title: 'التمييز'),
+                    dataColumnItem(title: 'عدد الابناء'),
                     dataColumnItem(title: 'الاجرائات'),
                   ],
                   rows: List.generate(users!.length, (index) {
@@ -93,6 +94,7 @@ class UsersList extends GetView<UserController> {
                         dataCellItem(data: housingController.getById(item.housing!)!),
                         dataCellItem(data: item.healthStatus.toString()),
                         dataCellItem(data: item.type.toString()),
+                        dataCellItem(data: item.childrenNumber.toString()),
                         dataController(
                             onEditPressed: () =>
                                 addEditUserForm(model: item, context: context),
