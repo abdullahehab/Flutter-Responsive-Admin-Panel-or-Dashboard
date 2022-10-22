@@ -1,6 +1,8 @@
 import 'dart:js';
 
 import 'package:admin/features/add_new_user/domain/entities/user_entity.dart';
+import 'package:admin/utils/page_route_name.dart';
+import 'package:admin/utils/routes.dart';
 import 'package:admin/widget/main_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +52,7 @@ class UsersList extends GetView<UserController> {
                   width: 200,
                   height: 50,
                   text: 'اضافة شخص جديد',
-                  onPressed: () => addEditUserForm(context: context)),
+                  onPressed: () => Get.toNamed(PageRouteName.ADD_NEW)),
               children: [
                 dataTable(
                   columns: [
