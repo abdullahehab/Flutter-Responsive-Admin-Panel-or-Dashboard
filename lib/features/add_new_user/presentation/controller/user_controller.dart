@@ -18,11 +18,13 @@ class UserController extends GetxController with StateMixin<List<UserEntity>> {
 
   @override
   void onInit() async {
+    change(null, status: RxStatus.loading());
     await getUsers();
     return super.onInit();
   }
 
   addUser(UserModel user) async {
+    change(null, status: RxStatus.loading());
     var data = await _addUserUsecase.call(user);
 
     data.fold(
@@ -31,6 +33,7 @@ class UserController extends GetxController with StateMixin<List<UserEntity>> {
       },
       (done) {
         showToast(message: 'تم الاضافة بنجاح');
+        getUsers();
       },
     );
   }
@@ -54,6 +57,7 @@ class UserController extends GetxController with StateMixin<List<UserEntity>> {
   }
 
   updateUser(UserModel user) async {
+    change(null, status: RxStatus.loading());
     var data = await _updateUserUsecase.call(user);
 
     data.fold(
@@ -62,6 +66,7 @@ class UserController extends GetxController with StateMixin<List<UserEntity>> {
       },
       (done) {
         showToast(message: 'تم التعديل بنجاح');
+        getUsers();
       },
     );
   }

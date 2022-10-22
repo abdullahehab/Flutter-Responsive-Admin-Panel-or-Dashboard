@@ -38,8 +38,7 @@ class UserRemoteDataSourceImp implements UserDataSource {
   Future<Either<Failure, Unit>> updateUser(UserModel user) async {
     final CollectionReference _mainCollection = _fireStore.collection('users');
 
-    DocumentReference documentReferencer =
-        _mainCollection.doc('٧٨٧٨٧٨٧٨٧٨٧٨٧٨');
+    DocumentReference documentReferencer = _mainCollection.doc(user.nationalId);
 
     try {
       await documentReferencer.update(user.toJson());

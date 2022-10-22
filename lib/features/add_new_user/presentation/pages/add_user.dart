@@ -58,7 +58,6 @@ class AddPeople extends GetView<UserController> {
     } else {
       isEdit = true;
 
-      print('Get.arguments => ${Get.arguments}');
       userModel = Get.arguments as UserModel;
     }
 
@@ -80,7 +79,14 @@ class AddPeople extends GetView<UserController> {
                 }
                 _formKey.currentState!.save();
 
+                if(isEdit) {
+                  controller.updateUser(userModel);
+                  Get.back();
+                  return;
+                }
+
                 controller.addUser(userModel);
+                Get.back();
               }).addPaddingOnly(left: 10, top: 10, bottom: 10),
           centerTitle: false,
           actions: [
