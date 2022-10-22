@@ -52,7 +52,7 @@ class AddPeople extends GetView<UserController> {
         childrenNumber: null,
         parentId: '',
         housing: '',
-        gender: '',
+        gender: 'ذكر',
         owning: '',
       );
     } else {

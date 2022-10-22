@@ -73,6 +73,7 @@ class UserModel extends UserEntity {
       housing: json["housing"],
       owning: json["owning"],
       name: json["name"],
+      gender: json['gender'],
       type: json['type']);
 
   Map<String, dynamic> toJson() => {
@@ -89,7 +90,8 @@ class UserModel extends UserEntity {
         "childrenNumber": childrenNumber,
         "housing": housing,
         "owning": owning,
-        "type": type
+        "type": type,
+        "gender": gender
       };
 
   @override
