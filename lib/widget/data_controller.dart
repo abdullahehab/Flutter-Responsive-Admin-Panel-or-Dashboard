@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../core/shared_components/error_dialog.dart';
 
 DataCell dataController({
   void Function()? onRemovePressed,
@@ -14,7 +17,14 @@ DataCell dataController({
         if (onEditPressed != null)
           IconButton(icon: Icon(Icons.edit), onPressed: onEditPressed),
         if (onRemovePressed != null)
-          IconButton(icon: Icon(Icons.delete), onPressed: onRemovePressed)
+          IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                dialogRemoveYesNo(
+                  context: Get.context!,
+                  btnYesPress: onRemovePressed,
+                );
+              })
       ],
     ),
   );
