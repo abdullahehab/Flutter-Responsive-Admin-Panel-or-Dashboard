@@ -11,21 +11,47 @@ DataCell dataController({
   return DataCell(
     Row(
       children: [
-        if (onViewPressed != null)
-          IconButton(
-              icon: Icon(Icons.remove_red_eye), onPressed: onViewPressed),
-        if (onEditPressed != null)
-          IconButton(icon: Icon(Icons.edit), onPressed: onEditPressed),
+        if (onViewPressed != null) ...{
+          InkWell(
+            onTap: onViewPressed,
+            child: Text('عرض', style: TextStyle(color: Colors.blue)),
+          ),
+          VerticalDivider()
+        },
+        if (onEditPressed != null) ...{
+          InkWell(
+            onTap: onEditPressed,
+            child: Text('تعديل', style: TextStyle(color: Colors.blue)),
+          ),
+          VerticalDivider()
+        },
         if (onRemovePressed != null)
-          IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {
-                dialogRemoveYesNo(
-                  context: Get.context!,
-                  btnYesPress: onRemovePressed,
-                );
-              })
+          InkWell(
+            onTap: () {
+              dialogRemoveYesNo(
+                context: Get.context!,
+                btnYesPress: onRemovePressed,
+              );
+            },
+            child: Text('حذف', style: TextStyle(color: Colors.red)),
+          ),
       ],
     ),
   );
+}
+
+class VerticalDivider extends StatelessWidget {
+  const VerticalDivider({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: Container(
+        height: 20,
+        width: 1,
+        color: Colors.black,
+      ),
+    );
+  }
 }
