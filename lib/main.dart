@@ -1,6 +1,7 @@
 import 'package:admin/features/add_new_user/data/datasource/remote_datasource.dart';
 import 'package:admin/features/add_new_user/data/repositories/user_repositories_imp.dart';
 import 'package:admin/features/add_new_user/domain/usecase/add_user_usecase.dart';
+import 'package:admin/features/add_new_user/domain/usecase/delete_user_usecase.dart';
 import 'package:admin/features/add_new_user/domain/usecase/update_user_usecase.dart';
 import 'package:admin/features/social_status/data/repositories/social_status_repository.dart';
 import 'package:admin/features/social_status/domain/usecase/get_social_statues_usecase.dart';
@@ -101,10 +102,14 @@ class Binding extends Bindings {
     Get.lazyPut(() => AddUserUsecase(Get.find<UserRepositoryImp>()));
     Get.lazyPut(() => GetUsersUsecase(Get.find<UserRepositoryImp>()));
     Get.lazyPut(() => UpdateUserUsecase(Get.find<UserRepositoryImp>()));
+    Get.lazyPut(() => DeleteUserUsecase(Get.find<UserRepositoryImp>()));
 
     Get.put(
-        UserController(Get.find<AddUserUsecase>(),
-            Get.find<UpdateUserUsecase>(), Get.find<GetUsersUsecase>()),
+        UserController(
+            Get.find<AddUserUsecase>(),
+            Get.find<UpdateUserUsecase>(),
+            Get.find<GetUsersUsecase>(),
+            Get.find<DeleteUserUsecase>()),
         permanent: true);
 
     Get.lazyPut<MainScreenController>(

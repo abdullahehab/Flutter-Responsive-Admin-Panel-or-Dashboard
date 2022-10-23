@@ -23,4 +23,9 @@ class UserRepositoryImp implements UserRepository {
   Future<Either<Failure, List<UserEntity>>> getAllUsers() {
     return remoteDataSourceImp.getAllUsers();
   }
+
+  @override
+  Future<Either<Failure, Unit>> delete(String userId) {
+    return remoteDataSourceImp.delete(userId);
+  }
 }

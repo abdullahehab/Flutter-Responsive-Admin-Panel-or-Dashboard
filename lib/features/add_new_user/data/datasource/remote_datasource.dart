@@ -8,6 +8,7 @@ import '../../domain/entities/user_entity.dart';
 abstract class UserDataSource {
   Future<Either<Failure, List<UserEntity>>> getAllUsers();
   Future<Either<Failure, Unit>> addUser(UserModel user);
+  Future<Either<Failure, Unit>> delete(String userId);
   Future<Either<Failure, Unit>> updateUser(UserModel user);
 }
 
@@ -70,6 +71,21 @@ class UserRemoteDataSourceImp implements UserDataSource {
       return Right(allUsers);
     } catch (e) {
       return Left(ServerFailure(mess: 'ةنا خطا ما في جلب المستخدمين'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> delete(String userId) async {
+    final CollectionReference _mainCollection = _fireStore.collection('users');
+
+    DocumentReference documentReferencer = _mainCollection.doc(userId);
+
+    try {
+      await documentReferencer.delete();
+
+      return Right(unit);
+    } catch (e) {
+      return Left(UnAuthFailure(mess: e.toString()));
     }
   }
 }
