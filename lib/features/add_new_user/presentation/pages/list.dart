@@ -97,7 +97,7 @@ class UsersList extends GetView<UserController> {
                             onRemovePressed: () =>
                                 controller.deleteUser(item.nationalId!),
                             onViewPressed: () => Get.toNamed(
-                                PageRouteName.DETAILS,
+                                PageRouteName.PEOPLE_DETAILS,
                                 arguments: item))
                       ],
                     );
