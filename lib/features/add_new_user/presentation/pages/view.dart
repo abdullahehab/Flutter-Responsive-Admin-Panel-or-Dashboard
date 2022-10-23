@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 import '../../../../core/shared_components/build_helper_label.dart';
 import '../../../../core/shared_components/styled_content_widget.dart';
+import '../../../../utils/colors.dart';
+import '../../../../widget/main_button.dart';
 import '../../../housing/presentation/controller/controller.dart';
 import '../../../owning/presentation/controller/controller.dart';
 import '../../../social_status/presentation/controller/controller.dart';
@@ -10,6 +12,7 @@ import '../../../working/presentation/controller/controller.dart';
 import '../../domain/entities/user_entity.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../extensions/extension.dart';
+
 class UserView extends GetView {
   @override
   Widget build(BuildContext context) {
@@ -31,59 +34,88 @@ class UserView extends GetView {
             Row(
               children: [
                 Expanded(
-                  child: StyledContent(children: [
-                    buildHelperLabel(
-                      helperText: 'الاسم',
-                      text: customer.name.toString(),
+                  child: StyledContent(
+                    children: [
+                      buildHelperLabel(
+                        helperText: 'الاسم',
+                        text: customer.name.toString(),
+                      ),
+                      buildHelperLabel(
+                        helperText: 'الرقم القومي',
+                        text: customer.nationalId.toString(),
+                      ),
+                      buildHelperLabel(
+                          helperText: 'الحالة الاجتماعية',
+                          text: socialStatusController
+                              .getById(customer.socialStatus!)!
+                              .title!),
+                      buildHelperLabel(
+                          helperText: 'الوظيفة',
+                          text: workController
+                              .getById(customer.working!)!
+                              .title!),
+                      buildHelperLabel(
+                        helperText: 'العنوان',
+                        text: customer.address.toString(),
+                      ),
+                      buildHelperLabel(
+                        helperText: 'رقم الهاتف',
+                        text: customer.phone.toString(),
+                      ),
+                      buildHelperLabel(
+                          helperText: 'الحيازة',
+                          text: owningController
+                              .getById(customer.owning!)!
+                              .title!),
+                      buildHelperLabel(
+                          helperText: 'السكن',
+                          text: housingController
+                              .getById(customer.housing!)!
+                              .title!),
+                      buildHelperLabel(
+                          helperText: 'الحالة الصحية',
+                          text: customer.healthStatus.toString()),
+                      buildHelperLabel(
+                          helperText: 'التمييز',
+                          text: customer.type.toString()),
+                      buildHelperLabel(
+                          helperText: 'عدد الابناء',
+                          text: customer.childrenNumber.toString()),
+                    ],
+                    footer: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        children: [
+                          if (customer.husbandId
+                              .toString()
+                              .isEmptyOrNull()) ...{
+                            CustomButton(
+                                    buttonColor: AppColor.kPrimaryDarkColor,
+                                    borderRadius: 6,
+                                    width: 130,
+                                    height: 40,
+                                    buttonPadding: EdgeInsets.zero,
+                                    text: "إضافة زوج/زوجة",
+                                    withoutPadding: true,
+                                    onPressed: () {})
+                                .addPaddingOnly(left: 10, top: 10, bottom: 10),
+                          },
+                          CustomButton(
+                                  buttonColor: AppColor.kPrimaryDarkColor,
+                                  borderRadius: 6,
+                                  width: 130,
+                                  height: 40,
+                                  buttonPadding: EdgeInsets.zero,
+                                  text: "إضافة ابن / ابنة",
+                                  withoutPadding: true,
+                                  onPressed: () {})
+                              .addPaddingOnly(left: 10, top: 10, bottom: 10),
+                        ],
+                      ),
                     ),
-                    buildHelperLabel(
-                      helperText: 'الرقم القومي',
-                      text: customer.nationalId.toString(),
-                    ),
-                    buildHelperLabel(
-                        helperText: 'الحالة الاجتماعية',
-                        text: socialStatusController
-                            .getById(customer.socialStatus!)!
-                            .title!),
-                    buildHelperLabel(
-                        helperText: 'الوظيفة',
-                        text: workController.getById(customer.working!)!.title!
-                    ),
-                    buildHelperLabel(
-                      helperText: 'العنوان',
-                      text: customer.address.toString(),
-                    ),
-                    buildHelperLabel(
-                      helperText: 'رقم الهاتف',
-                      text: customer.phone.toString(),
-                    ),
-                    buildHelperLabel(
-                        helperText: 'الحيازة',
-                        text: owningController.getById(customer.owning!)!.title!
-                    ),
-                    buildHelperLabel(
-                        helperText: 'السكن',
-                        text: housingController
-                            .getById(customer.housing!)!
-                            .title!
-                    ),
-                    buildHelperLabel(
-                        helperText: 'الحالة الصحية',
-                        text: customer.healthStatus.toString()
-                    ),
-                    buildHelperLabel(
-                        helperText: 'التمييز',
-                        text: customer.type.toString()
-                    ),
-                    buildHelperLabel(
-                        helperText: 'عدد الابناء',
-                        text: customer.childrenNumber.toString()
-                    ),
-                  ]),
+                  ),
                 ),
-
-
-                if(!customer.husbandId.toString().isEmptyOrNull()) ... {
+                if (!customer.husbandId.toString().isEmptyOrNull()) ...{
                   Expanded(
                     child: StyledContent(children: [
                       buildHelperLabel(
@@ -101,8 +133,9 @@ class UserView extends GetView {
                               .title!),
                       buildHelperLabel(
                           helperText: 'الوظيفة',
-                          text: workController.getById(customer.working!)!.title!
-                      ),
+                          text: workController
+                              .getById(customer.working!)!
+                              .title!),
                       buildHelperLabel(
                         helperText: 'العنوان',
                         text: customer.address.toString(),
@@ -113,26 +146,23 @@ class UserView extends GetView {
                       ),
                       buildHelperLabel(
                           helperText: 'الحيازة',
-                          text: owningController.getById(customer.owning!)!.title!
-                      ),
+                          text: owningController
+                              .getById(customer.owning!)!
+                              .title!),
                       buildHelperLabel(
                           helperText: 'السكن',
                           text: housingController
                               .getById(customer.housing!)!
-                              .title!
-                      ),
+                              .title!),
                       buildHelperLabel(
                           helperText: 'الحالة الصحية',
-                          text: customer.healthStatus.toString()
-                      ),
+                          text: customer.healthStatus.toString()),
                       buildHelperLabel(
                           helperText: 'التمييز',
-                          text: customer.type.toString()
-                      ),
+                          text: customer.type.toString()),
                       buildHelperLabel(
                           helperText: 'عدد الابناء',
-                          text: customer.childrenNumber.toString()
-                      ),
+                          text: customer.childrenNumber.toString()),
                     ]),
                   ),
                 }
