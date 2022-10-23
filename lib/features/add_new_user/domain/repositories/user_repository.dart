@@ -6,7 +6,7 @@ import '../../../../core/error/failures.dart';
 
 abstract class UserRepository {
   Future<Either<Failure, List<UserEntity>>> getAllUsers();
-  Future<Either<Failure, Unit>> addUser(UserModel user);
+  Future<Either<Failure, Unit>> addUser(UserEntity user);
   Future<Either<Failure, Unit>> delete(String userId);
-  Future<Either<Failure, Unit>> updateUser(UserModel user);
+  Future<Either<Failure, Unit>> updateUser(UserEntity user);
 }

@@ -1,4 +1,5 @@
 import 'package:admin/extensions/extension.dart';
+import 'package:admin/features/add_new_user/domain/entities/user_entity.dart';
 import 'package:admin/features/add_new_user/presentation/controller/user_controller.dart';
 import 'package:admin/features/housing/presentation/controller/controller.dart';
 import 'package:admin/features/owning/data/models/owning_model.dart';
@@ -25,6 +26,14 @@ import '../../../owning/domain/entities/owning.dart';
 import '../../../working/domain/entities/work.dart';
 import '../../../working/presentation/controller/controller.dart';
 
+class PeopleDetailsParas {
+  UserEntity? userModel;
+  String? husbandId;
+  String? parentId;
+
+  PeopleDetailsParas({this.userModel, this.husbandId, this.parentId});
+}
+
 class AddPeople extends GetView<UserController> {
   final _formKey = GlobalKey<FormState>();
 
@@ -36,13 +45,13 @@ class AddPeople extends GetView<UserController> {
     var socialStatusController = Get.find<SocialStatusController>();
     var workController = Get.find<WorkController>();
     bool isEdit = false;
-    UserModel userModel;
-    if (Get.arguments == null) {
-      userModel = UserModel(
+    UserEntity userModel;
+    if ((Get.arguments as PeopleDetailsParas).userModel == null) {
+      userModel = UserEntity(
         nationalId: '',
         name: '',
         address: '',
-        husbandId: '',
+        husbandId: (Get.arguments as PeopleDetailsParas).husbandId ?? '',
         socialStatus: 'اعزب',
         birthDate: null,
         phone: '',
@@ -50,7 +59,7 @@ class AddPeople extends GetView<UserController> {
         healthStatus: 'غير مريض',
         type: 'سليم',
         childrenNumber: null,
-        parentId: '',
+        parentId: (Get.arguments as PeopleDetailsParas).parentId ?? '',
         housing: '',
         gender: 'ذكر',
         owning: '',
@@ -58,7 +67,7 @@ class AddPeople extends GetView<UserController> {
     } else {
       isEdit = true;
 
-      userModel = Get.arguments as UserModel;
+      userModel = (Get.arguments as PeopleDetailsParas).userModel!;
     }
 
     return Scaffold(
@@ -79,7 +88,7 @@ class AddPeople extends GetView<UserController> {
                 }
                 _formKey.currentState!.save();
 
-                if(isEdit) {
+                if (isEdit) {
                   controller.updateUser(userModel);
                   Get.back();
                   return;

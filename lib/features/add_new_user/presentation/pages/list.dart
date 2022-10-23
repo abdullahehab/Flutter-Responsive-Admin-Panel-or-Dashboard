@@ -18,6 +18,7 @@ import '../../../../widget/data_column_Item.dart';
 import '../../../../widget/data_controller.dart';
 import '../../../../widget/data_table.dart';
 import '../controller/user_controller.dart';
+import 'add_user.dart';
 
 class UsersList extends GetView<UserController> {
   @override
@@ -91,9 +92,12 @@ class UsersList extends GetView<UserController> {
                         dataCellItem(data: item.type.toString()),
                         dataCellItem(data: item.childrenNumber.toString()),
                         dataController(
-                            onEditPressed: () => Get.toNamed(
-                                PageRouteName.ADD_NEW,
-                                arguments: item),
+                            onEditPressed: () {
+                              PeopleDetailsParas params =
+                                  PeopleDetailsParas(userModel: item);
+                              Get.toNamed(PageRouteName.ADD_NEW,
+                                  arguments: params);
+                            },
                             onRemovePressed: () =>
                                 controller.deleteUser(item.nationalId!),
                             onViewPressed: () => Get.toNamed(

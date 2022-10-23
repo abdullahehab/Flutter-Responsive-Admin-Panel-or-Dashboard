@@ -25,7 +25,7 @@ class UserController extends GetxController with StateMixin<List<UserEntity>> {
     return super.onInit();
   }
 
-  addUser(UserModel user) async {
+  addUser(UserEntity user) async {
     change(null, status: RxStatus.loading());
     var data = await _addUserUsecase.call(user);
 
@@ -73,7 +73,7 @@ class UserController extends GetxController with StateMixin<List<UserEntity>> {
     );
   }
 
-  updateUser(UserModel user) async {
+  updateUser(UserEntity user) async {
     change(null, status: RxStatus.loading());
     var data = await _updateUserUsecase.call(user);
 
