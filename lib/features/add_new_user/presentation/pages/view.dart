@@ -30,8 +30,6 @@ class UserView extends GetView {
       husbandModel = userController.getById(customer.husbandId!);
     }
 
-    print('husbandModel => ${customer.husbandId}');
-    print('husbandModel => $husbandModel');
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
