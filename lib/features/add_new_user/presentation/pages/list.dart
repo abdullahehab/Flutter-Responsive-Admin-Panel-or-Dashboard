@@ -95,8 +95,9 @@ class UsersList extends GetView<UserController> {
                             onEditPressed: () {
                               PeopleDetailsParas params =
                                   PeopleDetailsParas(userModel: item);
-                              Get.toNamed(PageRouteName.ADD_NEW,
-                                  arguments: params);
+                              // Get.toNamed(PageRouteName.ADD_NEW,
+                              //     arguments: params);
+                              viewForm(params);
                             },
                             onRemovePressed: () =>
                                 controller.deleteUser(item.nationalId!),
@@ -111,6 +112,15 @@ class UsersList extends GetView<UserController> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  viewForm(PeopleDetailsParas paras) async {
+    showDialog(
+      context: Get.context!,
+      builder: (_) => AddPeople(
+        paras: paras,
       ),
     );
   }

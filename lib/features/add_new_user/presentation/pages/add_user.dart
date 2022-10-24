@@ -43,15 +43,13 @@ class AddPeople extends GetView<UserController> {
 
   @override
   Widget build(BuildContext context) {
-    var mainScreenController = Get.find<MainScreenController>();
     var owningController = Get.find<OwningController>();
     var housingController = Get.find<HousingController>();
     var socialStatusController = Get.find<SocialStatusController>();
     var workController = Get.find<WorkController>();
     bool isEdit = false;
     UserEntity userModel;
-    if (paras?.userModel == null ||
-        (Get.arguments as PeopleDetailsParas).userModel == null) {
+    if (paras?.userModel == null) {
       var model = paras;
 
       userModel = UserEntity(
