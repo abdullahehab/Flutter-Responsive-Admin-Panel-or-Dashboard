@@ -30,6 +30,8 @@ class UserView extends GetView {
       husbandModel = userController.getById(customer.husbandId!);
     }
 
+    print('husbandModel => ${customer.husbandId}');
+    print('husbandModel => $husbandModel');
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -150,20 +152,20 @@ class UserContainer extends StatelessWidget {
       ],
       footer: customer.husbandId.toString().isEmptyOrNull()
           ? Row(
-            children: [
-              if(customer.gender == 'ذكر') ... {
-                CustomButton(
-                    buttonColor: AppColor.kPrimaryDarkColor,
-                    borderRadius: 6,
-                    width: 130,
-                    height: 40,
-                    buttonPadding: EdgeInsets.zero,
-                    text: "إضافة ابن / ابنة",
-                    withoutPadding: true,
-                    onPressed: () {})
-                    .addPaddingOnly(top: 10, bottom: 10),
-              },
-              Padding(
+              children: [
+                if (customer.gender == 'ذكر') ...{
+                  CustomButton(
+                          buttonColor: AppColor.kPrimaryDarkColor,
+                          borderRadius: 6,
+                          width: 130,
+                          height: 40,
+                          buttonPadding: EdgeInsets.zero,
+                          text: "إضافة ابن / ابنة",
+                          withoutPadding: true,
+                          onPressed: () {})
+                      .addPaddingOnly(top: 10, bottom: 10),
+                },
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     children: [
@@ -176,15 +178,15 @@ class UserContainer extends StatelessWidget {
                           text: "إضافة زوج/زوجة",
                           withoutPadding: true,
                           onPressed: () {
-                            PeopleDetailsParas params =
-                                PeopleDetailsParas(husbandId: customer.nationalId);
+                            PeopleDetailsParas params = PeopleDetailsParas(
+                                husbandId: customer.nationalId);
                             viewForm(params, customer);
                           }).addPaddingOnly(left: 10, top: 10, bottom: 10),
                     ],
                   ),
                 ),
-            ],
-          )
+              ],
+            )
           : null,
     );
   }
@@ -201,7 +203,8 @@ class UserContainer extends StatelessWidget {
 
     if (!husbandId.toString().isEmptyOrNull()) {
       user.husbandId = husbandId;
-      userController.updateUser(user);
+      await userController.updateUser(user);
+      await Future.delayed(const Duration(milliseconds: 400));
       Get.back();
       Get.toNamed(PageRouteName.PEOPLE_DETAILS, arguments: user);
     }
