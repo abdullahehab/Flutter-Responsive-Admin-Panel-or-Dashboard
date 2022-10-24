@@ -55,6 +55,7 @@ class UserController extends GetxController with StateMixin<List<UserEntity>> {
     );
   }
 
+  List<UserEntity> users = [];
   getUsers() async {
     change(null, status: RxStatus.loading());
     var data = await _getUsersUsecase.call();
@@ -67,6 +68,7 @@ class UserController extends GetxController with StateMixin<List<UserEntity>> {
         if (userList.isEmpty) {
           change(null, status: RxStatus.empty());
         } else {
+          users = userList;
           change(userList, status: RxStatus.success());
         }
       },
@@ -86,5 +88,10 @@ class UserController extends GetxController with StateMixin<List<UserEntity>> {
         getUsers();
       },
     );
+  }
+
+  UserEntity? getById(String id) {
+    return users
+        .firstWhereOrNull((element) => element.nationalId.toString() == id);
   }
 }

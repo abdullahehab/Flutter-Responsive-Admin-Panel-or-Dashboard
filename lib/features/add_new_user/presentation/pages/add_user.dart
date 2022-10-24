@@ -35,7 +35,11 @@ class PeopleDetailsParas {
 }
 
 class AddPeople extends GetView<UserController> {
+  AddPeople({this.onPressed, this.paras});
   final _formKey = GlobalKey<FormState>();
+
+  final PeopleDetailsParas? paras;
+  final Function(UserEntity user)? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +50,15 @@ class AddPeople extends GetView<UserController> {
     var workController = Get.find<WorkController>();
     bool isEdit = false;
     UserEntity userModel;
-    if ((Get.arguments as PeopleDetailsParas).userModel == null) {
+    if (paras?.userModel == null ||
+        (Get.arguments as PeopleDetailsParas).userModel == null) {
+      var model = paras;
+
       userModel = UserEntity(
         nationalId: '',
         name: '',
         address: '',
-        husbandId: (Get.arguments as PeopleDetailsParas).husbandId ?? '',
+        husbandId: model?.husbandId ?? '',
         socialStatus: 'اعزب',
         birthDate: null,
         phone: '',
@@ -59,15 +66,16 @@ class AddPeople extends GetView<UserController> {
         healthStatus: 'غير مريض',
         type: 'سليم',
         childrenNumber: null,
-        parentId: (Get.arguments as PeopleDetailsParas).parentId ?? '',
+        parentId: model?.parentId ?? '',
         housing: '',
         gender: 'ذكر',
         owning: '',
       );
     } else {
       isEdit = true;
-
-      userModel = (Get.arguments as PeopleDetailsParas).userModel!;
+      var model =
+          paras?.userModel ?? (Get.arguments as PeopleDetailsParas).userModel!;
+      userModel = model;
     }
 
     return Scaffold(
@@ -95,7 +103,7 @@ class AddPeople extends GetView<UserController> {
                 }
 
                 controller.addUser(userModel);
-                Get.back();
+                Get.back(result: userModel.nationalId);
               }).addPaddingOnly(left: 10, top: 10, bottom: 10),
           centerTitle: false,
           actions: [
@@ -108,7 +116,7 @@ class AddPeople extends GetView<UserController> {
                 text: "رجوع",
                 withoutPadding: true,
                 onPressed: () {
-                  Get.back();
+                  Get.back(result: '');
                 }).addPaddingOnly(left: 10, top: 10, bottom: 10)
           ],
         ),
