@@ -55,6 +55,35 @@ class UserView extends GetView {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomButton(
+                          buttonColor: AppColor.kPrimaryDarkColor,
+                          borderRadius: 6,
+                          width: 130,
+                          height: 40,
+                          buttonPadding: EdgeInsets.zero,
+                          text: "إضافة ابن / ابنة",
+                          withoutPadding: true,
+                          onPressed: () {})
+                      .addPaddingOnly(top: 10, bottom: 10),
+                  CustomButton(
+                      buttonColor: AppColor.kPrimaryDarkColor,
+                      borderRadius: 6,
+                      width: 70,
+                      height: 40,
+                      buttonPadding: EdgeInsets.zero,
+                      text: "رجوع",
+                      withoutPadding: true,
+                      onPressed: () {
+                        Get.back(result: '');
+                      }).addPaddingOnly(top: 10, bottom: 10)
+                ],
+              ),
+            ),
             SizedBox(height: 20.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -112,42 +141,32 @@ class UserView extends GetView {
                           helperText: 'عدد الابناء',
                           text: customer.childrenNumber.toString()),
                     ],
-                    footer: Padding(
+                    footer: customer.husbandId.toString().isEmptyOrNull()
+                        ? Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
                         children: [
-                          if (customer.husbandId
-                              .toString()
-                              .isEmptyOrNull()) ...{
-                            CustomButton(
-                                    buttonColor: AppColor.kPrimaryDarkColor,
-                                    borderRadius: 6,
-                                    width: 130,
-                                    height: 40,
-                                    buttonPadding: EdgeInsets.zero,
-                                    text: "إضافة زوج/زوجة",
-                                    withoutPadding: true,
-                                    onPressed: () {
-                                      PeopleDetailsParas params =
-                                          PeopleDetailsParas(
-                                              husbandId: customer.nationalId);
-                                      viewForm(params, customer);
-                                    })
-                                .addPaddingOnly(left: 10, top: 10, bottom: 10),
-                          },
                           CustomButton(
-                                  buttonColor: AppColor.kPrimaryDarkColor,
-                                  borderRadius: 6,
-                                  width: 130,
-                                  height: 40,
-                                  buttonPadding: EdgeInsets.zero,
-                                  text: "إضافة ابن / ابنة",
-                                  withoutPadding: true,
-                                  onPressed: () {})
-                              .addPaddingOnly(left: 10, top: 10, bottom: 10),
+                              buttonColor: AppColor.kPrimaryDarkColor,
+                              borderRadius: 6,
+                              width: 130,
+                              height: 40,
+                              buttonPadding: EdgeInsets.zero,
+                              text: "إضافة زوج/زوجة",
+                              withoutPadding: true,
+                              onPressed: () {
+                                PeopleDetailsParas params =
+                                PeopleDetailsParas(
+                                    husbandId:
+                                    customer.nationalId);
+                                viewForm(params, customer);
+                              })
+                              .addPaddingOnly(
+                              left: 10, top: 10, bottom: 10),
                         ],
                       ),
-                    ),
+                    )
+                        : null,
                   ),
                 ),
                 if (!customer.husbandId.toString().isEmptyOrNull()) ...{
