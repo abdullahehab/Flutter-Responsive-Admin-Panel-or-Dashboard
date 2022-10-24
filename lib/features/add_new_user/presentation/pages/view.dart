@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/constants/enums.dart';
 import '../../../../core/shared_components/build_helper_label.dart';
 import '../../../../core/shared_components/styled_content_widget.dart';
 import '../../../../extensions/extension.dart';
@@ -27,10 +28,10 @@ class UserView extends GetView {
 
   final userController = Get.find<UserController>();
 
-  Widget buildBody(UserEntity customer) {
+  Widget buildBody(UserEntity? customer) {
     UserEntity? husbandModel;
     List<UserEntity>? children = [];
-    if (!customer.husbandId.toString().isEmptyOrNull()) {
+    if (!customer!.husbandId.toString().isEmptyOrNull()) {
       husbandModel = userController.getById(customer.husbandId!);
     }
 
@@ -177,7 +178,7 @@ class UserContainer extends StatelessWidget {
                   onPressed: () {
                     PeopleDetailsParas params =
                         PeopleDetailsParas(parentId: customer.nationalId);
-                    viewForm(params, customer);
+                    viewForm(params, customer, UserType.child);
                   }).addPaddingOnly(
                 top: 10,
                 bottom: 10,
@@ -200,7 +201,7 @@ class UserContainer extends StatelessWidget {
                         onPressed: () {
                           PeopleDetailsParas params = PeopleDetailsParas(
                               husbandId: customer.nationalId);
-                          viewForm(params, customer);
+                          viewForm(params, customer, UserType.Husband);
                         }).addPaddingOnly(right: 10, top: 10, bottom: 10),
                   ],
                 ),
@@ -210,7 +211,7 @@ class UserContainer extends StatelessWidget {
         ));
   }
 
-  viewForm(PeopleDetailsParas paras, UserEntity user) async {
+  viewForm(PeopleDetailsParas paras, UserEntity user, UserType userType) async {
     var userController = Get.find<UserController>();
     var husbandId = await showDialog(
           context: Get.context!,
@@ -221,7 +222,9 @@ class UserContainer extends StatelessWidget {
         false;
 
     if (!husbandId.toString().isEmptyOrNull()) {
-      user.husbandId = husbandId;
+      if (userType == UserType.Husband) {
+        user.husbandId = husbandId;
+      }
       await userController.updateUser(user);
       await Future.delayed(const Duration(milliseconds: 400));
       Get.back();
@@ -264,10 +267,10 @@ class ChildrenListView extends StatelessWidget {
                 dataColumnItem(title: 'عدد الابناء'),
               ],
               rows: List.generate(children.length, (index) {
-                var item = children?.elementAt(index);
+                var item = children.elementAt(index);
                 return DataRow(
                   cells: [
-                    dataCellItem(data: item!.nationalId.toString()),
+                    dataCellItem(data: item.nationalId.toString()),
                     dataCellItem(data: item.name!),
                     dataCellItem(
                         data: socialStatusController
