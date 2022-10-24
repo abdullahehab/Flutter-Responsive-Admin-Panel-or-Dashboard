@@ -41,16 +41,6 @@ class UserView extends GetView {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomButton(
-                          buttonColor: AppColor.kPrimaryDarkColor,
-                          borderRadius: 6,
-                          width: 130,
-                          height: 40,
-                          buttonPadding: EdgeInsets.zero,
-                          text: "إضافة ابن / ابنة",
-                          withoutPadding: true,
-                          onPressed: () {})
-                      .addPaddingOnly(top: 10, bottom: 10),
-                  CustomButton(
                       buttonColor: AppColor.kPrimaryDarkColor,
                       borderRadius: 6,
                       width: 70,
@@ -159,26 +149,42 @@ class UserContainer extends StatelessWidget {
             text: customer.childrenNumber.toString()),
       ],
       footer: customer.husbandId.toString().isEmptyOrNull()
-          ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  CustomButton(
-                      buttonColor: AppColor.kPrimaryDarkColor,
-                      borderRadius: 6,
-                      width: 130,
-                      height: 40,
-                      buttonPadding: EdgeInsets.zero,
-                      text: "إضافة زوج/زوجة",
-                      withoutPadding: true,
-                      onPressed: () {
-                        PeopleDetailsParas params =
-                            PeopleDetailsParas(husbandId: customer.nationalId);
-                        viewForm(params, customer);
-                      }).addPaddingOnly(left: 10, top: 10, bottom: 10),
-                ],
-              ),
-            )
+          ? Row(
+            children: [
+              if(customer.gender == 'ذكر') ... {
+                CustomButton(
+                    buttonColor: AppColor.kPrimaryDarkColor,
+                    borderRadius: 6,
+                    width: 130,
+                    height: 40,
+                    buttonPadding: EdgeInsets.zero,
+                    text: "إضافة ابن / ابنة",
+                    withoutPadding: true,
+                    onPressed: () {})
+                    .addPaddingOnly(top: 10, bottom: 10),
+              },
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: [
+                      CustomButton(
+                          buttonColor: AppColor.kPrimaryDarkColor,
+                          borderRadius: 6,
+                          width: 130,
+                          height: 40,
+                          buttonPadding: EdgeInsets.zero,
+                          text: "إضافة زوج/زوجة",
+                          withoutPadding: true,
+                          onPressed: () {
+                            PeopleDetailsParas params =
+                                PeopleDetailsParas(husbandId: customer.nationalId);
+                            viewForm(params, customer);
+                          }).addPaddingOnly(left: 10, top: 10, bottom: 10),
+                    ],
+                  ),
+                ),
+            ],
+          )
           : null,
     );
   }
