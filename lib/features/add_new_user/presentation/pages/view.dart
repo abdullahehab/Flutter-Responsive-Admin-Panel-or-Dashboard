@@ -22,32 +22,12 @@ class UserView extends GetView {
     return buildBody(Get.arguments);
   }
 
-  var socialStatusController = Get.find<SocialStatusController>();
-  var userController = Get.find<UserController>();
-  var workController = Get.find<WorkController>();
-  var owningController = Get.find<OwningController>();
-  var housingController = Get.find<HousingController>();
+  final userController = Get.find<UserController>();
 
   Widget buildBody(UserEntity customer) {
     UserEntity? husbandModel;
     if (!customer.husbandId.toString().isEmptyOrNull()) {
       husbandModel = userController.getById(customer.husbandId!);
-    }
-
-    String getTitle(bool hasHusband, bool isMale) {
-      var title;
-      if (!hasHusband) {
-        title = 'بيانات الشخص';
-        return title;
-      }
-
-      if (isMale) {
-        title = 'بيانات الزوج';
-        return title;
-      }
-      title = 'بيانات الزوجه';
-
-      return title;
     }
 
     return Scaffold(
@@ -89,138 +69,9 @@ class UserView extends GetView {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: StyledContent(
-                    title: getTitle(
-                        !customer.husbandId.toString().isEmptyOrNull(),
-                        customer.gender == 'ذكر'),
-                    children: [
-                      buildHelperLabel(
-                        helperText: 'الاسم',
-                        text: customer.name.toString(),
-                      ),
-                      buildHelperLabel(
-                        helperText: 'الرقم القومي',
-                        text: customer.nationalId.toString(),
-                      ),
-                      buildHelperLabel(
-                          helperText: 'الحالة الاجتماعية',
-                          text: socialStatusController
-                              .getById(customer.socialStatus!)!
-                              .title!),
-                      buildHelperLabel(
-                          helperText: 'الوظيفة',
-                          text: workController
-                              .getById(customer.working!)!
-                              .title!),
-                      buildHelperLabel(
-                        helperText: 'العنوان',
-                        text: customer.address.toString(),
-                      ),
-                      buildHelperLabel(
-                        helperText: 'رقم الهاتف',
-                        text: customer.phone.toString(),
-                      ),
-                      buildHelperLabel(
-                          helperText: 'الحيازة',
-                          text: owningController
-                              .getById(customer.owning!)!
-                              .title!),
-                      buildHelperLabel(
-                          helperText: 'السكن',
-                          text: housingController
-                              .getById(customer.housing!)!
-                              .title!),
-                      buildHelperLabel(
-                          helperText: 'الحالة الصحية',
-                          text: customer.healthStatus.toString()),
-                      buildHelperLabel(
-                          helperText: 'التمييز',
-                          text: customer.type.toString()),
-                      buildHelperLabel(
-                          helperText: 'عدد الابناء',
-                          text: customer.childrenNumber.toString()),
-                    ],
-                    footer: customer.husbandId.toString().isEmptyOrNull()
-                        ? Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        children: [
-                          CustomButton(
-                              buttonColor: AppColor.kPrimaryDarkColor,
-                              borderRadius: 6,
-                              width: 130,
-                              height: 40,
-                              buttonPadding: EdgeInsets.zero,
-                              text: "إضافة زوج/زوجة",
-                              withoutPadding: true,
-                              onPressed: () {
-                                PeopleDetailsParas params =
-                                PeopleDetailsParas(
-                                    husbandId:
-                                    customer.nationalId);
-                                viewForm(params, customer);
-                              })
-                              .addPaddingOnly(
-                              left: 10, top: 10, bottom: 10),
-                        ],
-                      ),
-                    )
-                        : null,
-                  ),
-                ),
+                Expanded(child: UserContainer(customer: customer)),
                 if (!customer.husbandId.toString().isEmptyOrNull()) ...{
-                  Expanded(
-                    child: StyledContent(
-                        title: getTitle(true, husbandModel!.gender == 'ذكر'),
-                        children: [
-                          buildHelperLabel(
-                            helperText: 'الاسم',
-                            text: husbandModel.name.toString(),
-                          ),
-                          buildHelperLabel(
-                            helperText: 'الرقم القومي',
-                            text: husbandModel.nationalId.toString(),
-                          ),
-                          buildHelperLabel(
-                              helperText: 'الحالة الاجتماعية',
-                              text: socialStatusController
-                                  .getById(husbandModel.socialStatus!)!
-                                  .title!),
-                          buildHelperLabel(
-                              helperText: 'الوظيفة',
-                              text: workController
-                                  .getById(husbandModel.working!)!
-                                  .title!),
-                          buildHelperLabel(
-                            helperText: 'العنوان',
-                            text: husbandModel.address.toString(),
-                          ),
-                          buildHelperLabel(
-                            helperText: 'رقم الهاتف',
-                            text: husbandModel.phone.toString(),
-                          ),
-                          buildHelperLabel(
-                              helperText: 'الحيازة',
-                              text: owningController
-                                  .getById(husbandModel.owning!)!
-                                  .title!),
-                          buildHelperLabel(
-                              helperText: 'السكن',
-                              text: housingController
-                                  .getById(husbandModel.housing!)!
-                                  .title!),
-                          buildHelperLabel(
-                              helperText: 'الحالة الصحية',
-                              text: husbandModel.healthStatus.toString()),
-                          buildHelperLabel(
-                              helperText: 'التمييز',
-                              text: husbandModel.type.toString()),
-                          buildHelperLabel(
-                              helperText: 'عدد الابناء',
-                              text: husbandModel.childrenNumber.toString()),
-                        ]),
-                  ),
+                  Expanded(child: UserContainer(customer: husbandModel!)),
                 }
               ],
             )
@@ -233,6 +84,102 @@ class UserView extends GetView {
           ],
         ),
       ),
+    );
+  }
+}
+
+class UserContainer extends StatelessWidget {
+  UserContainer({Key? key, required this.customer}) : super(key: key);
+
+  final UserEntity customer;
+
+  final socialStatusController = Get.find<SocialStatusController>();
+  final userController = Get.find<UserController>();
+  final workController = Get.find<WorkController>();
+  final owningController = Get.find<OwningController>();
+  final housingController = Get.find<HousingController>();
+
+  String getTitle(bool hasHusband, bool isMale) {
+    var title;
+    if (!hasHusband) {
+      title = 'بيانات الشخص';
+      return title;
+    }
+
+    if (isMale) {
+      title = 'بيانات الزوج';
+      return title;
+    }
+    title = 'بيانات الزوجه';
+
+    return title;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return StyledContent(
+      title: getTitle(!customer.husbandId.toString().isEmptyOrNull(),
+          customer.gender == 'ذكر'),
+      children: [
+        buildHelperLabel(
+          helperText: 'الاسم',
+          text: customer.name.toString(),
+        ),
+        buildHelperLabel(
+          helperText: 'الرقم القومي',
+          text: customer.nationalId.toString(),
+        ),
+        buildHelperLabel(
+            helperText: 'الحالة الاجتماعية',
+            text:
+                socialStatusController.getById(customer.socialStatus!)!.title!),
+        buildHelperLabel(
+            helperText: 'الوظيفة',
+            text: workController.getById(customer.working!)!.title!),
+        buildHelperLabel(
+          helperText: 'العنوان',
+          text: customer.address.toString(),
+        ),
+        buildHelperLabel(
+          helperText: 'رقم الهاتف',
+          text: customer.phone.toString(),
+        ),
+        buildHelperLabel(
+            helperText: 'الحيازة',
+            text: owningController.getById(customer.owning!)!.title!),
+        buildHelperLabel(
+            helperText: 'السكن',
+            text: housingController.getById(customer.housing!)!.title!),
+        buildHelperLabel(
+            helperText: 'الحالة الصحية',
+            text: customer.healthStatus.toString()),
+        buildHelperLabel(helperText: 'التمييز', text: customer.type.toString()),
+        buildHelperLabel(
+            helperText: 'عدد الابناء',
+            text: customer.childrenNumber.toString()),
+      ],
+      footer: customer.husbandId.toString().isEmptyOrNull()
+          ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  CustomButton(
+                      buttonColor: AppColor.kPrimaryDarkColor,
+                      borderRadius: 6,
+                      width: 130,
+                      height: 40,
+                      buttonPadding: EdgeInsets.zero,
+                      text: "إضافة زوج/زوجة",
+                      withoutPadding: true,
+                      onPressed: () {
+                        PeopleDetailsParas params =
+                            PeopleDetailsParas(husbandId: customer.nationalId);
+                        viewForm(params, customer);
+                      }).addPaddingOnly(left: 10, top: 10, bottom: 10),
+                ],
+              ),
+            )
+          : null,
     );
   }
 
