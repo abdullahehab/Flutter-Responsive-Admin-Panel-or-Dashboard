@@ -108,85 +108,87 @@ class UserContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StyledContent(
-      title: getTitle(!customer.husbandId.toString().isEmptyOrNull(),
-          customer.gender == 'ذكر'),
-      children: [
-        buildHelperLabel(
-          helperText: 'الاسم',
-          text: customer.name.toString(),
-        ),
-        buildHelperLabel(
-          helperText: 'الرقم القومي',
-          text: customer.nationalId.toString(),
-        ),
-        buildHelperLabel(
-            helperText: 'الحالة الاجتماعية',
-            text:
-                socialStatusController.getById(customer.socialStatus!)!.title!),
-        buildHelperLabel(
-            helperText: 'الوظيفة',
-            text: workController.getById(customer.working!)!.title!),
-        buildHelperLabel(
-          helperText: 'العنوان',
-          text: customer.address.toString(),
-        ),
-        buildHelperLabel(
-          helperText: 'رقم الهاتف',
-          text: customer.phone.toString(),
-        ),
-        buildHelperLabel(
-            helperText: 'الحيازة',
-            text: owningController.getById(customer.owning!)!.title!),
-        buildHelperLabel(
-            helperText: 'السكن',
-            text: housingController.getById(customer.housing!)!.title!),
-        buildHelperLabel(
-            helperText: 'الحالة الصحية',
-            text: customer.healthStatus.toString()),
-        buildHelperLabel(helperText: 'التمييز', text: customer.type.toString()),
-        buildHelperLabel(
-            helperText: 'عدد الابناء',
-            text: customer.childrenNumber.toString()),
-      ],
-      footer: customer.husbandId.toString().isEmptyOrNull()
-          ? Row(
-              children: [
-                if (customer.gender == 'ذكر') ...{
-                  CustomButton(
-                          buttonColor: AppColor.kPrimaryDarkColor,
-                          borderRadius: 6,
-                          width: 130,
-                          height: 40,
-                          buttonPadding: EdgeInsets.zero,
-                          text: "إضافة ابن / ابنة",
-                          withoutPadding: true,
-                          onPressed: () {})
-                      .addPaddingOnly(top: 10, bottom: 10),
-                },
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      CustomButton(
-                          buttonColor: AppColor.kPrimaryDarkColor,
-                          borderRadius: 6,
-                          width: 130,
-                          height: 40,
-                          buttonPadding: EdgeInsets.zero,
-                          text: "إضافة زوج/زوجة",
-                          withoutPadding: true,
-                          onPressed: () {
-                            PeopleDetailsParas params = PeopleDetailsParas(
-                                husbandId: customer.nationalId);
-                            viewForm(params, customer);
-                          }).addPaddingOnly(left: 10, top: 10, bottom: 10),
-                    ],
-                  ),
+        title: getTitle(!customer.husbandId.toString().isEmptyOrNull(),
+            customer.gender == 'ذكر'),
+        children: [
+          buildHelperLabel(
+            helperText: 'الاسم',
+            text: customer.name.toString(),
+          ),
+          buildHelperLabel(
+            helperText: 'الرقم القومي',
+            text: customer.nationalId.toString(),
+          ),
+          buildHelperLabel(
+              helperText: 'الحالة الاجتماعية',
+              text: socialStatusController
+                  .getById(customer.socialStatus!)!
+                  .title!),
+          buildHelperLabel(
+              helperText: 'الوظيفة',
+              text: workController.getById(customer.working!)!.title!),
+          buildHelperLabel(
+            helperText: 'العنوان',
+            text: customer.address.toString(),
+          ),
+          buildHelperLabel(
+            helperText: 'رقم الهاتف',
+            text: customer.phone.toString(),
+          ),
+          buildHelperLabel(
+              helperText: 'الحيازة',
+              text: owningController.getById(customer.owning!)!.title!),
+          buildHelperLabel(
+              helperText: 'السكن',
+              text: housingController.getById(customer.housing!)!.title!),
+          buildHelperLabel(
+              helperText: 'الحالة الصحية',
+              text: customer.healthStatus.toString()),
+          buildHelperLabel(
+              helperText: 'التمييز', text: customer.type.toString()),
+          buildHelperLabel(
+              helperText: 'عدد الابناء',
+              text: customer.childrenNumber.toString()),
+        ],
+        footer: Row(
+          children: [
+            if (customer.gender == 'ذكر' &&
+                !customer.husbandId.toString().isEmptyOrNull()) ...{
+              CustomButton(
+                      buttonColor: AppColor.kPrimaryDarkColor,
+                      borderRadius: 6,
+                      width: 130,
+                      height: 40,
+                      buttonPadding: EdgeInsets.zero,
+                      text: "إضافة ابن / ابنة",
+                      withoutPadding: true,
+                      onPressed: () {})
+                  .addPaddingOnly(top: 10, bottom: 10, right: 10,),
+            },
+            if (customer.husbandId.toString().isEmptyOrNull()) ...{
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  children: [
+                    CustomButton(
+                        buttonColor: AppColor.kPrimaryDarkColor,
+                        borderRadius: 6,
+                        width: 130,
+                        height: 40,
+                        buttonPadding: EdgeInsets.zero,
+                        text: "إضافة زوج/زوجة",
+                        withoutPadding: true,
+                        onPressed: () {
+                          PeopleDetailsParas params = PeopleDetailsParas(
+                              husbandId: customer.nationalId);
+                          viewForm(params, customer);
+                        }).addPaddingOnly(right: 10, top: 10, bottom: 10),
+                  ],
                 ),
-              ],
-            )
-          : null,
-    );
+              ),
+            }
+          ],
+        ));
   }
 
   viewForm(PeopleDetailsParas paras, UserEntity user) async {
