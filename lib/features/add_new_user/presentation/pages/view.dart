@@ -40,7 +40,7 @@ class UserView extends GetView {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   CustomButton(
                       buttonColor: AppColor.kPrimaryDarkColor,
