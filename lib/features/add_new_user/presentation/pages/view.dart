@@ -8,6 +8,9 @@ import '../../../../core/shared_components/styled_content_widget.dart';
 import '../../../../extensions/extension.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/page_route_name.dart';
+import '../../../../widget/data_cell_item.dart';
+import '../../../../widget/data_column_Item.dart';
+import '../../../../widget/data_table.dart';
 import '../../../../widget/main_button.dart';
 import '../../../housing/presentation/controller/controller.dart';
 import '../../../owning/presentation/controller/controller.dart';
@@ -26,8 +29,19 @@ class UserView extends GetView {
 
   Widget buildBody(UserEntity customer) {
     UserEntity? husbandModel;
+    List<UserEntity>? children = [];
     if (!customer.husbandId.toString().isEmptyOrNull()) {
       husbandModel = userController.getById(customer.husbandId!);
+    }
+
+    if (customer.gender == 'ذكر') {
+      children = userController.users
+          .where((user) => user.parentId == customer.nationalId)
+          .toList();
+    } else if (husbandModel != null && husbandModel.gender == 'ذكر') {
+      children = userController.users
+          .where((user) => user.parentId == husbandModel?.nationalId)
+          .toList();
     }
 
     return Scaffold(
@@ -64,13 +78,11 @@ class UserView extends GetView {
                   Expanded(child: UserContainer(customer: husbandModel!)),
                 }
               ],
+            ),
+            SizedBox(height: 30.h),
+            ChildrenListView(
+              children: children,
             )
-            // SizedBox(
-            //   height: 400,
-            //   child: NoteCustomersListView(
-            //     customer: customer,
-            //   ),
-            // )
           ],
         ),
       ),
@@ -155,15 +167,22 @@ class UserContainer extends StatelessWidget {
             if (customer.gender == 'ذكر' &&
                 !customer.husbandId.toString().isEmptyOrNull()) ...{
               CustomButton(
-                      buttonColor: AppColor.kPrimaryDarkColor,
-                      borderRadius: 6,
-                      width: 130,
-                      height: 40,
-                      buttonPadding: EdgeInsets.zero,
-                      text: "إضافة ابن / ابنة",
-                      withoutPadding: true,
-                      onPressed: () {})
-                  .addPaddingOnly(top: 10, bottom: 10, right: 10,),
+                  buttonColor: AppColor.kPrimaryDarkColor,
+                  borderRadius: 6,
+                  width: 130,
+                  height: 40,
+                  buttonPadding: EdgeInsets.zero,
+                  text: "إضافة ابن / ابنة",
+                  withoutPadding: true,
+                  onPressed: () {
+                    PeopleDetailsParas params =
+                        PeopleDetailsParas(parentId: customer.nationalId);
+                    viewForm(params, customer);
+                  }).addPaddingOnly(
+                top: 10,
+                bottom: 10,
+                right: 10,
+              ),
             },
             if (customer.husbandId.toString().isEmptyOrNull()) ...{
               Padding(
@@ -208,5 +227,70 @@ class UserContainer extends StatelessWidget {
       Get.back();
       Get.toNamed(PageRouteName.PEOPLE_DETAILS, arguments: user);
     }
+  }
+}
+
+class ChildrenListView extends StatelessWidget {
+  ChildrenListView({Key? key, required this.children}) : super(key: key);
+
+  final List<UserEntity> children;
+
+  final socialStatusController = Get.find<SocialStatusController>();
+  final workController = Get.find<WorkController>();
+  final owningController = Get.find<OwningController>();
+  final housingController = Get.find<HousingController>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: children.length > 0,
+      child: SizedBox(
+        height: 400,
+        child: StyledContent(
+          subTitle: 'الابناء ( ${children.length} )',
+          children: [
+            dataTable(
+              columns: [
+                dataColumnItem(title: '#'),
+                dataColumnItem(title: 'الاسم'),
+                dataColumnItem(title: 'الحالة الاجتماعية'),
+                dataColumnItem(title: 'الوظيفة'),
+                dataColumnItem(title: 'العنوان'),
+                dataColumnItem(title: 'رقم الهاتف'),
+                dataColumnItem(title: 'الحيازة'),
+                dataColumnItem(title: 'السكن'),
+                dataColumnItem(title: 'الحالة الصحية'),
+                dataColumnItem(title: 'التمييز'),
+                dataColumnItem(title: 'عدد الابناء'),
+              ],
+              rows: List.generate(children.length, (index) {
+                var item = children?.elementAt(index);
+                return DataRow(
+                  cells: [
+                    dataCellItem(data: item!.nationalId.toString()),
+                    dataCellItem(data: item.name!),
+                    dataCellItem(
+                        data: socialStatusController
+                            .getById(item.socialStatus!)!
+                            .title!),
+                    dataCellItem(
+                        data: workController.getById(item.working!)!.title!),
+                    dataCellItem(data: item.address!),
+                    dataCellItem(data: item.phone!),
+                    dataCellItem(
+                        data: owningController.getById(item.owning!)!.title!),
+                    dataCellItem(
+                        data: housingController.getById(item.housing!)!.title!),
+                    dataCellItem(data: item.healthStatus.toString()),
+                    dataCellItem(data: item.type.toString()),
+                    dataCellItem(data: item.childrenNumber.toString()),
+                  ],
+                );
+              }),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
