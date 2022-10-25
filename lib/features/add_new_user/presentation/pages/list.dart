@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
-
+import 'package:admin/extensions/extension.dart';
 import '../../../../core/shared_components/styled_content_widget.dart';
 import '../../../../core/shared_page/app_empty.dart';
 import '../../../../widget/data_cell_item.dart';
@@ -68,6 +68,17 @@ class UsersList extends GetView<UserController> {
                   ],
                   rows: List.generate(users!.length, (index) {
                     var item = users.elementAt(index);
+
+                    List<UserEntity> children = [];
+
+                    if (item.gender == 'ذكر') {
+                      children = users
+                          .where((user) => user.parentId == item.nationalId)
+                          .toList();
+
+                      item.childrenNumber = children.length;
+                    }
+
                     return DataRow(
                       cells: [
                         dataCellItem(data: item.nationalId.toString()),
