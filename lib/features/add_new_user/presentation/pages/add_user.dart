@@ -10,6 +10,7 @@ import 'package:admin/utils/colors.dart';
 import 'package:admin/widget/custom_text_field.dart';
 import 'package:admin/widget/gender_selector.dart';
 import 'package:admin/widget/main_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -81,7 +82,6 @@ class AddPeople extends GetView<UserController> {
 
       genderNotifier.value = userModel.gender!;
     }
-
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -292,8 +292,8 @@ class AddPeople extends GetView<UserController> {
                 SizedBox(height: 10),
                 buildDateTimePickerField(
                   labelText: 'تاريخ الميلاد',
+                  lastDate: DateTime.now().year,
                   initialValue: userModel.birthDate,
-                  firstDate: DateTime.now().year,
                   onSaved: (value) => userModel.birthDate = value,
                 ),
                 SizedBox(height: 10),
