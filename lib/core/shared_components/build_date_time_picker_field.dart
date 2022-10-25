@@ -67,6 +67,7 @@ Widget buildDateTimePickerField(
         InkWell(
           onTap: () {
             showDatePicker(
+              locale: Locale('ar'),
               context: Get.context!,
               initialDate:
                   lastDate == null ? DateTime.now() : DateTime(lastDate),
