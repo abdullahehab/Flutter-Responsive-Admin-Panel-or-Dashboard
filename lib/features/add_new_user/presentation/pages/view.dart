@@ -265,6 +265,8 @@ class ChildrenListView extends StatelessWidget {
                 dataColumnItem(title: 'الحالة الصحية'),
                 dataColumnItem(title: 'التمييز'),
                 dataColumnItem(title: 'عدد الابناء'),
+                dataColumnItem(title: 'موقف التجنيد'),
+                dataColumnItem(title: 'المرحلة الدراسية'),
               ],
               rows: List.generate(children.length, (index) {
                 var item = children.elementAt(index);
@@ -287,6 +289,8 @@ class ChildrenListView extends StatelessWidget {
                     dataCellItem(data: item.healthStatus.toString()),
                     dataCellItem(data: item.type.toString()),
                     dataCellItem(data: item.childrenNumber.toString()),
+                    dataCellItem(data: item.recruitment.toString()),
+                    dataCellItem(data: item.educationalLevel.toString()),
                   ],
                 );
               }),

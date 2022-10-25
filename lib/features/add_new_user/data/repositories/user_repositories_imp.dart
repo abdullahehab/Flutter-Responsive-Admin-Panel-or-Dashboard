@@ -26,7 +26,9 @@ class UserRepositoryImp implements UserRepository {
         housing: user.housing,
         parentId: user.parentId,
         owning: user.owning,
-        gender: user.gender);
+        gender: user.gender,
+        recruitment: user.recruitment,
+        educationalLevel: user.educationalLevel);
 
     return remoteDataSourceImp.addUser(userModel);
   }
@@ -48,7 +50,9 @@ class UserRepositoryImp implements UserRepository {
         housing: user.housing,
         parentId: user.parentId,
         owning: user.owning,
-        gender: user.gender);
+        gender: user.gender,
+        recruitment: user.recruitment,
+        educationalLevel: user.educationalLevel);
 
     return remoteDataSourceImp.updateUser(userModel);
   }
