@@ -18,14 +18,23 @@ import '../../../social_status/presentation/controller/controller.dart';
 import '../../../working/domain/entities/work.dart';
 import '../../../working/presentation/controller/controller.dart';
 
+class FilterModel {
+  String? name;
+  String? nationalId;
+  String? work;
+  String? owning;
+  String? housing;
+  String? socialStatus;
+}
+
 class FilterForm extends GetView<UserController> {
-   FilterForm({Key? key}) : super(key: key);
+  FilterForm({Key? key}) : super(key: key);
 
   final socialStatusController = Get.find<SocialStatusController>();
   final workController = Get.find<WorkController>();
   final owningController = Get.find<OwningController>();
   final housingController = Get.find<HousingController>();
-
+  FilterModel filterModel = FilterModel();
   @override
   Widget build(BuildContext context) {
     return StyledContent(
@@ -36,31 +45,35 @@ class FilterForm extends GetView<UserController> {
           child: Column(
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: CustomTextField(
-                      validator: TextFieldValidators.isName,
                       prefixIcon:
                           Icon(FontAwesomeIcons.user, size: APP_ICON_SIZE),
                       contentPadding: EdgeInsets.only(right: 10),
-                      // onChangedText: (String text) => userModel.name = text,
-                      // initialValue: userModel.name,
+                      onChangedText: (String text) {
+                        filterModel.name = text;
+                        controller.filterUsers(filterModel);
+                      },
                       hint: 'الاسم',
                       outLineText: 'الاسم',
                       iconPathWidth: 17,
-                      textInputType: TextInputType.text,
+                      textInputType: TextInputType.name,
                       textInputAction: TextInputAction.next,
                     ),
                   ),
                   SizedBox(width: 2.w),
                   Expanded(
                     child: CustomTextField(
-                      validator: TextFieldValidators.isPhone,
                       contentPadding: EdgeInsets.only(right: 10),
                       prefixIcon: Icon(FontAwesomeIcons.addressBook,
                           size: APP_ICON_SIZE),
-                      // onChangedText: (String text) => userModel.phone = text,
-                      // initialValue: userModel.phone,
+                      onChangedText: (String text) {
+                        filterModel.nationalId = text;
+                        controller.filterUsers(filterModel);
+                      },
                       hint: 'الرقم القومي',
                       outLineText: 'الرقم القومي',
                       iconPathWidth: 17,
@@ -80,7 +93,8 @@ class FilterForm extends GetView<UserController> {
                       items: workController.workList,
                       onChanged: (value) {
                         var selected = value as Work;
-                        // userModel.working = selected.id.toString();
+                        filterModel.work = selected.id.toString();
+                        controller.filterUsers(filterModel);
                       },
                     ),
                   ),
@@ -100,7 +114,8 @@ class FilterForm extends GetView<UserController> {
                       items: owningController.owningList,
                       onChanged: (value) {
                         var selected = value as Owning;
-                        // userModel.owning = selected.id.toString();
+                        filterModel.owning = selected.id.toString();
+                        controller.filterUsers(filterModel);
                       },
                     ),
                   ),
@@ -115,7 +130,8 @@ class FilterForm extends GetView<UserController> {
                     items: housingController.housingList,
                     onChanged: (value) {
                       var selected = value as Housing;
-                      // userModel.housing = selected.id.toString();
+                      filterModel.housing = selected.id.toString();
+                      controller.filterUsers(filterModel);
                     },
                   )),
                   SizedBox(width: 2.w),
@@ -130,7 +146,8 @@ class FilterForm extends GetView<UserController> {
                       items: socialStatusController.socialStatusList,
                       onChanged: (value) {
                         var selected = value as SocialStatus;
-                        // userModel.socialStatus = selected.id.toString();
+                        filterModel.socialStatus = selected.id.toString();
+                        controller.filterUsers(filterModel);
                       },
                     ),
                   ),
