@@ -250,7 +250,7 @@ class ChildrenListView extends StatelessWidget {
       child: SizedBox(
         height: 400,
         child: StyledContent(
-          subTitle: 'الابناء ( ${children.length} )',
+          title: 'الابناء ( ${children.length} )',
           children: [
             dataTable(
               columns: [
