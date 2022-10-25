@@ -43,6 +43,9 @@ class AddPeople extends GetView<UserController> {
 
   @override
   Widget build(BuildContext context) {
+    final ValueNotifier<String> genderNotifier =
+        ValueNotifier<String>(genderKeys[0]);
+
     var owningController = Get.find<OwningController>();
     var housingController = Get.find<HousingController>();
     var socialStatusController = Get.find<SocialStatusController>();
@@ -52,6 +55,7 @@ class AddPeople extends GetView<UserController> {
     if (paras?.userModel == null) {
       var model = paras;
 
+      genderNotifier.value = 'ذكر';
       userModel = UserEntity(
         nationalId: '',
         name: '',
@@ -74,6 +78,8 @@ class AddPeople extends GetView<UserController> {
       var model =
           paras?.userModel ?? (Get.arguments as PeopleDetailsParas).userModel!;
       userModel = model;
+
+      genderNotifier.value = userModel.gender!;
     }
 
     return Scaffold(
@@ -149,6 +155,56 @@ class AddPeople extends GetView<UserController> {
                   iconPathWidth: 17,
                   textInputType: TextInputType.text,
                   textInputAction: TextInputAction.next,
+                ),
+                ValueListenableBuilder(
+                  valueListenable: genderNotifier,
+                  builder: (BuildContext context, String gender, _) =>
+                      Visibility(
+                    visible: !userModel.parentId.toString().isEmptyOrNull() &&
+                        gender == 'ذكر',
+                    child: Column(
+                      children: [
+                        SizedBox(height: 10),
+                        CustomTextField(
+                          validator: TextFieldValidators.isAddress,
+                          contentPadding: EdgeInsets.only(right: 10),
+                          prefixIcon: Icon(FontAwesomeIcons.addressBook,
+                              size: APP_ICON_SIZE),
+                          onChangedText: (String text) =>
+                              userModel.address = text,
+                          hint: 'موقف التجنيد',
+                          initialValue: userModel.address,
+                          outLineText: 'موقف التجنيد',
+                          iconPathWidth: 17,
+                          textInputType: TextInputType.text,
+                          textInputAction: TextInputAction.next,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Visibility(
+                  visible: !userModel.parentId.toString().isEmptyOrNull(),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 10),
+                      CustomTextField(
+                        validator: TextFieldValidators.isAddress,
+                        contentPadding: EdgeInsets.only(right: 10),
+                        prefixIcon: Icon(FontAwesomeIcons.addressBook,
+                            size: APP_ICON_SIZE),
+                        onChangedText: (String text) =>
+                            userModel.address = text,
+                        hint: 'المرحلة الدراسية',
+                        initialValue: userModel.address,
+                        outLineText: 'المرحلة الدراسية',
+                        iconPathWidth: 17,
+                        textInputType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 10),
                 CustomTextField(
@@ -257,10 +313,17 @@ class AddPeople extends GetView<UserController> {
                 SizedBox(
                   height: 10,
                 ),
-                GenderSelector(
-                  outLineText: 'النوع',
-                  initValue: userModel.gender,
-                  onChanged: (newValue) => userModel.gender = newValue,
+                ValueListenableBuilder<String>(
+                  valueListenable: genderNotifier,
+                  builder: (BuildContext context, String gender, _) =>
+                      GenderSelector(
+                    outLineText: 'النوع',
+                    initValue: userModel.gender,
+                    onChanged: (newValue) {
+                      genderNotifier.value = newValue!;
+                      userModel.gender = newValue;
+                    },
+                  ),
                 ),
               ],
             ).addPaddingOnly(bottom: context.mediaQueryPadding.bottom),
