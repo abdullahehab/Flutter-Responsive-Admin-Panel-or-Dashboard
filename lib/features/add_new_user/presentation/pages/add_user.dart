@@ -171,9 +171,9 @@ class AddPeople extends GetView<UserController> {
                           prefixIcon: Icon(FontAwesomeIcons.addressBook,
                               size: APP_ICON_SIZE),
                           onChangedText: (String text) =>
-                              userModel.address = text,
+                              userModel.recruitment = text,
                           hint: 'موقف التجنيد',
-                          initialValue: userModel.address,
+                          initialValue: userModel.recruitment,
                           outLineText: 'موقف التجنيد',
                           iconPathWidth: 17,
                           textInputType: TextInputType.text,
@@ -195,9 +195,9 @@ class AddPeople extends GetView<UserController> {
                         prefixIcon: Icon(FontAwesomeIcons.addressBook,
                             size: APP_ICON_SIZE),
                         onChangedText: (String text) =>
-                            userModel.address = text,
+                            userModel.educationalLevel = text,
                         hint: 'المرحلة الدراسية',
-                        initialValue: userModel.address,
+                        initialValue: userModel.educationalLevel,
                         outLineText: 'المرحلة الدراسية',
                         iconPathWidth: 17,
                         textInputType: TextInputType.text,

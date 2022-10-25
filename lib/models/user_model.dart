@@ -21,12 +21,16 @@ class UserModel extends UserEntity {
     this.housing,
     this.parentId,
     this.owning,
+    this.educationalLevel,
+    this.recruitment,
     this.gender = 'ذكر',
   }) : super(
             nationalId: nationalId,
             address: address,
             name: name,
             gender: gender,
+            educationalLevel: educationalLevel,
+            recruitment: recruitment,
             husbandId: husbandId,
             parentId: parentId,
             socialStatus: socialStatus,
@@ -53,6 +57,8 @@ class UserModel extends UserEntity {
   int? childrenNumber;
   String? housing;
   String? owning;
+  String? educationalLevel;
+  String? recruitment;
 
   factory UserModel.fromRawJson(String str) =>
       UserModel.fromJson(json.decode(str));
@@ -74,6 +80,8 @@ class UserModel extends UserEntity {
       owning: json["owning"],
       name: json["name"],
       gender: json['gender'],
+      educationalLevel: json['educationalLevel'],
+      recruitment: json['recruitment'],
       type: json['type']);
 
   Map<String, dynamic> toJson() => {
@@ -91,7 +99,9 @@ class UserModel extends UserEntity {
         "housing": housing,
         "owning": owning,
         "type": type,
-        "gender": gender
+        "gender": gender,
+        "educationalLevel": educationalLevel,
+        "recruitment": recruitment,
       };
 
   @override

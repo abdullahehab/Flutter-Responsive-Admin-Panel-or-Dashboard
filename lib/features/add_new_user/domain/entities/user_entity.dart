@@ -8,6 +8,8 @@ class UserEntity {
     this.gender = 'ذكر',
     this.healthStatus = 'غير مريض',
     this.housing,
+    this.educationalLevel,
+    this.recruitment,
     this.husbandId,
     this.nationalId,
     this.owning,
@@ -25,6 +27,8 @@ class UserEntity {
   String? gender;
   String? husbandId;
   String? parentId;
+  String? educationalLevel;
+  String? recruitment;
   String? socialStatus;
   int? birthDate;
   String? phone;
