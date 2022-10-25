@@ -9,6 +9,7 @@ import '../../../../core/shared_components/drop_down_widget.dart';
 import '../../../../core/shared_components/styled_content_widget.dart';
 import '../../../../utils/text_field_validator.dart';
 import '../../../../widget/custom_text_field.dart';
+import '../../../../widget/main_button.dart';
 import '../../../housing/domain/entities/housing.dart';
 import '../../../housing/presentation/controller/controller.dart';
 import '../../../owning/domain/entities/owning.dart';
@@ -39,6 +40,11 @@ class FilterForm extends GetView<UserController> {
   Widget build(BuildContext context) {
     return StyledContent(
       title: "خيارات التصنيف",
+      titleWidget: CustomButton(
+          width: 200,
+          height: 50,
+          text: 'إعادة تحميل الاشخاص',
+          onPressed: () {}),
       children: [
         Padding(
           padding: const EdgeInsets.all(20.0),
