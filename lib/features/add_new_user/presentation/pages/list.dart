@@ -8,17 +8,27 @@ import 'package:admin/widget/main_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:admin/extensions/extension.dart';
+import '../../../../core/constants/constants.dart';
+import '../../../../core/shared_components/drop_down_widget.dart';
 import '../../../../core/shared_components/styled_content_widget.dart';
 import '../../../../core/shared_page/app_empty.dart';
+import '../../../../utils/text_field_validator.dart';
+import '../../../../widget/custom_text_field.dart';
 import '../../../../widget/data_cell_item.dart';
 import '../../../../widget/data_column_Item.dart';
 import '../../../../widget/data_controller.dart';
 import '../../../../widget/data_table.dart';
+import '../../../housing/domain/entities/housing.dart';
+import '../../../owning/domain/entities/owning.dart';
+import '../../../social_status/domain/entities/social_status.dart';
+import '../../../working/domain/entities/work.dart';
 import '../controller/user_controller.dart';
 import 'add_user.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UsersList extends GetView<UserController> {
   @override
@@ -42,7 +52,118 @@ class UsersList extends GetView<UserController> {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
-            SizedBox(height: 20),
+            SizedBox(height: 40.h),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomTextField(
+                          validator: TextFieldValidators.isName,
+                          prefixIcon:
+                              Icon(FontAwesomeIcons.user, size: APP_ICON_SIZE),
+                          contentPadding: EdgeInsets.only(right: 10),
+                          // onChangedText: (String text) => userModel.name = text,
+                          // initialValue: userModel.name,
+                          hint: 'الاسم',
+                          outLineText: 'الاسم',
+                          iconPathWidth: 17,
+                          textInputType: TextInputType.text,
+                          textInputAction: TextInputAction.next,
+                        ),
+                      ),
+                      SizedBox(width: 2.w),
+                      Expanded(
+                        child: CustomTextField(
+                          validator: TextFieldValidators.isPhone,
+                          contentPadding: EdgeInsets.only(right: 10),
+                          prefixIcon: Icon(FontAwesomeIcons.addressBook,
+                              size: APP_ICON_SIZE),
+                          // onChangedText: (String text) => userModel.phone = text,
+                          // initialValue: userModel.phone,
+                          hint: 'الرقم القومي',
+                          outLineText: 'الرقم القومي',
+                          iconPathWidth: 17,
+                          maxLength: 11,
+                          textInputType: TextInputType.phone,
+                          textInputAction: TextInputAction.next,
+                        ),
+                      ),
+                      SizedBox(width: 2.w),
+                      Expanded(
+                        child: DropDownWidgetX<Work>(
+                          requiredFiled: true,
+                          labelText: 'الوظيفة',
+                          // selectedItem: workController.getById(userModel.working!),
+                          itemAsString: (Work? u) => u!.title!,
+                          maxHeight: 100,
+                          items: workController.workList,
+                          onChanged: (value) {
+                            var selected = value as Work;
+                            // userModel.working = selected.id.toString();
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 2.w),
+                    ],
+                  ),
+                  SizedBox(height: 10.h),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: DropDownWidgetX<Owning>(
+                          requiredFiled: true,
+                          labelText: 'الحيازة',
+                          // selectedItem: owningController.getById(userModel.owning!),
+                          itemAsString: (Owning? u) => u!.title!,
+                          maxHeight: 100,
+                          items: owningController.owningList,
+                          onChanged: (value) {
+                            var selected = value as Owning;
+                            // userModel.owning = selected.id.toString();
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 2.w),
+                      Expanded(
+                          child: DropDownWidgetX<Housing>(
+                        requiredFiled: true,
+                        labelText: 'السكن',
+                        // selectedItem: housingController.getById(userModel.housing!),
+                        itemAsString: (Housing? u) => u!.title!,
+                        maxHeight: 100,
+                        items: housingController.housingList,
+                        onChanged: (value) {
+                          var selected = value as Housing;
+                          // userModel.housing = selected.id.toString();
+                        },
+                      )),
+                      SizedBox(width: 2.w),
+                      Expanded(
+                        child: DropDownWidgetX<SocialStatus>(
+                          requiredFiled: true,
+                          labelText: 'الحالة الاجتماعية',
+                          // selectedItem:
+                          // socialStatusController.getById(userModel.socialStatus!),
+                          itemAsString: (SocialStatus? u) => u!.title!,
+                          maxHeight: 100,
+                          items: socialStatusController.socialStatusList,
+                          onChanged: (value) {
+                            var selected = value as SocialStatus;
+                            // userModel.socialStatus = selected.id.toString();
+                          },
+                        ),
+                      ),
+
+                      SizedBox(width: 2.w),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            SizedBox(height: 40.h),
             StyledContent(
               subTitle: 'الاشخاص',
               leadingWidget: CustomButton(
