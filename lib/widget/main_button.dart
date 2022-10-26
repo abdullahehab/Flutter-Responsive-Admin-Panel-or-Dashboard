@@ -35,7 +35,6 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: height ?? 50.h,
-      width: width ?? MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 4)),
       ),
