@@ -110,6 +110,10 @@ class UserController extends GetxController with StateMixin<List<UserEntity>> {
     change(filteredList, status: RxStatus.success());
   }
 
+  void reset() {
+    change(users, status: RxStatus.success());
+  }
+
   Future updateUser(UserEntity user, {Function()? onSuccess}) async {
     change(null, status: RxStatus.loading());
     var data = await _updateUserUsecase.call(user);

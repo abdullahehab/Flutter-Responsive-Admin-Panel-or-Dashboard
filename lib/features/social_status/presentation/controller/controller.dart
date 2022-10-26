@@ -93,6 +93,6 @@ class SocialStatusController extends GetxController with StateMixin {
 
   SocialStatus? getById(String id) {
     return socialStatusList
-            .firstWhereOrNull((element) => element.id.toString() == id);;
+            .firstWhereOrNull((element) => element.id.toString() == id);
   }
 }
