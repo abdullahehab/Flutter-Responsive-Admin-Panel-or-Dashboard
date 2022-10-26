@@ -86,31 +86,30 @@ class AddPeople extends GetView<UserController> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
-          title: CustomButton(
-              buttonColor: AppColor.kPrimaryDarkColor,
-              borderRadius: 6,
-              width: 70,
-              height: 40,
-              buttonPadding: EdgeInsets.zero,
-              text: "حفظ",
-              withoutPadding: true,
-              onPressed: () {
-                if (_formKey.currentState!.validate() == false) {
-                  return;
-                }
-                _formKey.currentState!.save();
-
-                if (isEdit) {
-                  controller.updateUser(userModel);
-                  Get.back();
-                  return;
-                }
-
-                controller.addUser(userModel);
-                Get.back(result: userModel.nationalId);
-              }).addPaddingOnly(left: 10, top: 10, bottom: 10),
-          centerTitle: false,
           actions: [
+            CustomButton(
+                buttonColor: AppColor.kPrimaryDarkColor,
+                borderRadius: 6,
+                width: 70,
+                height: 40,
+                buttonPadding: EdgeInsets.zero,
+                text: "حفظ",
+                withoutPadding: true,
+                onPressed: () {
+                  if (_formKey.currentState!.validate() == false) {
+                    return;
+                  }
+                  _formKey.currentState!.save();
+
+                  if (isEdit) {
+                    controller.updateUser(userModel);
+                    Get.back();
+                    return;
+                  }
+
+                  controller.addUser(userModel);
+                  Get.back(result: userModel.nationalId);
+                }).addPaddingOnly(left: 10, top: 10, bottom: 10),
             CustomButton(
                 buttonColor: AppColor.kPrimaryDarkColor,
                 borderRadius: 6,
