@@ -35,6 +35,10 @@ class FilterForm extends GetView<UserController> {
   final workController = Get.find<WorkController>();
   final owningController = Get.find<OwningController>();
   final housingController = Get.find<HousingController>();
+
+  final nameController = TextEditingController();
+  final nationalIdController = TextEditingController();
+
   FilterModel filterModel = FilterModel();
   @override
   Widget build(BuildContext context) {
@@ -44,7 +48,13 @@ class FilterForm extends GetView<UserController> {
           width: 200,
           height: 50,
           text: 'إعادة تحميل الاشخاص',
-          onPressed: () {}),
+          onPressed: () {
+            nameController.clear();
+            nationalIdController.clear();
+
+
+            controller.reset();
+          }),
       children: [
         Padding(
           padding: const EdgeInsets.all(20.0),
