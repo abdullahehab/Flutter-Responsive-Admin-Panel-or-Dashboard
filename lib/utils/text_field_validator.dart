@@ -2,8 +2,8 @@ import 'package:admin/utils/validator.dart';
 
 class TextFieldValidators {
   static String? isName(String? name) {
-    if (Validator.isName(name!)) return null;
-    return 'برجاء إدخال الاسم كامل';
+    if (Validator.isArName(name!)) return null;
+    return 'برجاء إدخال الاسم كامل و بشكل صحيح';
   }
 
   static String? isFullName(String name) {

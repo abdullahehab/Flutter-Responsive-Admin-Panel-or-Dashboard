@@ -46,7 +46,7 @@ class WorksList extends GetView<WorkController> {
               leadingWidget: CustomButton(
                   width: 200,
                   height: 50,
-                  text: 'اضافة حالة اجتماعية جديدة',
+                  text: 'إضافة حالة اجتماعية جديدة',
                   onPressed: () => addNewSocialStatues()),
               children: [
                 dataTable(
@@ -108,7 +108,7 @@ class WorksList extends GetView<WorkController> {
               Header(
                   text: isEdit
                       ? 'تعديل حالة اجتماعية'
-                      : 'اضافة حالة اجتماعية جديدة'),
+                      : 'إضافة حالة اجتماعية جديدة'),
               Divider(),
               SizedBox(height: 20),
               CustomTextField(

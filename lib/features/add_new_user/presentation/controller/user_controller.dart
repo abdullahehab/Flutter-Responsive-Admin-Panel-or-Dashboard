@@ -35,7 +35,7 @@ class UserController extends GetxController with StateMixin<List<UserEntity>> {
         showToast(message: failure.mess);
       },
       (done) {
-        showToast(message: 'تم الاضافة بنجاح');
+        showToast(message: 'تم الإضافة بنجاح');
         getUsers();
       },
     );

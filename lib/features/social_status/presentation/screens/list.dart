@@ -48,7 +48,7 @@ class SocialStatuesList extends GetView<SocialStatusController> {
               leadingWidget: CustomButton(
                   width: 200,
                   height: 50,
-                  text: 'اضافة حالة اجتماعية جديدة',
+                  text: 'إضافة حالة اجتماعية جديدة',
                   onPressed: () => addNewSocialStatues()),
               children: [
                 dataTable(
@@ -109,8 +109,8 @@ class SocialStatuesList extends GetView<SocialStatusController> {
               SizedBox(height: 30),
               Header(
                   text: isEdit
-                      ? 'تعديل حالة اجتماعية'
-                      : 'اضافة حالة اجتماعية جديدة'),
+                      ? 'تعديل حالة إجتماعية'
+                      : 'إضافة حالة إجتماعية جديدة'),
               Divider(),
               SizedBox(height: 20),
               CustomTextField(
