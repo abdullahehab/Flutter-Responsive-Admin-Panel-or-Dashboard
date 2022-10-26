@@ -40,7 +40,9 @@ class Validator {
   }
 
   static bool isName(String name) {
-    return name.length >= 3;
+    final RegExp nameRegExp = RegExp(r'^[a-z]+$');
+
+    return name.length >= 3 && nameRegExp.hasMatch(name);
   }
 
   static bool isFullName(String? name) {
