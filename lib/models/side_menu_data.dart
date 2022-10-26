@@ -31,12 +31,12 @@ class SideMenuData {
 }
 
 List<SideMenuData> items = [
-  SideMenuData(
-      title: 'الرئيسية',
-      icon: FontAwesomeIcons.dashcube,
-      key: HOME_KEY,
-      onTap: () => Navigator.pushNamed(Get.context!, PageRouteName.MAIN_SCREEN),
-      itemWidget: DashboardScreen()),
+  // SideMenuData(
+  //     title: 'الرئيسية',
+  //     icon: FontAwesomeIcons.dashcube,
+  //     key: HOME_KEY,
+  //     onTap: () => Navigator.pushNamed(Get.context!, PageRouteName.MAIN_SCREEN),
+  //     itemWidget: DashboardScreen()),
   SideMenuData(
       title: 'العملاء',
       key: USERS_KEY,
