@@ -51,7 +51,7 @@ class OwningController extends GetxController with StateMixin {
         showToast(message: failure.mess);
       },
       (done) async {
-        showToast(message: 'تم الاضافة بنجاح');
+        showToast(message: 'تم الإضافة بنجاح');
         await getOwning(restoreData: true);
       },
     );

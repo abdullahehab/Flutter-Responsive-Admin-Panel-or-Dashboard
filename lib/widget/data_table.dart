@@ -21,7 +21,7 @@ Widget dataTable({
             fontSize: 14,
             color: Color(0xffFED385),
             fontWeight: FontWeight.w700,
-            fontFamily: 'Cairo',
+            fontFamily: 'cairo',
           ),
           columnSpacing: 0,
           dataRowHeight: rowHeight ?? 50,
@@ -29,7 +29,7 @@ Widget dataTable({
             color: Colors.black,
             fontSize: 14,
             fontWeight: FontWeight.w400,
-            fontFamily: 'Cairo',
+            fontFamily: 'cairo',
           ),
           headingRowColor: MaterialStateColor.resolveWith(
             (states) {

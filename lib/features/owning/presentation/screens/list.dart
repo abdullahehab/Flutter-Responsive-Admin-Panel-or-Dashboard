@@ -45,7 +45,7 @@ class OwningList extends GetView<OwningController> {
               leadingWidget: CustomButton(
                   width: 200,
                   height: 50,
-                  text: 'اضافة حيازة جديدة',
+                  text: 'إضافة حيازة جديدة',
                   onPressed: () => addNewHousing()),
               children: [
                 dataTable(
@@ -97,13 +97,13 @@ class OwningList extends GetView<OwningController> {
       barrierColor: Colors.grey[500]!.withOpacity(.4),
       builder: (_) => AppDialog(
         height: 250,
-        title: 'اضافة حيازة',
+        title: 'إضافة حيازة',
         child: Form(
           key: _formKey,
           child: Column(
             children: [
               SizedBox(height: 30),
-              Header(text: isEdit ? 'تعديل حيازة' : 'اضافة حيازة جديدة'),
+              Header(text: isEdit ? 'تعديل حيازة' : 'إضافة حيازة جديدة'),
               Divider(),
               SizedBox(height: 20),
               CustomTextField(

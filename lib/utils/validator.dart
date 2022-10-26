@@ -39,8 +39,14 @@ class Validator {
     return password.isNotEmpty && password.length == 8;
   }
 
-  static bool isName(String name) {
-    return name.length >= 3;
+  static bool isArName(String name) {
+    // en name
+    // final RegExp nameRegExp = RegExp(r'^[a-z]+$');
+
+    // ar name
+    final RegExp nameRegExp = RegExp(r'[\u0621-\u064A]+$');
+
+    return name.length >= 3 && nameRegExp.hasMatch(name);
   }
 
   static bool isFullName(String? name) {

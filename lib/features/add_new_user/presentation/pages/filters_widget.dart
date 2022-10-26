@@ -105,7 +105,7 @@ class FilterForm extends GetView<UserController> {
                       labelText: 'الوظيفة',
                       // selectedItem: workController.getById(userModel.working!),
                       itemAsString: (Work? u) => u!.title!,
-                      maxHeight: 100,
+                      maxHeight: 300,
                       items: workController.workList,
                       onChanged: (value) {
                         var selected = value as Work;
@@ -126,7 +126,7 @@ class FilterForm extends GetView<UserController> {
                       labelText: 'الحيازة',
                       // selectedItem: owningController.getById(userModel.owning!),
                       itemAsString: (Owning? u) => u!.title!,
-                      maxHeight: 100,
+                      maxHeight: 300,
                       items: owningController.owningList,
                       onChanged: (value) {
                         var selected = value as Owning;
@@ -142,7 +142,7 @@ class FilterForm extends GetView<UserController> {
                     labelText: 'السكن',
                     // selectedItem: housingController.getById(userModel.housing!),
                     itemAsString: (Housing? u) => u!.title!,
-                    maxHeight: 100,
+                    maxHeight: 300,
                     items: housingController.housingList,
                     onChanged: (value) {
                       var selected = value as Housing;
@@ -158,7 +158,7 @@ class FilterForm extends GetView<UserController> {
                       // selectedItem:
                       // socialStatusController.getById(userModel.socialStatus!),
                       itemAsString: (SocialStatus? u) => u!.title!,
-                      maxHeight: 100,
+                      maxHeight: 300,
                       items: socialStatusController.socialStatusList,
                       onChanged: (value) {
                         var selected = value as SocialStatus;

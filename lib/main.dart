@@ -89,7 +89,7 @@ void main() async {
       locale: const Locale('ar', 'EG'),
       initialBinding: Binding(),
       theme: ThemeData(
-        fontFamily: 'Cairo',
+        fontFamily: 'cairo',
       ),
     ),
   ));

@@ -86,31 +86,30 @@ class AddPeople extends GetView<UserController> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
-          title: CustomButton(
-              buttonColor: AppColor.kPrimaryDarkColor,
-              borderRadius: 6,
-              width: 70,
-              height: 40,
-              buttonPadding: EdgeInsets.zero,
-              text: "حفظ",
-              withoutPadding: true,
-              onPressed: () {
-                if (_formKey.currentState!.validate() == false) {
-                  return;
-                }
-                _formKey.currentState!.save();
-
-                if (isEdit) {
-                  controller.updateUser(userModel);
-                  Get.back();
-                  return;
-                }
-
-                controller.addUser(userModel);
-                Get.back(result: userModel.nationalId);
-              }).addPaddingOnly(left: 10, top: 10, bottom: 10),
-          centerTitle: false,
           actions: [
+            CustomButton(
+                buttonColor: AppColor.kPrimaryDarkColor,
+                borderRadius: 6,
+                width: 70,
+                height: 40,
+                buttonPadding: EdgeInsets.zero,
+                text: "حفظ",
+                withoutPadding: true,
+                onPressed: () {
+                  if (_formKey.currentState!.validate() == false) {
+                    return;
+                  }
+                  _formKey.currentState!.save();
+
+                  if (isEdit) {
+                    controller.updateUser(userModel);
+                    Get.back();
+                    return;
+                  }
+
+                  controller.addUser(userModel);
+                  Get.back(result: userModel.nationalId);
+                }).addPaddingOnly(left: 10, top: 10, bottom: 10),
             CustomButton(
                 buttonColor: AppColor.kPrimaryDarkColor,
                 borderRadius: 6,
@@ -242,7 +241,7 @@ class AddPeople extends GetView<UserController> {
                   labelText: 'الحيازة',
                   selectedItem: owningController.getById(userModel.owning!),
                   itemAsString: (Owning? u) => u!.title!,
-                  maxHeight: 100,
+                  maxHeight: 300,
                   items: owningController.owningList,
                   onChanged: (value) {
                     var selected = value as Owning;
@@ -255,7 +254,7 @@ class AddPeople extends GetView<UserController> {
                   labelText: 'السكن',
                   selectedItem: housingController.getById(userModel.housing!),
                   itemAsString: (Housing? u) => u!.title!,
-                  maxHeight: 100,
+                  maxHeight: 300,
                   items: housingController.housingList,
                   onChanged: (value) {
                     var selected = value as Housing;
@@ -269,7 +268,7 @@ class AddPeople extends GetView<UserController> {
                   selectedItem:
                       socialStatusController.getById(userModel.socialStatus!),
                   itemAsString: (SocialStatus? u) => u!.title!,
-                  maxHeight: 100,
+                  maxHeight: 300,
                   items: socialStatusController.socialStatusList,
                   onChanged: (value) {
                     var selected = value as SocialStatus;
@@ -282,7 +281,7 @@ class AddPeople extends GetView<UserController> {
                   labelText: 'الوظيفة',
                   selectedItem: workController.getById(userModel.working!),
                   itemAsString: (Work? u) => u!.title!,
-                  maxHeight: 100,
+                  maxHeight: 300,
                   items: workController.workList,
                   onChanged: (value) {
                     var selected = value as Work;

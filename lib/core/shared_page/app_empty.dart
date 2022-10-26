@@ -6,7 +6,7 @@ import '../../utils/colors.dart';
 
 Widget appEmpty({
   String title = "لا يوجد بيانات",
-  String msg = "قم باضافة بيانتك الان",
+  String msg = "قم بإضافة بيانتك الان",
   required void Function()? onPressed,
 }) {
   return Scaffold(

@@ -45,7 +45,7 @@ class HousingList extends GetView<HousingController> {
               leadingWidget: CustomButton(
                   width: 200,
                   height: 50,
-                  text: 'اضافة سكن جديد',
+                  text: 'إضافة سكن جديد',
                   onPressed: () => addNewHousing()),
               children: [
                 dataTable(
@@ -103,7 +103,7 @@ class HousingList extends GetView<HousingController> {
           child: Column(
             children: [
               SizedBox(height: 30),
-              Header(text: isEdit ? 'تعديل سكن' : 'اضافة سكن جديد'),
+              Header(text: isEdit ? 'تعديل سكن' : 'إضافة سكن جديد'),
               Divider(),
               SizedBox(height: 20),
               CustomTextField(

@@ -58,11 +58,11 @@ class UsersList extends GetView<UserController> {
             FilterForm(),
             SizedBox(height: 40.h),
             StyledContent(
-              subTitle: 'الاشخاص',
+              subTitle: 'الأشخاص',
               leadingWidget: CustomButton(
                   width: 200,
                   height: 50,
-                  text: 'اضافة شخص جديد',
+                  text: 'إضافة شخص جديد',
                   onPressed: () => Get.toNamed(PageRouteName.ADD_NEW)),
               children: [
                 dataTable(
