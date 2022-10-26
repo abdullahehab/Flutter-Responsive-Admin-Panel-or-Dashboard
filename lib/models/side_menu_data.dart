@@ -1,3 +1,4 @@
+import 'package:admin/core/constants/assets.dart';
 import 'package:admin/features/working/presentation/screens/list.dart';
 import 'package:admin/screens/main/users_data.dart';
 import 'package:admin/services/service_locator.dart';
@@ -17,7 +18,7 @@ import '../screens/people_screen/people_screen.dart';
 class SideMenuData {
   final String? title, imagePath;
   final GestureTapCallback? onTap;
-  final IconData? icon;
+  final String? icon;
   final Widget? itemWidget;
   final String? key;
 
@@ -40,37 +41,37 @@ List<SideMenuData> items = [
   SideMenuData(
       title: 'الأشخاص',
       key: USERS_KEY,
-      icon: FontAwesomeIcons.users,
+      icon: Assets.usersIcon,
       onTap: () =>
           Navigator.pushNamed(Get.context!, PageRouteName.PEOPLE_SCREEN),
       itemWidget: UsersList()
       // itemWidget: PeopleScreen()
-  ),
+      ),
   SideMenuData(
       title: 'الحالة الاجتماعية',
       key: '',
-      icon: FontAwesomeIcons.users,
+      icon: Assets.socialStatusIcon,
       onTap: () => Navigator.pushNamed(
           Get.context!, PageRouteName.SOCIAL_STATUES_SCREEN),
       itemWidget: SocialStatuesList()),
   SideMenuData(
       title: 'الوظيفة',
       key: '',
-      icon: FontAwesomeIcons.briefcase,
+      icon: Assets.workIcon,
       onTap: () =>
           Navigator.pushNamed(Get.context!, PageRouteName.WORKS_SCREEN),
       itemWidget: WorksList()),
   SideMenuData(
       title: 'السكن',
       key: '',
-      icon: FontAwesomeIcons.houseUser,
+      icon: Assets.housingIcon,
       onTap: () =>
           Navigator.pushNamed(Get.context!, PageRouteName.HOUSING_SCREEN),
       itemWidget: HousingList()),
   SideMenuData(
       title: 'حيازة',
       key: '',
-      icon: FontAwesomeIcons.userTag,
+      icon: Assets.owningIcon,
       onTap: () =>
           Navigator.pushNamed(Get.context!, PageRouteName.OWNING_SCREEN),
       itemWidget: OwningList()),

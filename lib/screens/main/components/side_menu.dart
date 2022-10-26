@@ -1,8 +1,9 @@
-import 'package:admin/extensions/extension.dart';
 import 'package:admin/models/side_menu_data.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import 'main_screen_controller.dart';
@@ -62,7 +63,7 @@ class DrawerListTile extends StatelessWidget {
   }) : super(key: key);
 
   final String? title;
-  final IconData? iconData;
+  final String? iconData;
   final bool selected;
 
   @override
@@ -75,10 +76,11 @@ class DrawerListTile extends StatelessWidget {
       child: ListTile(
         key: ValueKey(title),
         horizontalTitleGap: 0.0,
-        leading: Icon(
-          iconData,
-          size: 14,
+        leading: SvgPicture.asset(
+          iconData!,
           color: selected ? AppColor.bgSideMenu : Colors.white54,
+          width: 17.h,
+          height: 17.h,
         ),
         title: Text(
           title!,
