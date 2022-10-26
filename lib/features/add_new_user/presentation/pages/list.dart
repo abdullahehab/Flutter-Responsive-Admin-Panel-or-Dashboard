@@ -58,7 +58,7 @@ class UsersList extends GetView<UserController> {
             FilterForm(),
             SizedBox(height: 40.h),
             StyledContent(
-              subTitle: 'الاشخاص',
+              subTitle: 'الأشخاص',
               leadingWidget: CustomButton(
                   width: 200,
                   height: 50,

@@ -38,7 +38,7 @@ List<SideMenuData> items = [
   //     onTap: () => Navigator.pushNamed(Get.context!, PageRouteName.MAIN_SCREEN),
   //     itemWidget: DashboardScreen()),
   SideMenuData(
-      title: 'العملاء',
+      title: 'الأشخاص',
       key: USERS_KEY,
       icon: FontAwesomeIcons.users,
       onTap: () =>
