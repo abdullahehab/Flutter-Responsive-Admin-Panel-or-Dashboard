@@ -98,20 +98,23 @@ class UsersList extends GetView<UserController> {
                         dataCellItem(data: item.nationalId.toString()),
                         dataCellItem(data: item.name!),
                         dataCellItem(
-                            data: socialStatusController
-                                .getById(item.socialStatus!)!
+                            data: (socialStatusController
+                                        .getById(item.socialStatus!) ??
+                                    SocialStatus(title: '', id: null))
                                 .title!),
                         dataCellItem(
-                            data:
-                                workController.getById(item.working!)!.title!),
+                            data: (workController.getById(item.working!) ??
+                                    Work(title: '', id: null))
+                                .title!),
                         dataCellItem(data: item.address!),
                         dataCellItem(data: item.phone!),
                         dataCellItem(
-                            data:
-                                owningController.getById(item.owning!)!.title!),
+                            data: (owningController.getById(item.owning!) ??
+                                    Owning(title: '', id: null))
+                                .title!),
                         dataCellItem(
-                            data: housingController
-                                .getById(item.housing!)!
+                            data: (housingController.getById(item.housing!) ??
+                                    Housing(title: '', id: null))
                                 .title!),
                         dataCellItem(data: item.healthStatus.toString()),
                         dataCellItem(data: item.type.toString()),
