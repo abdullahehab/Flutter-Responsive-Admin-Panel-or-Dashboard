@@ -112,7 +112,7 @@ class _UsersListPdfState extends State<UsersListPdf> {
                       child: pw.Column(children: [
                         pw.SizedBox(height: 10),
                         operationTable(
-                          title: '#',
+                          title: 'الرقم القومي',
                           value1: 'الاسم'.tr,
                           value2: 'الحالة الاجتماعية'.tr,
                           value3: 'الوظيفة'.tr,
