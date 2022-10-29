@@ -1,4 +1,5 @@
 import 'package:admin/features/add_new_user/domain/entities/user_entity.dart';
+import 'package:admin/features/add_new_user/presentation/pages/pdf.dart';
 import 'package:admin/features/housing/presentation/controller/controller.dart';
 import 'package:admin/features/owning/presentation/controller/controller.dart';
 import 'package:admin/features/social_status/presentation/controller/controller.dart';
@@ -59,11 +60,32 @@ class UsersList extends GetView<UserController> {
             SizedBox(height: 40.h),
             StyledContent(
               subTitle: 'الأشخاص',
-              leadingWidget: CustomButton(
-                  width: 200,
-                  height: 50,
-                  text: 'إضافة شخص جديد',
-                  onPressed: () => Get.toNamed(PageRouteName.ADD_NEW)),
+              leadingWidget: Row(
+                children: [
+                  CustomButton(
+                      buttonPadding: EdgeInsets.zero,
+                      height: 40,
+                      withoutPadding: true,
+                      forwardButton: Icon(Icons.print).paddingOnly(left: 5),
+                      text: 'طباعة',
+                      onPressed: () {
+                        showDialog(
+                          context: Get.context!,
+                          barrierColor: Color(0xff262D35).withOpacity(.9),
+                          builder: (_) => UsersListPdf(
+                            title: 'تقرير الحجوزات',
+                            users: users!,
+                          ),
+                        );
+                      }),
+                  CustomButton(
+                      height: 40,
+                      buttonPadding: EdgeInsets.zero,
+                      forwardButton: Icon(Icons.add).paddingOnly(left: 5),
+                      text: 'إضافة شخص جديد',
+                      onPressed: () => Get.toNamed(PageRouteName.ADD_NEW)),
+                ],
+              ),
               children: [
                 dataTable(
                   columns: [

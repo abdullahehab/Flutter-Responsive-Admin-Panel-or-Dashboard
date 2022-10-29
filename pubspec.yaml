@@ -53,6 +53,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   awesome_dialog: ^2.2.1
+  printing: ^5.9.2
 #  firebase_auth:
 #    git:
 #      url: https://github.com/collinjackson/plugins.git

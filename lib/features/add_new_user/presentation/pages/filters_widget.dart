@@ -47,6 +47,7 @@ class FilterForm extends GetView<UserController> {
       titleWidget: CustomButton(
           width: 200,
           height: 50,
+          forwardButton: Icon(Icons.refresh).paddingOnly(left: 5),
           text: 'إعادة تحميل الاشخاص',
           onPressed: () {
             nameController.clear();

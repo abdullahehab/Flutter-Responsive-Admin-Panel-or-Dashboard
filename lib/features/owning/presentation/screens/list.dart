@@ -46,6 +46,7 @@ class OwningList extends GetView<OwningController> {
                   width: 200,
                   height: 50,
                   text: 'إضافة حيازة جديدة',
+                  forwardButton: Icon(Icons.add).paddingOnly(left: 5),
                   onPressed: () => addNewHousing()),
               children: [
                 dataTable(

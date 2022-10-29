@@ -90,9 +90,9 @@ class AddPeople extends GetView<UserController> {
             CustomButton(
                 buttonColor: AppColor.kPrimaryDarkColor,
                 borderRadius: 6,
-                width: 70,
                 height: 40,
                 buttonPadding: EdgeInsets.zero,
+                forwardButton: Icon(Icons.save, size: 22).paddingOnly(left: 5),
                 text: "حفظ",
                 withoutPadding: true,
                 onPressed: () {
@@ -113,9 +113,10 @@ class AddPeople extends GetView<UserController> {
             CustomButton(
                 buttonColor: AppColor.kPrimaryDarkColor,
                 borderRadius: 6,
-                width: 70,
                 height: 40,
                 buttonPadding: EdgeInsets.zero,
+                forwardButton:
+                    Icon(Icons.arrow_back_ios, size: 22).paddingOnly(left: 5),
                 text: "رجوع",
                 withoutPadding: true,
                 onPressed: () {
