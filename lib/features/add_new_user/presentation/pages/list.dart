@@ -59,11 +59,23 @@ class UsersList extends GetView<UserController> {
             SizedBox(height: 40.h),
             StyledContent(
               subTitle: 'الأشخاص',
-              leadingWidget: CustomButton(
-                  width: 200,
-                  height: 50,
-                  text: 'إضافة شخص جديد',
-                  onPressed: () => Get.toNamed(PageRouteName.ADD_NEW)),
+              leadingWidget: Row(
+                children: [
+                  CustomButton(
+                      buttonPadding: EdgeInsets.zero,
+                      height: 40,
+                      withoutPadding: true,
+                      forwardButton: Icon(Icons.print).paddingOnly(left: 5),
+                      text: 'طباعة',
+                      onPressed: () => Get.toNamed(PageRouteName.ADD_NEW)),
+                  CustomButton(
+                      height: 40,
+                      buttonPadding: EdgeInsets.zero,
+                      forwardButton: Icon(Icons.add).paddingOnly(left: 5),
+                      text: 'إضافة شخص جديد',
+                      onPressed: () => Get.toNamed(PageRouteName.ADD_NEW)),
+                ],
+              ),
               children: [
                 dataTable(
                   columns: [

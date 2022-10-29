@@ -44,6 +44,7 @@ class WorksList extends GetView<WorkController> {
             StyledContent(
               subTitle: 'الوظائف المضافة',
               leadingWidget: CustomButton(
+                  forwardButton: Icon(Icons.add).paddingOnly(left: 5),
                   width: 200,
                   height: 50,
                   text: 'إضافة وظيفة جديدة',

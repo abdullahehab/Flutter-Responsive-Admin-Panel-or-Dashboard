@@ -46,6 +46,7 @@ class HousingList extends GetView<HousingController> {
                   width: 200,
                   height: 50,
                   text: 'إضافة سكن جديد',
+                  forwardButton: Icon(Icons.add).paddingOnly(left: 5),
                   onPressed: () => addNewHousing()),
               children: [
                 dataTable(
