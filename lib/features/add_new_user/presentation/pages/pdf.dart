@@ -185,17 +185,17 @@ class _UsersListPdfState extends State<UsersListPdf> {
       bool? titledBold = false}) {
     return pw.Table(
         columnWidths: {
-          0: pw.FlexColumnWidth(1),
-          1: pw.FlexColumnWidth(1),
+          0: pw.FlexColumnWidth(1.5),
+          1: pw.FlexColumnWidth(1.5),
           2: pw.FlexColumnWidth(2),
-          3: pw.FlexColumnWidth(1),
-          4: pw.FlexColumnWidth(1),
+          3: pw.FlexColumnWidth(1.5),
+          4: pw.FlexColumnWidth(1.5),
           5: pw.FlexColumnWidth(2),
-          6: pw.FlexColumnWidth(1),
-          7: pw.FlexColumnWidth(1),
-          8: pw.FlexColumnWidth(2),
-          9: pw.FlexColumnWidth(2),
-          10: pw.FlexColumnWidth(2),
+          6: pw.FlexColumnWidth(1.5),
+          7: pw.FlexColumnWidth(1.5),
+          8: pw.FlexColumnWidth(2.6),
+          9: pw.FlexColumnWidth(2.7),
+          10: pw.FlexColumnWidth(2.5),
         },
         border: pw.TableBorder.all(color: PdfColors.black, width: .5),
         children: [
