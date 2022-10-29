@@ -250,7 +250,7 @@ class _UsersListPdfState extends State<UsersListPdf> {
               pw.Padding(
                 padding: pw.EdgeInsets.symmetric(horizontal: 8),
                 child: arabicText('${value1 ?? '--'}',
-                    align: pw.TextAlign.left,
+                    align: pw.TextAlign.right,
                     style: _style!.copyWith(fontSize: 8)),
               ),
               pw.Padding(
