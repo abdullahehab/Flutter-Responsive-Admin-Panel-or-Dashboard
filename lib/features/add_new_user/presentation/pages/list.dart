@@ -9,16 +9,12 @@ import 'package:admin/widget/main_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:admin/extensions/extension.dart';
-import '../../../../core/constants/constants.dart';
-import '../../../../core/shared_components/drop_down_widget.dart';
+
 import '../../../../core/shared_components/styled_content_widget.dart';
 import '../../../../core/shared_page/app_empty.dart';
-import '../../../../utils/text_field_validator.dart';
-import '../../../../widget/custom_text_field.dart';
 import '../../../../widget/data_cell_item.dart';
 import '../../../../widget/data_column_Item.dart';
 import '../../../../widget/data_controller.dart';
@@ -29,8 +25,6 @@ import '../../../social_status/domain/entities/social_status.dart';
 import '../../../working/domain/entities/work.dart';
 import '../controller/user_controller.dart';
 import 'add_user.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'filters_widget.dart';
 
 class UsersList extends GetView<UserController> {
