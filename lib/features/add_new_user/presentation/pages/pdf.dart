@@ -97,16 +97,16 @@ class _UsersListPdfState extends State<UsersListPdf> {
                     ),
                   ),
                   pw.SizedBox(height: 15),
-                  pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.center,
-                      crossAxisAlignment: pw.CrossAxisAlignment.center,
-                      children: [
-                        pw.SizedBox(width: 50),
-                        arabicText('تقرير',
-                            style: _style!.copyWith(fontSize: 19)),
-                        pw.SizedBox(width: 40),
-                      ]),
-                  pw.SizedBox(height: 20),
+                  // pw.Row(
+                  //     mainAxisAlignment: pw.MainAxisAlignment.center,
+                  //     crossAxisAlignment: pw.CrossAxisAlignment.center,
+                  //     children: [
+                  //       pw.SizedBox(width: 50),
+                  //       arabicText('تقرير',
+                  //           style: _style!.copyWith(fontSize: 19)),
+                  //       pw.SizedBox(width: 40),
+                  //     ]),
+                  // pw.SizedBox(height: 20),
                   pw.Padding(
                       padding: pw.EdgeInsets.symmetric(horizontal: 8),
                       child: pw.Column(children: [
@@ -129,7 +129,9 @@ class _UsersListPdfState extends State<UsersListPdf> {
                               title: '${item.nationalId.toString()}',
                               value1: '${item.name!}',
                               value2:
-                                  '${socialStatusController.getById(item.socialStatus!) ?? SocialStatus(title: '', id: null).title!}',
+                              (socialStatusController.getById(item.socialStatus!) ??
+                                  SocialStatus(title: '', id: null))
+                                  .title!,
                               value3: (workController.getById(item.working!) ??
                                       Work(title: '', id: null))
                                   .title!,
