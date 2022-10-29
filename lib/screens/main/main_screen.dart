@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 
 import '../../models/side_menu_data.dart';
+import '../../utils/colors.dart';
 import 'components/main_screen_controller.dart';
 import 'components/side_menu.dart';
 
@@ -14,7 +15,11 @@ class MainScreen extends GetView<MainScreenController> {
     return GetX(
       init: controller,
       builder: (DisposableInterface con) => Scaffold(
-        drawer: SideMenu(),
+        appBar: Responsive.isMobile()
+            ? AppBar(
+                title: Text('الرئيسية'), backgroundColor: AppColor.bgSideMenu)
+            : null,
+        drawer: Responsive.isMobile() ? SideMenu() : null,
         body: SafeArea(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
