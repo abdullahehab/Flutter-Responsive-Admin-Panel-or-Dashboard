@@ -19,6 +19,10 @@ class UserEntity {
     this.type = 'سليم',
     this.name,
     this.working,
+    this.socialStatusName,
+    this.workingName,
+    this.housingName,
+    this.owningName,
   });
 
   String? nationalId;
@@ -38,4 +42,9 @@ class UserEntity {
   int? childrenNumber;
   String? housing;
   String? owning;
+  String? socialStatusName;
+  String? workingName;
+  String? housingName;
+  String? owningName;
+
 }
